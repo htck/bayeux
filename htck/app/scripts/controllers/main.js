@@ -7,7 +7,6 @@
  * # MainCtrl
  * Controller of the htckApp
  */
-angular.module('htckApp')
-  .controller('MainCtrl', function ($scope) {
-    
+angular.module('htckApp').controller('MainCtrl', function ($scope) {
+  		console.log(constants);
   });
