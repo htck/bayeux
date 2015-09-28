@@ -9,5 +9,5 @@
  */
 angular.module('htckApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.howIsMyAngular = "OK";
+    
   });
