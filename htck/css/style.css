@@ -1,3 +1,11 @@
+.padding-h-15 {
+  padding-top: 15px;
+}
+
 body {
   background-image:url(../img/background_1.jpg);
+}
+
+#readme {
+  background-color: white;
 }

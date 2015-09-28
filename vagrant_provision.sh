@@ -27,4 +27,7 @@ EOF
 )
 echo "$NGINX" | sudo tee "/etc/nginx/sites-available/$PROJECT_NAME.conf"
 sudo ln -sf "/etc/nginx/sites-available/$PROJECT_NAME.conf" "/etc/nginx/sites-enabled/$PROJECT_NAME.conf"
+# fixing tricky nginx/vagrant bug
+sudo sed -i "s/sendfile on;/sendfile off;/" /etc/nginx/nginx.conf
+
 sudo service nginx restart
