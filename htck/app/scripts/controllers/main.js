@@ -8,5 +8,5 @@
  * Controller of the htckApp
  */
 angular.module('htckApp').controller('MainCtrl', function ($scope) {
-  		console.log(constants);
+  		$scope.constants = constants;
   });
