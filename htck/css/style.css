@@ -7,5 +7,22 @@ body {
 }
 
 #readme {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#content-left-panel {
+  background-color: #433c37;
+}
+
+#content-middle-panel {
+  border-style: solid;
+  border-width: 5px 0px 5px 0px;
+  border-color: #433c37;
+}
+
+#content-right-panel {
+  padding: 0;
+  background-color: #433c37;
+  color: white;
+  font-weight: bold;
 }
