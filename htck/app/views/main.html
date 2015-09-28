@@ -1,33 +1,61 @@
-<div class="header text-center">
-  <h1>{{constants.config.appTitle}}</h1>
+<div>
+  <div class="header text-center">
+    <h1>{{constants.config.appTitle}}</h1>
+  </div>
+
+  <div class="padding-h-15"></div>
+
+  <div id="content" class="container app_wrapper">
+    <div class="row">
+      <div id="content-left-panel" class="col-lg-3" style="height: 800px;">
+
+        <div>
+  <md-content class="md-padding">
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab ng-repeat="t in constants.tabs" label="{{t.title}}">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">{{t.title}}</h1>
+          
+          <div>
+  <md-grid-list
+        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
+        md-row-height-gt-md="2:2" md-row-height="2:2"
+        md-gutter="12px" md-gutter-gt-sm="8px" >
+    <md-grid-tile ng-repeat="i in t.images track by $index" class="gray"
+        md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+      <img ng-src="{{i}}"></img>
+    </md-grid-tile>
+  </md-grid-list>
 </div>
 
-<div class="padding-h-15"></div>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
 
-<div id="content" class="container app_wrapper">
-  <div class="row">
-    <div id="content-left-panel" class="col-lg-3" style="height: 800px;">
-    </div>
-    <div id="content-middle-panel" class="col-lg-8" style="height: 800px;">
-    </div>
-    <div id="content-right-panel" class="col-lg-1 text-center" style="height: 800px;">
-      <div class="padding-h-15"></div>
-      <p>Color</p>
-      <div class="padding-h-15"></div>
-      <p>Size</p>
-      <div class="padding-h-15"></div>
-      <p>Orientation</p>
-      <div class="padding-h-15"></div>
+      </div>
+      <div id="content-middle-panel" class="col-lg-8" style="height: 800px;">
+      </div>
+      <div id="content-right-panel" class="col-lg-1 text-center" style="height: 800px;">
+        <div class="padding-h-15"></div>
+        <p>Color</p>
+        <div class="padding-h-15"></div>
+        <p>Size</p>
+        <div class="padding-h-15"></div>
+        <p>Orientation</p>
+        <div class="padding-h-15"></div>
+      </div>
     </div>
   </div>
+
+  <div class="padding-h-15"></div>
+
+  <div id="readme" class="container">
+    <h1>Original Historic Tale Construction Kit</h1>
+    <p>Project/Fork description</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+
+  <div class="padding-h-15"></div>
 </div>
-
-<div class="padding-h-15"></div>
-
-<div id="readme" class="container">
-  <h1>Original Historic Tale Construction Kit</h1>
-  <p>Project/Fork description</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</div>
-
-<div class="padding-h-15"></div>

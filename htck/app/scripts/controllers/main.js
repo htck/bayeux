@@ -9,4 +9,5 @@
  */
 angular.module('htckApp').controller('MainCtrl', function ($scope) {
   		$scope.constants = constants;
+  		console.log(constants);
   });
