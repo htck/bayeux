@@ -1,0 +1,10 @@
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components
+/lib
+
+#To be added later
+/test
+README.md
