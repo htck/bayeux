@@ -2,6 +2,31 @@
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+.padding-h-15 {
+  padding-top: 15px;
+}
+
 body {
-  background-image:url(../images/background_1.jpg);
+  background: url(../images/background_1.jpg);
+}
+
+#readme {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#content-left-panel {
+  background-color: #433c37;
+}
+
+#content-middle-panel {
+  border-style: solid;
+  border-width: 5px 0px 5px 0px;
+  border-color: #433c37;
+}
+
+#content-right-panel {
+  padding: 0;
+  background-color: #433c37;
+  color: white;
+  font-weight: bold;
 }
