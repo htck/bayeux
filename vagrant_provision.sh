@@ -7,27 +7,26 @@ PROJECT_NAME=htck
 sudo apt-get update -y
 sudo apt-get upgrade -y
 # Install required packages
-sudo apt-get install git nginx -y
+sudo apt-get install git build-essential ruby-compass -y
 
-# set up nginx
-sudo rm -rf /etc/nginx/sites-enabled/*
-NGINX=$(cat << EOF
-server {
-  listen 80;
-  listen [::]:80;
+#sudo ln -sf /usr/bin/nodejs /usr/bin/node
 
-  server_name localhost;
+#sudo npm install -g bower
+#sudo npm install -g grunt-cli
 
-  root $REPO_PATH/$PROJECT_NAME;
-  index index.html;
+#cd "$REPO_PATH"/"$PROJECT_NAME"
+#sudo npm install
+#bower install
+#grunt serve
+# set up 
 
-  access_log /var/log/nginx/$PROJECT_NAME.access.log;
-}
-EOF
-)
-echo "$NGINX" | sudo tee "/etc/nginx/sites-available/$PROJECT_NAME.conf"
-sudo ln -sf "/etc/nginx/sites-available/$PROJECT_NAME.conf" "/etc/nginx/sites-enabled/$PROJECT_NAME.conf"
-# fixing tricky nginx/vagrant bug
-sudo sed -i "s/sendfile on;/sendfile off;/" /etc/nginx/nginx.conf
+curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
+sudo apt-get install --yes nodejs
+sudo npm install npm -g
+sudo npm install -g bower
+sudo npm install -g grunt-cli
 
-sudo service nginx restart
+cd "$REPO_PATH"/"$PROJECT_NAME"
+su vagrant -c "npm install"
+su vagrant -c "bower install"
+#grunt serve
