@@ -29,19 +29,19 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
   		function elementMouseDown (/*evt, x, y*/){
   			// TODO
   			console.log('Click');
+        $scope.current = this;
   			//this.toFront();
   		}
 
   		function elementDragStart (cx, cy) {
   			console.log('Start');
   			console.log(this);
+        $scope.current = this;
   			this.ox = this.attrs.x;
         this.oy = this.attrs.y;
   		}
   		function elementDragMove (dx, dy) {
-  			console.log('Move');
-  			//console.log(this);
-  			//console.log(dx+"-"+dy);
+  			//console.log('Move');
   			var x = this.ox + dx;
   			var y = this.oy + dy;
 
@@ -50,22 +50,31 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
   		}
   		function elementDragEnd () {
   			console.log('End');
+        // TODO
   		}
+
+      function addElement(ie){
+        ie.mousedown(elementMouseDown);
+        ie.drag(elementDragMove, elementDragStart, elementDragEnd);
+
+        var element = {
+          raph: ie,
+          size: 1,
+          rotation: 0,
+          id: ie.id
+        }
+
+        elements.push(element);
+      }
 
 
   		$scope.addImage = function(src){
   			var size = getSizeOfImage(src);
   			var ie = paper.image(src, (WIDTH - size[0])/2, (HEIGHT - size[1])/2, size[0], size[1]);
-  			ie.mousedown(elementMouseDown);
-  			ie.drag(elementDragMove, elementDragStart, elementDragEnd);
-
-  			var element = {
-  				raph: ie,
-  				size: 1,
-  				rotation: 0,
-  				id: ie.id
-  			}
-
-  			elements.push(element);
+  			addElement(ie);
   		};
+
+      $scope.bringToFront = function(){
+        $scope.current.toFront();
+      };
   });
