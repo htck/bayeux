@@ -26,10 +26,16 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
 			return [width, height];
   		}
 
+  		function elementMouseDown(/*evt, x, y*/){
+  			// TODO
+  			//this.toFront();
+  		}
+
   		$scope.addImage = function(src){
   			var size = getSizeOfImage(src);
   			var ie = paper.image(src, (WIDTH - size[0])/2, (HEIGHT - size[1])/2, size[0], size[1]);
-  			
+  			ie.mousedown(elementMouseDown);
+
   			var element = {
   				raph: ie,
   				size: 1,
