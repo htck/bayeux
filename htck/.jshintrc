@@ -12,5 +12,6 @@
   "unused": true,
   "globals": {
     "angular": false
-  }
+  },
+  "validthis":true
 }

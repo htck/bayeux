@@ -7,41 +7,43 @@
  * # MainCtrl
  * Controller of the htckApp
  */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
+/* globals constants */
+/* globals Raphael */
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log) {
   		$scope.constants = constants;
   		
-  		var paper = Raphael('paper');
-  		console.log('Paper', paper);
+  		var paper = new Raphael('paper');
+  		$log.debug('Paper', paper);
   		var HEIGHT = paper.height, WIDTH = paper.width;
 
   		var elements = [];
 
   		function getSizeOfImage(src) {
-			var fimg = new Image();
-			fimg.src = src;
+  			var fimg = new Image(); 
+  			fimg.src = src;
 
-			var width = fimg.width;
-			var height = fimg.height;
+  			var width = fimg.width;
+  			var height = fimg.height;
 
-			return [width, height];
+  			return [width, height];
   		}
 
   		function elementMouseDown (/*evt, x, y*/){
   			// TODO
-  			console.log('Click');
+  			$log.debug('Click');
         $scope.current = this;
   			//this.toFront();
   		}
 
-  		function elementDragStart (cx, cy) {
-  			console.log('Start');
-  			console.log(this);
+  		function elementDragStart () {
+  			$log.debug('Start');
+  			$log.debug(this);
         $scope.current = this;
   			this.ox = this.attrs.x;
         this.oy = this.attrs.y;
   		}
   		function elementDragMove (dx, dy) {
-  			//console.log('Move');
+  			//$log.debug('Move');
   			var x = this.ox + dx;
   			var y = this.oy + dy;
 
@@ -49,7 +51,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
         this.attr(pos);
   		}
   		function elementDragEnd () {
-  			console.log('End');
+  			$log.debug('End');
         // TODO
   		}
 
@@ -62,15 +64,16 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
           size: 1,
           rotation: 0,
           id: ie.id
-        }
+        };
 
         $scope.current = ie;
         elements.push(element);
       }
 
-      $scope.unfocus = function(){
+      function unfocus(){
+        $log.debug('Unfocus');
         $scope.current = null;
-      };
+      }
 
 
   		$scope.addImage = function(src){
@@ -84,8 +87,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
           return;
         }
         $scope.current.remove();
+        unfocus();
         // TODO : remove from array
-      }
+      };
 
       $scope.bringToFront = function(){
         if(!$scope.current) {
@@ -93,4 +97,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
         }
         $scope.current.toFront();
       };
+
+      var background = paper.rect(0, 0, WIDTH, HEIGHT);
+      background.mousedown(function() {
+        // TODO add text
+      });
+      background.attr({'fill':'white', 'fill-opacity':'0', 'stroke':'none'});
   });
