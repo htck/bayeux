@@ -2,12 +2,16 @@
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+.margin-v-0 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .padding-h-15 {
   padding-top: 15px;
 }
 
 body {
-  background: url(../images/background_1.jpg);
 }
 
 #readme {
@@ -32,6 +36,7 @@ body {
 }
 
 #ng_view {
+  background: url(../images/background_1.jpg);
  // width:100%;
 }
 
