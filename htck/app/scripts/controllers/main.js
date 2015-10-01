@@ -68,6 +68,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
         elements.push(element);
       }
 
+      $scope.unfocus = function(){
+        $scope.current = null;
+      };
+
 
   		$scope.addImage = function(src){
   			var size = getSizeOfImage(src);

@@ -38,15 +38,17 @@
       <div id="paper" class="col-lg-8" style="height: 800px;">
       </div>
       <div id="content-right-panel" class="col-lg-1 text-center" style="height: 800px;">
-        <div class="padding-h-15"></div>
-        <p>Color</p>
-        <div class="padding-h-15"></div>
-        <p>Size</p>
-        <div class="padding-h-15"></div>
-        <p>Orientation</p>
-        <div class="padding-h-15"></div>
-        <md-button ng-click="bringToFront()" class="md-primary md-raised">Bring To Front</md-button>
-        <md-button ng-click="remove()" class="md-warn md-raised">Remove</md-button>
+        <div ng-if="current">
+          <div class="padding-h-15"></div>
+          <p>Color</p>
+          <div class="padding-h-15"></div>
+          <p>Size</p>
+          <div class="padding-h-15"></div>
+          <p>Orientation</p>
+          <div class="padding-h-15"></div>
+          <md-button ng-click="bringToFront()" class="md-primary md-raised">Bring To Front</md-button>
+          <md-button ng-click="remove()" class="md-warn md-raised">Remove</md-button>
+        </div>
       </div>
     </div>
   </div>
