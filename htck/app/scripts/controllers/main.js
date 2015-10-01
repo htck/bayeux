@@ -64,6 +64,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
           id: ie.id
         }
 
+        $scope.current = ie;
         elements.push(element);
       }
 
@@ -74,7 +75,18 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout) {
   			addElement(ie);
   		};
 
+      $scope.remove = function() {
+        if(!$scope.current) {
+          return;
+        }
+        $scope.current.remove();
+        // TODO : remove from array
+      }
+
       $scope.bringToFront = function(){
+        if(!$scope.current) {
+          return;
+        }
         $scope.current.toFront();
       };
   });
