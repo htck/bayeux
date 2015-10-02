@@ -220,4 +220,35 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         // TODO add text
       });
       background.attr({'fill':'white', 'fill-opacity':'0', 'stroke':'none'});
+
+      // Function gotten from SVGFix
+      // source : https://code.google.com/p/svgfix/
+      function svgfix (text) {
+        var fixed = text ;
+        fixed = jQuery.trim(fixed);
+        if (fixed.indexOf( 'xmlns:xlink' ) == -1 ) {
+          fixed = fixed.replace ('<svg ', '<svg xmlns:xlink="http://www.w3.org/1999/xlink" '); 
+        }
+        fixed = fixed.replace (' href', ' xlink:href'); 
+        return fixed; 
+      }
+
+      // WIP : POC for export function
+      $scope.export = function(){
+        console.log('Exporting');
+        var svg = document.getElementById("paper").children[0];
+        console.log(svg);
+        var svgStr = svgfix(svg.outerHTML);
+        console.log(svgStr);
+
+        canvg(document.getElementById('canvas'), svgStr);
+        $timeout(function(){
+          var elem = document.getElementById('canvas');
+          console.log(elem);
+          var imgData = elem.toDataURL("image/png");
+          console.log(imgData);
+
+          window.open(imgData, 'Download');
+        },1000);
+      };
   });
