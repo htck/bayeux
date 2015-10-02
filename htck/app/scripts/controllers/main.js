@@ -107,6 +107,30 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.current.toFront();
       };
 
+
+      $scope.elementSetSize = function(){
+        if(!$scope.current) {
+          return;
+        }
+        // TODO
+      };
+
+      $scope.elementSetRotation = function(){
+        if(!$scope.current) {
+          return;
+        }
+        // TODO
+        //$scope.current.transform("r"+$scope.current.rotation+" 0 0");
+      };
+
+      $scope.elementSetMirror = function(){
+        if(!$scope.current) {
+          return;
+        }
+        // TODO
+        //console.log($scope.current.mirror);
+      };
+
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
       background.mousedown(function() {
         // TODO add text
