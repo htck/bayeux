@@ -44,6 +44,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         console.log(this);
         $scope.current = this;
   			//this.toFront();
+        $scope.$apply();
   		}
 
       // Triggers when an element is dragged
@@ -202,6 +203,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         angle=Math.floor(angle);
+        console.log(angle);
         $scope.current.rotation = angle;
       };
 
