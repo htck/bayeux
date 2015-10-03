@@ -17,6 +17,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       constants.ELEMENT_DEFAULT_HEIGHT=1;
       constants.ELEMENT_DEFAULT_WIDTH=1;
       constants.ELEMENT_DEFAULT_ROTATION=0;
+      constants.ELEMENT_DEFAULT_KEEPRATIO=true;
   		$scope.constants = constants;
 
       var paper = new Raphael('paper');
@@ -101,6 +102,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         ft.attrs.rotate=constants.ELEMENT_DEFAULT_ROTATION;
         $scope.elementChangedRotation(ft.attrs.rotate);
         $scope.current.opacity = 1;
+        $scope.current.keepratio = constants.ELEMENT_DEFAULT_KEEPRATIO;
+        $scope.elementSetKeepRatio();
         $scope.$apply();
       }
 
