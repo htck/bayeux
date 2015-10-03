@@ -157,6 +157,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
         if($scope.current.keepratio){
           $scope.current.ft.attrs.scale.x=$scope.current.ft.attrs.scale.x*$scope.current.height/$scope.current.ft.attrs.scale.y;
+          $scope.current.width=$scope.current.ft.attrs.scale.x;
         }
         $scope.current.ft.attrs.ratio=$scope.current.ft.attrs.scale.x/$scope.current.ft.attrs.scale.y;
         $scope.current.ft.attrs.scale.y=$scope.current.height;
@@ -179,6 +180,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
         if($scope.current.keepratio){
           $scope.current.ft.attrs.scale.y = dir * $scope.current.ft.attrs.scale.y*$scope.current.width/$scope.current.ft.attrs.scale.x;
+          $scope.current.height=$scope.current.ft.attrs.scale.y;
         }
         $scope.current.ft.attrs.ratio = dir * $scope.current.ft.attrs.scale.x/$scope.current.ft.attrs.scale.y;
         
