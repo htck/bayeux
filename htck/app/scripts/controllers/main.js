@@ -203,7 +203,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         angle=Math.floor(angle);
-        console.log(angle);
         $scope.current.rotation = angle;
       };
 

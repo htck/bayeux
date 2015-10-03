@@ -1,10 +1,10 @@
 var constants = {
   "config": {
-    "appTitle": "Historic Tale Construction Kit"
+    "appTitle": "t"
   },
   "tabs": [
    {
-      "title": "Beasts",
+      "title": "1",
       "images": [
         "content//images/beasts/01_horse.png",
         "content//images/beasts/02_cow.png",
@@ -33,7 +33,7 @@ var constants = {
       ]
     },
    {
-      "title": "Braves",
+      "title": "2",
       "images": [
         "content//images/brave/01_archer1.png",
         "content//images/brave/02_archer2.png",
@@ -55,7 +55,7 @@ var constants = {
       ]
     },
    {
-      "title": "Buildings",
+      "title": "3",
       "images": [
         "content//images/buildings/01_tower.png",
         "content//images/buildings/02_tower2.png",
@@ -72,7 +72,7 @@ var constants = {
       ]
     },
    {
-      "title": "Folks",
+      "title": "4",
       "images": [
         "content//images/folc/01_group.png",
         "content//images/folc/02_staring-guys.png",
@@ -101,7 +101,7 @@ var constants = {
       ]
     },
    {
-      "title": "Misc",
+      "title": "5",
       "images": [
         "content//images/misc/01_tree.png",
         "content//images/misc/02_tree.png",
