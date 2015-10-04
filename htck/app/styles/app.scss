@@ -21,4 +21,9 @@
 #content-left-panel {
   background-color: #433c37;
   padding:0;
+
+  .item{
+  	max-width:100%;
+	max-height:100%;
+  }
 }
