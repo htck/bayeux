@@ -9,7 +9,7 @@
  */
 /* globals constants */
 /* globals Raphael */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log) {
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document) {
 // Constants
       constants.ELEMENT_SCALE_MIN = 0.2;
       constants.ELEMENT_SCALE_MAX = 5;
@@ -216,8 +216,17 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
-      background.mousedown(function() {
+      background.mousedown(function(evt, x, y) {
+        console.log(evt);
         // TODO add text
+        var text = paper.text(evt.layerX, evt.layerY, 'Hello').attr({'text-anchor': 'start', 'font-size': '25px'});
+
+        console.log(text);
+
+        addElement(text);
+
+        text[0].textContent = "Bonjour";
+        $scope.carret = (text[0].textContent.length);
       });
       background.attr({'fill':'white', 'fill-opacity':'0', 'stroke':'none'});
 
@@ -254,4 +263,30 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           }
         });
       };
+
+      function handleKeyPress (evt) {
+        if(!$scope.current || $scope.current.type !== 'text'){
+          return;
+        }
+        
+        // Check if letter key
+        if(!evt.key.match('^[a-zA-Z]$')){
+          return;
+        }
+        console.log('Still here');
+        console.log(evt);
+        var k = evt.key.toUpperCase();
+        console.log(k);
+
+        //$scope.carret
+
+        $scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.carret)+k+$scope.current[0].textContent.substr($scope.carret);
+        $scope.carret++;
+      };
+
+      $document.on('keydown', handleKeyPress);
+
+      $scope.$on('$destroy', function () {
+        $document.off('keydown', handleKeyPress);
+      });
   });
