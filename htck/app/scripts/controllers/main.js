@@ -27,6 +27,18 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       var fts = [];
 
+      function setCurrent(newCurrent) {
+        if($scope.current){
+          $scope.current.ft.hideHandles();
+        }
+        
+        $scope.current = newCurrent;
+
+        if($scope.current) {
+          $scope.current.ft.showHandles();
+        }
+      }
+
   		function getSizeOfImage(src) {
   			var fimg = new Image(); 
   			fimg.src = src;
@@ -42,7 +54,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
   			// TODO
   			$log.debug('Click');
         console.log(this);
-        $scope.current = this;
+        setCurrent(this);
   			//this.toFront();
         $scope.$apply();
   		}
@@ -51,7 +63,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
   		function elementDragStart () {
   			$log.debug('Start');
   			$log.debug(this);
-        $scope.current = this;
+        setCurrent(this);
   			this.ox = this.attrs.x;
         this.oy = this.attrs.y;
 
@@ -88,9 +100,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         // to make this work free_transform plugin must implement range.scale for x AND y 
         //ft.setOpts({range: {scale: [$scope.constants.ELEMENT_SCALE_MIN*ft.attrs.size.x, $scope.constants.ELEMENT_SCALE_MAX*ft.attrs.size.y] } });
 
-        $scope.current = ie;
-        $scope.current.ft = ft;
-        $scope.current.ft.id = cptFtId++;
+        //$scope.current = ie;
+
+        
+        ie.ft = ft;
+        ie.ft.id = cptFtId++;
+        setCurrent(ie);
 
         fts.push(ft);
 
@@ -123,7 +138,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       // Unselects an element
       function unfocus(){
         $log.debug('Unfocus');
-        $scope.current = null;
+        //$scope.current = null;
+        setCurrent(null);
       }
 
       // Adds an image as a raphael element from its url
