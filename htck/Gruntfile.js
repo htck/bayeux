@@ -283,49 +283,12 @@ module.exports = function (grunt) {
       }
     },
 
-    // The following *-min tasks will produce minified files in the dist folder
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= appConfig.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    /*uglify: {
-      dist: {
-        files: {
-          '<%= appConfig.dist %>/scripts/scripts.js': [
-            '<%= appConfig.dist %>/scripts/scripts.js'
-          ]
-        }
-      }
-    },*/
-    // concat: {
-    //   dist: {}
-    // },
-
     imagemin: {
       dist: {
         files: [{
           expand: true,
           cwd: '<%= appConfig.app %>/images',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= appConfig.dist %>/images'
-        }]
-      }
-    },
-
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= appConfig.app %>/images',
-          src: '{,*/}*.svg',
           dest: '<%= appConfig.dist %>/images'
         }]
       }
@@ -345,19 +308,6 @@ module.exports = function (grunt) {
           src: ['*.html'],
           dest: '<%= appConfig.dist %>'
         }]
-      }
-    },
-
-    ngtemplates: {
-      dist: {
-        options: {
-          module: 'htckApp',
-          htmlmin: '<%= htmlmin.dist.options %>',
-          usemin: 'scripts/scripts.js'
-        },
-        cwd: '<%= appConfig.app %>',
-        src: 'views/{,*/}*.html',
-        dest: '.tmp/templateCache.js'
       }
     },
 
@@ -396,13 +346,8 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
-          cwd: '.',
-          src: 'lib/bootstrap-sass-official/assets/fonts/bootstrap/*',
-          dest: '<%= appConfig.dist %>'
-        }, {
-          expand: true,
           cwd: '<%= appConfig.app %>',
-          src: '  views/*',
+          src: '  views/**/*',
           dest: '<%= appConfig.dist %>'
         }, {
           expand: true,
@@ -429,8 +374,7 @@ module.exports = function (grunt) {
       ],
       dist: [
         'compass:dist',
-        'imagemin',
-        'svgmin'
+        'imagemin'
       ]
     },
 
@@ -478,14 +422,13 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
-    //'autoprefixer',
-    //'ngtemplates',
+    'autoprefixer',
     'concat',
     'ngAnnotate',
     'copy:dist',
     'cssmin',
     'uglify',
-    //'filerev',
+    'filerev',
     'usemin',
     'htmlmin'
   ]);
