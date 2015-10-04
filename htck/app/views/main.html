@@ -41,8 +41,11 @@
       <div id="content-right-panel" class="col-lg-2 text-center" style="height: 800px;">
         <div ng-if="current">
           <div class="padding-v-15"></div>
-          <p>Color</p>
-          <div class="padding-v-15"></div>
+          <div ng-if="current && current.type==='text'">
+            <p>Color</p>
+             <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};"></div>
+            <div class="padding-v-15"></div>
+          </div>
           <p>Opacity</p>
           <div class="padding-h-30" layout>
             <md-slider flex min="0" step="0.02" max="1" ng-model="current.opacity" ng-change="elementSetOpacity()" id="opacity-slider" aria-label="Opacity" class>

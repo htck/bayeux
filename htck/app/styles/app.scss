@@ -33,3 +33,11 @@
 	max-height:100%;
   }
 }
+
+.circle{
+	width:$colorPickerSize;
+	height:$colorPickerSize;
+	border-radius:$colorPickerSize/2;
+	display:inline-block;
+	margin:0 4px;
+}
