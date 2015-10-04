@@ -2,6 +2,13 @@ var constants = {
   "config": {
     "appTitle": "Historic Tale Construction Kit"
   },
+  "colors":[
+    "#8C0A0A",
+    "#000057",
+    "#BE8202",
+    "#326400",
+    "#303030"
+  ],
   "tabs": [
    {
       "title": "Beasts",
