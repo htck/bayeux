@@ -28,6 +28,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if($scope.current && newCurrent && $scope.current.id === newCurrent.id){
           return;
         }
+        if($scope.current && $scope.current.type === 'text' && !$scope.current[0].textContent.length) {
+          $scope.current.ft.unplug();
+          $scope.current.remove();
+        }
         if($scope.current && $scope.current.ft){
           $scope.current.ft.hideHandles();
         }
@@ -217,16 +221,17 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
       background.mousedown(function(evt, x, y) {
-        console.log(evt);
+        
         // TODO add text
-        var text = paper.text(evt.layerX, evt.layerY, 'Hello').attr({'text-anchor': 'start', 'font-size': '25px'});
-
-        console.log(text);
+        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-size': '25px'});
 
         addElement(text);
 
-        text[0].textContent = "Bonjour";
-        $scope.carret = (text[0].textContent.length);
+        $scope.carret = 0;
+
+        text[0].textContent = '';
+
+        $scope.$apply();
       });
       background.attr({'fill':'white', 'fill-opacity':'0', 'stroke':'none'});
 
@@ -268,7 +273,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(!$scope.current || $scope.current.type !== 'text'){
           return;
         }
-        console.log(evt);
+        $log.debug(evt);
         if(evt.key === 'Backspace') {
           if($scope.current[0].textContent.length && $scope.carret > 0){
             console.log('REMOVE');
@@ -299,11 +304,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if((!evt.key.match('^[a-zA-Z]$')) && (!evt.key === ' ') || evt.key.length > 1){ // TODO better regex
           return;
         }
-        console.log('Still here');
         var k = (evt.key === ' ') ? ' ' : evt.key.toUpperCase();
-        console.log(k);
-
-        //$scope.carret
 
         $scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.carret)+k+$scope.current[0].textContent.substr($scope.carret);
         $scope.carret++;
