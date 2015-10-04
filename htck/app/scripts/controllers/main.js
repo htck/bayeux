@@ -9,10 +9,13 @@
  */
 /* globals constants */
 /* globals Raphael */
+/* globals $ */
+/* globals canvg */
+/* globals saveAs */
 angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document) {
 // Constants
       constants.ELEMENT_SCALE_MIN = 0.2;
-      constants.ELEMENT_SCALE_MAX = 5;
+      constants.ELEMENT_SCALE_MAX = 5; 
       constants.SHOWHANDLES=true;
       constants.ELEMENT_DEFAULT_HEIGHT=1;
       constants.ELEMENT_DEFAULT_WIDTH=1;
@@ -159,8 +162,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(!$scope.current) {
           return;
         }
-        var dir;
-        ($scope.current.mirror) ? dir = -1 : dir = 1;
+        var dir = 1;
+        if($scope.current.mirror) {
+          dir = -1;
+        }
 
         if($scope.current.keepratio){
           $scope.current.ft.attrs.scale.y = dir * $scope.current.ft.attrs.scale.y*$scope.current.width/$scope.current.ft.attrs.scale.x;
@@ -176,8 +181,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(!$scope.current) {
           return;
         }
-        var dir;
-        ($scope.current.mirror) ? dir = -1 : dir = 1;
+        var dir = 1;
+        if($scope.current.mirror) {
+          dir = -1;
+        }
         $scope.current.width = dir * width;
       };
 
@@ -202,7 +209,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         $scope.current.ft.setOpts({keepRatio: $scope.current.keepratio});
-      }
+      };
 
       $scope.elementSetMirror = function(){
         if(!$scope.current) {
@@ -220,7 +227,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
-      background.mousedown(function(evt, x, y) {
+      background.mousedown(function(evt) {
         var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-family': constants.fonts[0], 'font-size': '25px', 'fill': constants.colors[0]});
         addElement(text);
         $scope.carret = 0;
@@ -233,8 +240,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       // source : https://code.google.com/p/svgfix/
       function svgfix (text) {
         var fixed = text ;
-        fixed = jQuery.trim(fixed);
-        if (fixed.indexOf( 'xmlns:xlink' ) == -1 ) {
+        fixed = $.trim(fixed);
+        if (fixed.indexOf( 'xmlns:xlink' ) === -1 ) {
           fixed = fixed.replace ('<svg ', '<svg xmlns:xlink="http://www.w3.org/1999/xlink" '); 
         }
         fixed = fixed.replace (' href', ' xlink:href'); 
@@ -295,7 +302,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         // Check if letter key
-        if((!evt.key.match('^[a-zA-Z]$')) && (!evt.key === ' ') || evt.key.length > 1){ // TODO better regex
+        if((!evt.key.match('^[a-zA-Z]$')) && (evt.key !== ' ') || evt.key.length > 1){ // TODO better regex
           return;
         }
         var k = (evt.key === ' ') ? ' ' : evt.key.toUpperCase();
@@ -305,7 +312,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
         evt.stopPropagation();
         evt.preventDefault();
-      };
+      }
 
       $document.on('keydown', handleKeyPress);
 
