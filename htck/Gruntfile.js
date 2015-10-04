@@ -296,15 +296,15 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= appConfig.dist %>/scripts/scripts.js': [
-    //         '<%= appConfig.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
+    /*uglify: {
+      dist: {
+        files: {
+          '<%= appConfig.dist %>/scripts/scripts.js': [
+            '<%= appConfig.dist %>/scripts/scripts.js'
+          ]
+        }
+      }
+    },*/
     // concat: {
     //   dist: {}
     // },
@@ -374,13 +374,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= appConfig.dist %>/*.html']
-      }
-    },
-
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -405,6 +398,16 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '.',
           src: 'lib/bootstrap-sass-official/assets/fonts/bootstrap/*',
+          dest: '<%= appConfig.dist %>'
+        }, {
+          expand: true,
+          cwd: '<%= appConfig.app %>',
+          src: '  views/*',
+          dest: '<%= appConfig.dist %>'
+        }, {
+          expand: true,
+          cwd: '<%= appConfig.app %>',
+          src: '  content/**/*',
           dest: '<%= appConfig.dist %>'
         }]
       },
@@ -475,15 +478,14 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
-    'ngtemplates',
+    //'autoprefixer',
+    //'ngtemplates',
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
     'cssmin',
     'uglify',
-    'filerev',
+    //'filerev',
     'usemin',
     'htmlmin'
   ]);
