@@ -221,16 +221,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
       background.mousedown(function(evt, x, y) {
-        
-        // TODO add text
-        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-size': '25px'});
-
+        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-size': '25px', 'fill': constants.colors[0]});
         addElement(text);
-
         $scope.carret = 0;
-
         text[0].textContent = '';
-
         $scope.$apply();
       });
       background.attr({'fill':'white', 'fill-opacity':'0', 'stroke':'none'});
@@ -318,4 +312,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       $scope.$on('$destroy', function () {
         $document.off('keydown', handleKeyPress);
       });
+
+      $scope.setFontColor = function(color) {
+        $scope.current.attr({ fill: color});
+      };
   });

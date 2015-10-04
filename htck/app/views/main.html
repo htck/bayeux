@@ -43,7 +43,7 @@
           <div class="padding-v-15"></div>
           <div ng-if="current && current.type==='text'">
             <p>Color</p>
-             <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};"></div>
+             <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
             <div class="padding-v-15"></div>
           </div>
           <p>Opacity</p>
