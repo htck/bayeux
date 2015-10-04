@@ -11,7 +11,8 @@
     "angular-sanitize": "^1.3.0",
     "angular-touch": "^1.3.0",
     "angular-material": "~0.11.1",
-    "raphael": "~2.1.4"
+    "raphael": "~2.1.4",
+    "raphael_free_transform": "git://github.com/AliasIO/Raphael.FreeTransform.git"
   },
   "devDependencies": {
     "angular-mocks": "^1.3.0"
