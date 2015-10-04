@@ -269,26 +269,30 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         console.log(evt);
-        evt.stopPropagation();
-        evt.preventDefault();
         if(evt.key === 'Backspace') {
           if($scope.current[0].textContent.length && $scope.carret > 0){
             console.log('REMOVE');
             $scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.carret-1)+$scope.current[0].textContent.substr($scope.carret);
             $scope.carret--;
           }
+          evt.stopPropagation();
+          evt.preventDefault();
           return;
         }
         if(evt.key === 'ArrowLeft') {
           if($scope.carret > 0){
             $scope.carret--;
           }
+          evt.stopPropagation();
+          evt.preventDefault();
           return;
         }
         if(evt.key === 'ArrowRight') {
           if($scope.carret < $scope.current[0].textContent.length){
             $scope.carret++;
           }
+          evt.stopPropagation();
+          evt.preventDefault();
           return;
         }
         // Check if letter key
@@ -303,6 +307,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
         $scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.carret)+k+$scope.current[0].textContent.substr($scope.carret);
         $scope.carret++;
+
+        evt.stopPropagation();
+        evt.preventDefault();
       };
 
       $document.on('keydown', handleKeyPress);
