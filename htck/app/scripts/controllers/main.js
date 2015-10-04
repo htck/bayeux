@@ -233,22 +233,25 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         return fixed; 
       }
 
-      // WIP : POC for export function
       $scope.export = function(){
-        console.log('Exporting');
+        $log.debug('Exporting');
+        // Unfocus to remove handles from elements
+        unfocus();
+        // Get the svg element created by Raphael
         var svg = document.getElementById("paper").children[0];
-        console.log(svg);
         var svgStr = svgfix(svg.outerHTML);
-        console.log(svgStr);
 
-        canvg(document.getElementById('canvas'), svgStr);
-        $timeout(function(){
-          var elem = document.getElementById('canvas');
-          console.log(elem);
-          var imgData = elem.toDataURL("image/png");
-          console.log(imgData);
+        // Convert to canvas using canvg
+        canvg(document.getElementById('canvas'), svgStr, {
+          renderCallback: function() {
+            var canvas = document.getElementById('canvas');
 
-          window.open(imgData, 'Download');
-        },1000);
+            // Get blob from canvas image
+            canvas.toBlob(function(blob){
+              // Save to file using FileSaver.js
+              saveAs(blob, "TheGloriousTaleOfBayeux.png");  // TODO generate random name for file
+            });
+          }
+        });
       };
   });
