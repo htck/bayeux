@@ -23,9 +23,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       var paper = new Raphael('paper');
   		$log.debug('Paper', paper);
   		var HEIGHT = paper.height, WIDTH = paper.width;
-      var cptFtId = 0;
-
-      var fts = [];
 
       function setCurrent(newCurrent) {
         if($scope.current){
@@ -79,15 +76,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         // TODO
   		}
 
-      function ftsIndexOf (ft) {
-        for (var i = 0; i < fts.length; i++) {
-            if (fts[i].id == ft.id) {
-                return i;
-            }
-        }
-        return -1;
-      }
-
       // Should be called when creating a raphael element
       function addElement(ie){
         ie.mousedown(elementMouseDown);
@@ -101,13 +89,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         //ft.setOpts({range: {scale: [$scope.constants.ELEMENT_SCALE_MIN*ft.attrs.size.x, $scope.constants.ELEMENT_SCALE_MAX*ft.attrs.size.y] } });
 
         //$scope.current = ie;
-
-        
         ie.ft = ft;
-        ie.ft.id = cptFtId++;
         setCurrent(ie);
-
-        fts.push(ft);
 
         // set default values
         (constants.showHandles) ? ft.showHandles() : null;
@@ -154,7 +137,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(!$scope.current) {
           return;
         }
-        fts.splice(ftsIndexOf($scope.current.ft),1);
         $scope.current.ft.unplug();
         $scope.current.remove();
         unfocus();
