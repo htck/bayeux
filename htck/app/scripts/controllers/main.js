@@ -230,16 +230,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.current.ft.apply();
       };
 
-      $scope.elementSetShowHandles = function(){
-        if(!$scope.current) {
-          return;
-        }
-        // TODO : find a way to keep drag and drop without handles!
-        for (var i = 0; i < fts.length; i++) {
-          ($scope.constants.SHOWHANDLES) ? fts[i].showHandles() : fts[i].hideHandles();
-        }
-      }
-
       $scope.elementSetKeepRatio = function(){
         if(!$scope.current) {
           return;
