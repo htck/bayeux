@@ -25,10 +25,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
   		var HEIGHT = paper.height, WIDTH = paper.width;
 
       function setCurrent(newCurrent) {
-        if($scope.current && $scope.current.id === newCurrent.id){
+        if($scope.current && newCurrent && $scope.current.id === newCurrent.id){
           return;
         }
-        if($scope.current){
+        if($scope.current && $scope.current.ft){
           $scope.current.ft.hideHandles();
         }
         
