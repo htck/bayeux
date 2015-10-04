@@ -12,7 +12,9 @@
     "angular-touch": "^1.3.0",
     "angular-material": "~0.11.1",
     "raphael": "~2.1.4",
-    "raphael_free_transform": "git://github.com/AliasIO/Raphael.FreeTransform.git"
+    "raphael_free_transform": "git://github.com/AliasIO/Raphael.FreeTransform.git",
+    "canvg": "~1.3.0",
+    "FileSaver": "git://github.com/eligrey/FileSaver.js.git"
   },
   "devDependencies": {
     "angular-mocks": "^1.3.0"

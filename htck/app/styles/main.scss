@@ -1,6 +1,7 @@
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
+@import "common.scss";
 
 .margin-v-0 {
   margin-top: 0px;
@@ -21,10 +22,6 @@ body {
 
 #readme {
   background-color: rgba(255, 255, 255, 0.5);
-}
-
-#content-left-panel {
-  background-color: #433c37;
 }
 
 #paper {
