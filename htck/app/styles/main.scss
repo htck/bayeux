@@ -1,8 +1,7 @@
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
-
-$appHeight:800px;
+@import "common.scss";
 
 .margin-v-0 {
   margin-top: 0px;
