@@ -268,14 +268,35 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(!$scope.current || $scope.current.type !== 'text'){
           return;
         }
-        
+        console.log(evt);
+        evt.stopPropagation();
+        evt.preventDefault();
+        if(evt.key === 'Backspace') {
+          if($scope.current[0].textContent.length && $scope.carret > 0){
+            console.log('REMOVE');
+            $scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.carret-1)+$scope.current[0].textContent.substr($scope.carret);
+            $scope.carret--;
+          }
+          return;
+        }
+        if(evt.key === 'ArrowLeft') {
+          if($scope.carret > 0){
+            $scope.carret--;
+          }
+          return;
+        }
+        if(evt.key === 'ArrowRight') {
+          if($scope.carret < $scope.current[0].textContent.length){
+            $scope.carret++;
+          }
+          return;
+        }
         // Check if letter key
-        if(!evt.key.match('^[a-zA-Z]$')){
+        if((!evt.key.match('^[a-zA-Z]$')) && (!evt.key === ' ') || evt.key.length > 1){ // TODO better regex
           return;
         }
         console.log('Still here');
-        console.log(evt);
-        var k = evt.key.toUpperCase();
+        var k = (evt.key === ' ') ? ' ' : evt.key.toUpperCase();
         console.log(k);
 
         //$scope.carret
