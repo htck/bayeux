@@ -10,7 +10,7 @@
 
   <div id="content" class="container-fluid app_wrapper">
     <div class="row">
-      <div id="content-left-panel" class="col-lg-3" style="height: 800px;">
+      <div id="content-left-panel" class="col-lg-3" style="height: 800px; padding: 15px;">
         <div>
           <md-content>
             <md-tabs class="itembank" md-border-bottom>
@@ -35,7 +35,9 @@
         </div>
       </div>
 
-      <div id="paper" class="col-lg-7" style="height: 800px;">
+      <div id="content-middle-panel" class="col-lg-7" style="min-width: 900px;">
+        <div id="paper" class="" style="float: none; margin: 0 auto;height: 800px; width: 900px;">
+        </div>
       </div>
 
       <div id="content-right-panel" class="col-lg-2 text-center" style="height: 800px;">
@@ -95,6 +97,7 @@
   </div>
 
   <div class="padding-h-15"></div>
+  <div class="padding-v-15"></div>
 
   <canvas id="canvas" ng-show="false"></canvas>
 </div>

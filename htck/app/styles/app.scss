@@ -20,12 +20,16 @@
 
 }
 
+#content {
+	background-color: #433c37;
+}
+
 #content-left-panel {
   background-color: #433c37;
   padding:0;
 
   .itembank {
-  	height:$appHeight;
+  	height:$leftPannelHeight;
   }
 
   .item{
