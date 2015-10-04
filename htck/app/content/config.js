@@ -130,6 +130,9 @@ var constants = {
         "content//images/misc/17_sword_helmet.png",
       ]
     },
+  ],
+  "fonts":[
+    "Bayeux"
   ]
 }
 

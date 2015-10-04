@@ -221,7 +221,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
       background.mousedown(function(evt, x, y) {
-        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-size': '25px', 'fill': constants.colors[0]});
+        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-family': constants.fonts[0], 'font-size': '25px', 'fill': constants.colors[0]});
         addElement(text);
         $scope.carret = 0;
         text[0].textContent = '';
