@@ -25,6 +25,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
   		var HEIGHT = paper.height, WIDTH = paper.width;
 
       function setCurrent(newCurrent) {
+        if($scope.current && $scope.current.id === newCurrent.id){
+          return;
+        }
         if($scope.current){
           $scope.current.ft.hideHandles();
         }
@@ -50,36 +53,14 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
   		function elementMouseDown (/*evt, x, y*/){
   			// TODO
   			$log.debug('Click');
-        console.log(this);
         setCurrent(this);
   			//this.toFront();
         $scope.$apply();
   		}
 
-      // Triggers when an element is dragged
-  		function elementDragStart () {
-  			$log.debug('Start');
-  			$log.debug(this);
-        setCurrent(this);
-  			this.ox = this.attrs.x;
-        this.oy = this.attrs.y;
-
-  		}
-
-      // Triggers while an element is dragged
-  		function elementDragMove (dx, dy) {
-  		}
-
-      // Triggers when an element drag is stopped
-  		function elementDragEnd () {
-  			$log.debug('End');
-        // TODO
-  		}
-
       // Should be called when creating a raphael element
       function addElement(ie){
         ie.mousedown(elementMouseDown);
-        ie.drag(elementDragMove, elementDragStart, elementDragEnd);
 
         var ft = paper.freeTransform(ie, {}, function(ft, events) {
           handleFtChanged(ft, events);
@@ -93,7 +74,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         setCurrent(ie);
 
         // set default values
-        (constants.showHandles) ? ft.showHandles() : null;
         ft.attrs.y=constants.ELEMENT_DEFAULT_HEIGHT;
         $scope.elementChangedHeight(ft.attrs.y);
         ft.attrs.x=constants.ELEMENT_DEFAULT_WIDTH;
@@ -103,7 +83,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.current.opacity = 1;
         $scope.current.keepratio = constants.ELEMENT_DEFAULT_KEEPRATIO;
         $scope.elementSetKeepRatio();
-        $scope.$apply();
+
+        ft.setOpts({'drag':['self']});
       }
 
       function handleFtChanged(ft, events) {
