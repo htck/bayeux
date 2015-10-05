@@ -331,5 +331,16 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.carret = $scope.current[0].textContent.length;
         console.log($scope.current);
         $scope.current.attr({'x':0});
+
+        console.log($scope.current.getBBox().width);
+        console.log($scope.current.getBBox().height);
+
+        var x = $scope.current.attr('x');
+        var y = $scope.current.attr('y');
+        var h = $scope.current.getBBox().height;
+
+
+        $scope.carretPointer = paper.rect(x, y-(h * 3/4), 3, h);
+        $scope.carretPointer.attr({'fill':'red', 'stroke':'none'});
       }
   });
