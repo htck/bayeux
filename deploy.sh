@@ -9,5 +9,5 @@ mv /tmp/dist/* .
 git add content/ images/ index.html  scripts/ styles/ views/
 git commit -am "Deploying to gh-pages"
 git push --delete origin gh-pages
-git push --set-upstream
+git push --set-upstream origin gh-pages
 git checkout master
