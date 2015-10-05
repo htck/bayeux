@@ -337,6 +337,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       $scope.setFontColor = function(color) {
         $scope.current.attr({ fill: color});
+        if($scope.carretPointer){
+          $scope.carretPointer.attr({ fill: color});
+        }
       };
 
       function updateCarretPosition() {
@@ -378,7 +381,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
 
         $scope.carretPointer = paper.rect(x-1, y-(h * 3/5), 3, h);
-        $scope.carretPointer.attr({'fill':'red', 'stroke':'none'});
+        $scope.carretPointer.attr({'fill':$scope.current.attr('fill'), 'stroke':'none'});
 
         updateCarretPosition();
       }
