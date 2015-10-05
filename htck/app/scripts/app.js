@@ -14,7 +14,8 @@ angular
     'ngAria',
     'ngRoute',
     'ngTouch',
-    'ngMaterial'
+    'ngMaterial',
+    'ngDragDrop'
   ])
   .config(function ($routeProvider) {
     $routeProvider

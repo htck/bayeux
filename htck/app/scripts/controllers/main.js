@@ -127,9 +127,11 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       };
 
       // Adds an image as a raphael element from its url
-  		$scope.addImage = function(src){
+  		$scope.addImage = function(src, x, y){
   			var size = getSizeOfImage(src);
-  			var ie = paper.image(src, (WIDTH - size.w)/2, (HEIGHT - size.h)/2, size.w, size.h);  // TODO
+        x=(x)?x:(WIDTH - size.w)/2;
+        y=(y)?y:(HEIGHT - size.h)/2;
+  			var ie = paper.image(src, x, y, size.w, size.h);  // TODO
   			addElement(ie);
   		};
 
@@ -409,4 +411,14 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.carretPointer.remove();
         $scope.carretPointer = null;
       }
+
+/*************************************************************** Drag & drop */
+
+      $scope.test = function(event, ui) {
+        console.log(ui);
+        var src=ui.draggable.context.currentSrc;
+        var x = ui.offset.left - $('#paper').offset().left;
+        var y = ui.offset.top - $('#paper').offset().top;
+        $scope.addImage(src, x, y);
+      };
   });

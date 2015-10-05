@@ -23,7 +23,7 @@
                       md-gutter="12px" md-gutter-gt-sm="8px" >
                       <md-grid-tile ng-repeat="i in t.images track by $index" class="gray"
                         md-rowspan="1" md-colspan="1" md-colspan-sm="1">
-                        <img class="item" ng-src="{{i}}" ng-click="addImage(i)"></img>
+                        <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{i}}" ng-click="addImage(i)"></img>
                       </md-grid-tile>
                     </md-grid-list>
                   </div>
@@ -35,7 +35,7 @@
       </div>
 
       <div id="content-middle-panel" class="col-lg-7 padding-panel">
-        <div id="paper" class="">
+        <div id="paper" class="" data-drop="true" jqyoui-droppable="{onDrop: 'test'}">
         </div>
       </div>
 
