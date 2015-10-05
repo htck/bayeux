@@ -113,6 +113,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       function unfocus(){
         $log.debug('Unfocus');
         //$scope.current = null;
+        removeCarret();
         setCurrent(null);
       }
 
@@ -159,6 +160,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         $scope.current.height = height;
+        updateCarretPosition();
       };
 
       $scope.elementSetWidth = function(){
@@ -189,6 +191,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           dir = -1;
         }
         $scope.current.width = dir * width;
+        updateCarretPosition();
       };
 
       $scope.elementChangedRotation = function(angle){
@@ -197,6 +200,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
         angle=Math.floor(angle);
         $scope.current.rotation = angle;
+        updateCarretPosition();
       };
 
       $scope.elementSetRotation = function(){
@@ -358,6 +362,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       }
 
       function addCarret() {
+        removeCarret();
         $scope.carret = $scope.current[0].textContent.length;
         if(!$scope.current.inited){
           $scope.carret = 0;
@@ -372,9 +377,17 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         var h = $scope.current.getBBox(true).height;
 
 
-        $scope.carretPointer = paper.rect(x, y-(h * 2/4), 3, h);
+        $scope.carretPointer = paper.rect(x-1, y-(h * 3/5), 3, h);
         $scope.carretPointer.attr({'fill':'red', 'stroke':'none'});
 
         updateCarretPosition();
+      }
+
+      function removeCarret() {
+        if(!$scope.carretPointer){
+          return;
+        }
+        $scope.carretPointer.remove();
+        $scope.carretPointer = null;
       }
   });
