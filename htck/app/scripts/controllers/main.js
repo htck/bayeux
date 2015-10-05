@@ -236,6 +236,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.carret = 0;
         //text[0].textContent = '';
         text.attr({text: ''});
+        text.inited = true;
         $scope.$apply();
       });
       background.attr({'fill':'url(images/background_2.jpg)', 'fill-opacity':'1', 'stroke':'none'});
@@ -285,6 +286,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
             //$scope.current[0].textContent = ;
             $scope.current.attr({text: $scope.current[0].textContent.substr(0,$scope.carret-1)+$scope.current[0].textContent.substr($scope.carret)});
             $scope.carret--;
+            updateCarretPosition();
           }
           evt.stopPropagation();
           evt.preventDefault();
@@ -293,6 +295,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(evt.key === 'ArrowLeft') {
           if($scope.carret > 0){
             $scope.carret--;
+            updateCarretPosition();
           }
           evt.stopPropagation();
           evt.preventDefault();
@@ -301,6 +304,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(evt.key === 'ArrowRight') {
           if($scope.carret < $scope.current[0].textContent.length){
             $scope.carret++;
+            updateCarretPosition();
           }
           evt.stopPropagation();
           evt.preventDefault();
@@ -315,6 +319,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         //$scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.carret)+k+$scope.current[0].textContent.substr($scope.carret);
         $scope.current.attr({text: $scope.current[0].textContent.substr(0,$scope.carret)+k+$scope.current[0].textContent.substr($scope.carret)});
         $scope.carret++;
+        updateCarretPosition();
 
         evt.stopPropagation();
         evt.preventDefault();
@@ -330,20 +335,43 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.current.attr({ fill: color});
       };
 
+      function updateCarretPosition() {
+        var cloneText = $scope.current.clone();
+        cloneText.attr({'fill':'blue'});
+        var x = cloneText.attr('x');
+        var y = cloneText.attr('y');
+        cloneText.attr({text: $scope.current[0].textContent.substr(0, $scope.carret)});
+        var w = cloneText.getBBox().width;
+        if($scope.carret === 0){
+          cloneText.attr({text:''});
+          w = 0;
+        }
+
+        console.log($scope.carret);
+
+        $scope.carretPointer.attr({x: x+w});
+
+        cloneText.remove();
+      }
+
       function addCarret() {
         $scope.carret = $scope.current[0].textContent.length;
+        if(!$scope.current.inited){
+          $scope.carret = 0;
+        }
         console.log($scope.current);
-        $scope.current.attr({'x':0});
 
-        console.log($scope.current.getBBox().width);
-        console.log($scope.current.getBBox().height);
+        console.log($scope.current.node.getBBox().width);
+        console.log($scope.current.node.getBBox().height);
 
         var x = $scope.current.attr('x');
         var y = $scope.current.attr('y');
-        var h = $scope.current.getBBox().height;
+        var h = $scope.current.node.getBBox().height;
 
 
-        $scope.carretPointer = paper.rect(x, y-(h * 3/4), 3, h);
+        $scope.carretPointer = paper.rect(x, y-(h * 2/4), 3, h);
         $scope.carretPointer.attr({'fill':'red', 'stroke':'none'});
+
+        updateCarretPosition();
       }
   });
