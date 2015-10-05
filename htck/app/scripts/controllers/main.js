@@ -79,18 +79,21 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         // to make this work free_transform plugin must implement range.scale for x AND y 
         //ft.setOpts({range: {scale: [$scope.constants.ELEMENT_SCALE_MIN*ft.attrs.size.x, $scope.constants.ELEMENT_SCALE_MAX*ft.attrs.size.y] } });
 
-        //$scope.current = ie;
         ie.ft = ft;
         setCurrent(ie);
 
         // set default values
         ft.attrs.y=constants.ELEMENT_DEFAULT_HEIGHT;
         $scope.elementChangedHeight(ft.attrs.y);
+
         ft.attrs.x=constants.ELEMENT_DEFAULT_WIDTH;
         $scope.elementChangedWidth(ft.attrs.x);
+
         ft.attrs.rotate=constants.ELEMENT_DEFAULT_ROTATION;
         $scope.elementChangedRotation(ft.attrs.rotate);
+
         $scope.current.opacity = 1;
+
         $scope.current.keepratio = constants.ELEMENT_DEFAULT_KEEPRATIO;
         $scope.elementSetKeepRatio();
 
@@ -117,6 +120,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         setCurrent(null);
       }
 
+      //
+      $scope.isFlipped = function() {
+        var dir = ($scope.current.mirror) ? -1 : 1;
+        return dir;
+      };
+
       // Adds an image as a raphael element from its url
   		$scope.addImage = function(src){
   			var size = getSizeOfImage(src);
@@ -141,56 +150,59 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.current.toFront();
       };
 
+      $scope.elementRatio = function(){
+        return $scope.current.ft.attrs.scale.x / $scope.current.ft.attrs.scale.y; 
+      };
 
+      //modified by sliders 
       $scope.elementSetHeight = function(){
         if(!$scope.current) {
           return;
-        }
-        if($scope.current.keepratio){
-          $scope.current.ft.attrs.scale.x=$scope.current.ft.attrs.scale.x*$scope.current.height/$scope.current.ft.attrs.scale.y;
-          $scope.current.width=$scope.current.ft.attrs.scale.x;
-        }
-        $scope.current.ft.attrs.ratio=$scope.current.ft.attrs.scale.x/$scope.current.ft.attrs.scale.y;
-        $scope.current.ft.attrs.scale.y=$scope.current.height;
+        }        
+        
+        if($scope.current.keepratio) {
+          $scope.current.ft.attrs.scale.x = $scope.elementRatio() * $scope.current.height;
+          $scope.elementChangedWidth($scope.current.ft.attrs.scale.x);
+          $scope.current.ft.attrs.scale.y = $scope.current.height;
+        } else {
+          $scope.current.ft.attrs.scale.y = $scope.current.height;
+          $scope.current.ft.attrs.ratio = $scope.elementRatio();
+        }                       
         $scope.current.ft.apply();
       };
 
+      //modified by sliders 
+      $scope.elementSetWidth = function(){
+        if(!$scope.current) {
+          return;
+        }        
+        if($scope.current.keepratio){
+          $scope.current.ft.attrs.scale.y = $scope.isFlipped() * $scope.current.width / $scope.elementRatio();
+          $scope.elementChangedHeight($scope.current.ft.attrs.scale.y);
+          $scope.current.ft.attrs.scale.x = $scope.isFlipped() * $scope.current.width;
+        } else {
+          $scope.current.ft.attrs.scale.x = $scope.isFlipped() * $scope.current.width;
+          $scope.current.ft.attrs.ratio = $scope.elementRatio();
+        }        
+        $scope.current.ft.apply();    
+      };
+
+      //modified by handles 
       $scope.elementChangedHeight = function(height){
         if(!$scope.current) {
           return;
         }
-        $scope.current.height = height;
+        $scope.current.height = Math.abs(height);
         updateCarretPosition();
       };
+      
 
-      $scope.elementSetWidth = function(){
+      //modified by handles 
+      $scope.elementChangedWidth = function(width){    
         if(!$scope.current) {
           return;
-        }
-        var dir = 1;
-        if($scope.current.mirror) {
-          dir = -1;
-        }
-
-        if($scope.current.keepratio){
-          $scope.current.ft.attrs.scale.y = dir * $scope.current.ft.attrs.scale.y*$scope.current.width/$scope.current.ft.attrs.scale.x;
-          $scope.current.height=$scope.current.ft.attrs.scale.y;
-        }
-        $scope.current.ft.attrs.ratio = dir * $scope.current.ft.attrs.scale.x/$scope.current.ft.attrs.scale.y;
-        
-        $scope.current.ft.attrs.scale.x = dir * $scope.current.width;
-        $scope.current.ft.apply();
-      };
-
-      $scope.elementChangedWidth = function(width){
-        if(!$scope.current) {
-          return;
-        }
-        var dir = 1;
-        if($scope.current.mirror) {
-          dir = -1;
-        }
-        $scope.current.width = dir * width;
+        }    
+        $scope.current.width = Math.abs(width);
         updateCarretPosition();
       };
 
@@ -218,11 +230,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.current.ft.setOpts({keepRatio: $scope.current.keepratio});
       };
 
-      $scope.elementSetMirror = function(){
+      $scope.elementSetMirror = function() {
         if(!$scope.current) {
           return;
         }
-        $scope.current.ft.attrs.scale.x = -$scope.current.ft.attrs.scale.x;
+        $scope.current.ft.attrs.scale.x = - $scope.current.ft.attrs.scale.x;
+        $scope.current.ft.attrs.ratio = $scope.elementRatio();
         $scope.current.ft.apply();
       };
       $scope.elementSetOpacity = function(){
