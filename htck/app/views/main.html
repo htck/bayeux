@@ -1,16 +1,15 @@
 <div>
-  <div class="padding-v-15"></div>
+  <div class="padding-v-50"></div>
 
   <div class="header text-center">
     <h1 class="margin-v-0">{{constants.config.appTitle}}</h1>
   </div>
 
-  <div class="padding-v-15"></div>
-  <div class="padding-v-15"></div>
+  <div class="padding-v-50"></div>
 
   <div id="content" class="container-fluid app_wrapper">
     <div class="row">
-      <div id="content-left-panel" class="col-lg-3" style="height: 800px;">
+      <div id="content-left-panel" class="col-lg-3 padding-panel">
         <div>
           <md-content>
             <md-tabs class="itembank" md-border-bottom>
@@ -34,11 +33,13 @@
           </md-content>
         </div>
       </div>
-      
-      <div id="paper" class="col-lg-7" style="height: 800px;">
+
+      <div id="content-middle-panel" class="col-lg-7 padding-panel">
+        <div id="paper" class="">
+        </div>
       </div>
 
-      <div id="content-right-panel" class="col-lg-2 text-center" style="height: 800px;">
+      <div id="content-right-panel" class="col-lg-2 padding-panel text-center">
         <div ng-if="current">
           <div class="padding-v-15"></div>
           <div ng-if="current && current.type==='text'">
@@ -95,6 +96,7 @@
   </div>
 
   <div class="padding-h-15"></div>
+  <div class="padding-v-15"></div>
 
   <canvas id="canvas" ng-show="false"></canvas>
 </div>
