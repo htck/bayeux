@@ -341,7 +341,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         var x = cloneText.attr('x');
         var y = cloneText.attr('y');
         cloneText.attr({text: $scope.current[0].textContent.substr(0, $scope.carret)});
-        var w = cloneText.getBBox().width;
+        var w = cloneText.getBBox(true).width;
         if($scope.carret === 0){
           cloneText.attr({text:''});
           w = 0;
@@ -350,6 +350,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         console.log($scope.carret);
 
         $scope.carretPointer.attr({x: x+w});
+
+        // Transform pointer
+        $scope.carretPointer.transform($scope.current.transform());
 
         cloneText.remove();
       }
@@ -361,12 +364,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
         console.log($scope.current);
 
-        console.log($scope.current.node.getBBox().width);
-        console.log($scope.current.node.getBBox().height);
+        console.log($scope.current.getBBox(true).width);
+        console.log($scope.current.getBBox(true).height);
 
         var x = $scope.current.attr('x');
         var y = $scope.current.attr('y');
-        var h = $scope.current.node.getBBox().height;
+        var h = $scope.current.getBBox(true).height;
 
 
         $scope.carretPointer = paper.rect(x, y-(h * 2/4), 3, h);
