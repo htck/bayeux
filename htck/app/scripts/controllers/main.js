@@ -343,6 +343,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       };
 
       function updateCarretPosition() {
+        if(!$scope.current || $scope.current.type !== 'text'){
+          return;
+        }
         var cloneText = $scope.current.clone();
         cloneText.attr({'fill':'blue'});
         var x = cloneText.attr('x');
