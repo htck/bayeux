@@ -234,7 +234,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-family': constants.fonts[0], 'font-size': '25px', 'fill': constants.colors[0]});
         addElement(text);
         $scope.carret = 0;
-        text[0].textContent = '';
+        //text[0].textContent = '';
+        text.attr({text: ''});
         $scope.$apply();
       });
       background.attr({'fill':'url(images/background_2.jpg)', 'fill-opacity':'1', 'stroke':'none'});
@@ -281,7 +282,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(evt.key === 'Backspace') {
           if($scope.current[0].textContent.length && $scope.carret > 0){
             console.log('REMOVE');
-            $scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.carret-1)+$scope.current[0].textContent.substr($scope.carret);
+            //$scope.current[0].textContent = ;
+            $scope.current.attr({text: $scope.current[0].textContent.substr(0,$scope.carret-1)+$scope.current[0].textContent.substr($scope.carret)});
             $scope.carret--;
           }
           evt.stopPropagation();
@@ -310,7 +312,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
         var k = (evt.key === ' ') ? ' ' : evt.key.toUpperCase();
 
-        $scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.carret)+k+$scope.current[0].textContent.substr($scope.carret);
+        //$scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.carret)+k+$scope.current[0].textContent.substr($scope.carret);
+        $scope.current.attr({text: $scope.current[0].textContent.substr(0,$scope.carret)+k+$scope.current[0].textContent.substr($scope.carret)});
         $scope.carret++;
 
         evt.stopPropagation();
