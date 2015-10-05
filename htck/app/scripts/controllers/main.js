@@ -234,7 +234,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         text[0].textContent = '';
         $scope.$apply();
       });
-      background.attr({'fill':'url(../images/background_2.jpg)', 'fill-opacity':'1', 'stroke':'none'});
+      background.attr({'fill':'url(images/background_2.jpg)', 'fill-opacity':'1', 'stroke':'none'});
 
       // Function gotten from SVGFix
       // source : https://code.google.com/p/svgfix/
