@@ -12,9 +12,7 @@ angular
   .module('htckApp', [
     'ngAnimate',
     'ngAria',
-    'ngResource',
     'ngRoute',
-    'ngSanitize',
     'ngTouch',
     'ngMaterial'
   ])
