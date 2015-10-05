@@ -44,6 +44,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if($scope.current) {
           $scope.current.ft.showHandles();
         }
+        if($scope.current && $scope.current.type === 'text') {
+          addCarret();
+        }
       }
 
   		function getSizeOfImage(src) {
@@ -323,4 +326,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       $scope.setFontColor = function(color) {
         $scope.current.attr({ fill: color});
       };
+
+      function addCarret() {
+        $scope.carret = $scope.current[0].textContent.length;
+        console.log($scope.current);
+        $scope.current.attr({'x':0});
+      }
   });
