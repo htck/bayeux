@@ -1,8 +1,6 @@
 @import "common.scss";
 
 .app_wrapper {
-	// width:100%;
-
 	// TODO customize md-tabs look
 	md-content {
 	  background-color: transparent !important;
@@ -17,19 +15,57 @@
 	    margin-top: 0;
 	  }
 	}
+}
 
+#content {
+	background-color: $appBg;
+}
+
+.padding-panel {
+	padding: $appPanelPadding;
 }
 
 #content-left-panel {
-  background-color: #433c37;
-  padding:0;
+  height: $appHeight;
 
   .itembank {
-  	height:$appHeight;
+  	height:calc(#{$appHeight} - 2*#{$appPanelPadding});
   }
 
   .item{
   	max-width:100%;
-	max-height:100%;
+		max-height:100%;
   }
+}
+
+#content-middle-panel {
+	height:$appHeight;
+	//width: $appWidth;
+
+
+/*
+  float: none;
+  margin: 0 auto;*/
+}
+
+#paper {
+	height:calc(#{$appHeight} - 2*#{$appPanelPadding});
+	width: calc(#{$appWidth} - 2*#{$appPanelPadding});
+  min-width: $appWidth;
+  max-width: $appWidth;
+  margin: auto;
+}
+
+#content-right-panel {
+	height:$appHeight;
+  color: white;
+  font-weight: bold;
+}
+
+.circle{
+	width:$colorPickerSize;
+	height:$colorPickerSize;
+	border-radius:$colorPickerSize/2;
+	display:inline-block;
+	margin:0 4px;
 }

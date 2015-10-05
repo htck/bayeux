@@ -9,10 +9,13 @@
  */
 /* globals constants */
 /* globals Raphael */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log) {
+/* globals $ */
+/* globals canvg */
+/* globals saveAs */
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document) {
 // Constants
       constants.ELEMENT_SCALE_MIN = 0.2;
-      constants.ELEMENT_SCALE_MAX = 5;
+      constants.ELEMENT_SCALE_MAX = 5; 
       constants.SHOWHANDLES=true;
       constants.ELEMENT_DEFAULT_HEIGHT=1;
       constants.ELEMENT_DEFAULT_WIDTH=1;
@@ -28,6 +31,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if($scope.current && newCurrent && $scope.current.id === newCurrent.id){
           return;
         }
+        if($scope.current && $scope.current.type === 'text' && !$scope.current[0].textContent.length) {
+          $scope.current.ft.unplug();
+          $scope.current.remove();
+        }
         if($scope.current && $scope.current.ft){
           $scope.current.ft.hideHandles();
         }
@@ -36,6 +43,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
         if($scope.current) {
           $scope.current.ft.showHandles();
+        }
+        if($scope.current && $scope.current.type === 'text') {
+          addCarret();
         }
       }
 
@@ -106,6 +116,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       function unfocus(){
         $log.debug('Unfocus');
         //$scope.current = null;
+        removeCarret();
         setCurrent(null);
       }
 
@@ -173,7 +184,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           $scope.current.ft.attrs.scale.x = $scope.isFlipped() * $scope.current.width;
           $scope.current.ft.attrs.ratio = $scope.elementRatio();
         }        
-        $scope.current.ft.apply();
+        $scope.current.ft.apply();    
       };
 
       //modified by handles 
@@ -182,16 +193,17 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         $scope.current.height = Math.abs(height);
+        updateCarretPosition();
       };
       
 
       //modified by handles 
-      $scope.elementChangedWidth = function(width){        
-        console.log("handles Changed Width ");
+      $scope.elementChangedWidth = function(width){    
         if(!$scope.current) {
           return;
         }    
         $scope.current.width = Math.abs(width);
+        updateCarretPosition();
       };
 
       $scope.elementChangedRotation = function(angle){
@@ -200,6 +212,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
         angle=Math.floor(angle);
         $scope.current.rotation = angle;
+        updateCarretPosition();
       };
 
       $scope.elementSetRotation = function(){
@@ -234,16 +247,22 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
-      background.mousedown(function() {
-        // TODO add text
+      background.mousedown(function(evt) {
+        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-family': constants.fonts[0], 'font-size': '25px', 'fill': constants.colors[0]});
+        addElement(text);
+        $scope.carret = 0;
+        //text[0].textContent = '';
+        text.attr({text: ''});
+        text.inited = true;
+        $scope.$apply();
       });
-      background.attr({'fill':'white', 'fill-opacity':'0', 'stroke':'none'});
+      background.attr({'fill':'url(images/background_2.jpg)', 'fill-opacity':'1', 'stroke':'none'});
 
       // Function gotten from SVGFix
       // source : https://code.google.com/p/svgfix/
       function svgfix (text) {
         var fixed = text ;
-        fixed = jQuery.trim(fixed);
+        fixed = $.trim(fixed);
         if (fixed.indexOf( 'xmlns:xlink' ) === -1 ) {
           fixed = fixed.replace ('<svg ', '<svg xmlns:xlink="http://www.w3.org/1999/xlink" '); 
         }
@@ -272,4 +291,122 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           }
         });
       };
+
+      function handleKeyPress (evt) {
+        if(!$scope.current || $scope.current.type !== 'text'){
+          return;
+        }
+        $log.debug(evt);
+        if(evt.key === 'Backspace') {
+          if($scope.current[0].textContent.length && $scope.carret > 0){
+            console.log('REMOVE');
+            //$scope.current[0].textContent = ;
+            $scope.current.attr({text: $scope.current[0].textContent.substr(0,$scope.carret-1)+$scope.current[0].textContent.substr($scope.carret)});
+            $scope.carret--;
+            updateCarretPosition();
+          }
+          evt.stopPropagation();
+          evt.preventDefault();
+          return;
+        }
+        if(evt.key === 'ArrowLeft') {
+          if($scope.carret > 0){
+            $scope.carret--;
+            updateCarretPosition();
+          }
+          evt.stopPropagation();
+          evt.preventDefault();
+          return;
+        }
+        if(evt.key === 'ArrowRight') {
+          if($scope.carret < $scope.current[0].textContent.length){
+            $scope.carret++;
+            updateCarretPosition();
+          }
+          evt.stopPropagation();
+          evt.preventDefault();
+          return;
+        }
+        // Check if letter key
+        if((!evt.key.match('^[a-zA-Z]$')) && (evt.key !== ' ') || evt.key.length > 1){ // TODO better regex
+          return;
+        }
+        var k = (evt.key === ' ') ? ' ' : evt.key.toUpperCase();
+
+        //$scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.carret)+k+$scope.current[0].textContent.substr($scope.carret);
+        $scope.current.attr({text: $scope.current[0].textContent.substr(0,$scope.carret)+k+$scope.current[0].textContent.substr($scope.carret)});
+        $scope.carret++;
+        updateCarretPosition();
+
+        evt.stopPropagation();
+        evt.preventDefault();
+      }
+
+      $document.on('keydown', handleKeyPress);
+
+      $scope.$on('$destroy', function () {
+        $document.off('keydown', handleKeyPress);
+      });
+
+      $scope.setFontColor = function(color) {
+        $scope.current.attr({ fill: color});
+        if($scope.carretPointer){
+          $scope.carretPointer.attr({ fill: color});
+        }
+      };
+
+      function updateCarretPosition() {
+        if(!$scope.current || $scope.current.type !== 'text'){
+          return;
+        }
+        var cloneText = $scope.current.clone();
+        cloneText.attr({'fill':'blue'});
+        var x = cloneText.attr('x');
+        var y = cloneText.attr('y');
+        cloneText.attr({text: $scope.current[0].textContent.substr(0, $scope.carret)});
+        var w = cloneText.getBBox(true).width;
+        if($scope.carret === 0){
+          cloneText.attr({text:''});
+          w = 0;
+        }
+
+        console.log($scope.carret);
+
+        $scope.carretPointer.attr({x: x+w});
+
+        // Transform pointer
+        $scope.carretPointer.transform($scope.current.transform());
+
+        cloneText.remove();
+      }
+
+      function addCarret() {
+        removeCarret();
+        $scope.carret = $scope.current[0].textContent.length;
+        if(!$scope.current.inited){
+          $scope.carret = 0;
+        }
+        console.log($scope.current);
+
+        console.log($scope.current.getBBox(true).width);
+        console.log($scope.current.getBBox(true).height);
+
+        var x = $scope.current.attr('x');
+        var y = $scope.current.attr('y');
+        var h = $scope.current.getBBox(true).height;
+
+
+        $scope.carretPointer = paper.rect(x-1, y-(h * 3/5), 3, h);
+        $scope.carretPointer.attr({'fill':$scope.current.attr('fill'), 'stroke':'none'});
+
+        updateCarretPosition();
+      }
+
+      function removeCarret() {
+        if(!$scope.carretPointer){
+          return;
+        }
+        $scope.carretPointer.remove();
+        $scope.carretPointer = null;
+      }
   });

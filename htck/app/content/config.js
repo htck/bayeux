@@ -2,6 +2,14 @@ var constants = {
   "config": {
     "appTitle": "Historic Tale Construction Kit"
   },
+  "colors":[
+    "#303030",
+    "#BA3030",
+    "#0F0FA6",
+    "#B89735",
+    "#438005",
+    "#A61BA3"
+  ],
   "tabs": [
    {
       "title": "Beasts",
@@ -122,6 +130,9 @@ var constants = {
         "content//images/misc/17_sword_helmet.png",
       ]
     },
+  ],
+  "fonts":[
+    "Bayeux"
   ]
 }
 
