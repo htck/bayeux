@@ -16,4 +16,5 @@ sudo npm install -g grunt-cli
 cd "$REPO_PATH"/"$PROJECT_NAME"
 su vagrant -c "npm install"
 su vagrant -c "bower install"
+sudo ln -s /vagrant/deploy.sh /usr/bin/deploy
 #grunt serve
