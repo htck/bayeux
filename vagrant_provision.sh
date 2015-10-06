@@ -17,4 +17,5 @@ cd "$REPO_PATH"/"$PROJECT_NAME"
 su vagrant -c "npm install"
 su vagrant -c "bower install"
 sudo ln -s /vagrant/deploy.sh /usr/bin/deploy
+chmod 400 /home/vagrant/.ssh/id_rsa
 #grunt serve
