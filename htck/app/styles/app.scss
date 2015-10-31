@@ -27,19 +27,31 @@
 	background: $appBg;
 }
 
+<<<<<<< HEAD
 #canvas {
 	width:$appWidth;
 	height:$appHeight;
 }
+=======
+#content-images-panel {
+  height: $appHeight;
+>>>>>>> design deeply reworked
 
 .brush-active {
 	background-color: $brushActiveColor;
 }
 
+<<<<<<< HEAD
 // --- Sidenav
 
 .left-panel{
 	min-width:$leftPanelMinWidth !important;
+=======
+  .item{
+    max-width:100%;
+    max-height:100%;
+  }
+>>>>>>> design deeply reworked
 }
 
 #content-left-panel {
@@ -86,6 +98,7 @@
 	margin:0 4px;
 }
 
+<<<<<<< HEAD
 // --- Media Queries
 
 // Big Screens
@@ -111,4 +124,29 @@
 		height:$colorPickerSizeSM;
 		border-radius:$colorPickerSizeSM/2;
 	}
+=======
+#toolbar {
+  color: white;
+  margin: 0 auto;
+}
+
+.slider-wrapper {
+  height: 45px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (max-width: $screen-lg-min) {
+  #toolbar {
+    max-width:$appWidth;
+  }
+
+  #content-images-panel {
+    height: $imagesPanelResponsiveHeight;
+
+    .itembank {
+      height:calc(#{$imagesPanelResponsiveHeight} - 2*#{$appPanelPadding});
+    }
+  }
+>>>>>>> design deeply reworked
 }
