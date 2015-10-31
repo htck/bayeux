@@ -1,16 +1,8 @@
-$appHeight:675px;
-$appWidth: 900px;
-$toolBarHeight: 50px;
-$mdLeftPanelHeight: 350px;
-
+$appHeight:700px;
+$appWidth: 850px;
 $appPanelPadding: 10px;
 
 $appBg: #433c37;
+$imagesPanelResponsiveHeight: 300px; // min 248
 
-$leftPanelMinWidth:304px;
-
-$colorPickerSize:55px;
-$colorPickerSizeMD:38px;
-$colorPickerSizeSM:28px;
-
-$brushActiveColor: rgba(150,255,150,0.4);
+$colorPickerSize:40px;

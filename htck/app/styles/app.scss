@@ -27,19 +27,17 @@
 	background: $appBg;
 }
 
-#canvas {
-	width:$appWidth;
-	height:$appHeight;
-}
+#content-images-panel {
+  height: $appHeight;
 
 .brush-active {
 	background-color: $brushActiveColor;
 }
 
-// --- Sidenav
-
-.left-panel{
-	min-width:$leftPanelMinWidth !important;
+  .item{
+    max-width:100%;
+    max-height:100%;
+  }
 }
 
 #content-left-panel {
@@ -86,29 +84,27 @@
 	margin:0 4px;
 }
 
-// --- Media Queries
-
-// Big Screens
-@media screen and (max-width: 1200px) {
-	.left-panel{
-		height:$mdLeftPanelHeight;
-	}
+#toolbar {
+  color: white;
+  margin: 0 auto;
 }
 
-// Medium Screens
-@media screen and (max-width: 960px) {
-    .circle{
-		width:$colorPickerSizeMD;
-		height:$colorPickerSizeMD;
-		border-radius:$colorPickerSizeMD/2;
-	}
+.slider-wrapper {
+  height: 45px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-// Small Screens
-@media screen and (max-width: 600px) {
-    .circle{
-		width:$colorPickerSizeSM;
-		height:$colorPickerSizeSM;
-		border-radius:$colorPickerSizeSM/2;
-	}
+@media (max-width: $screen-lg-min) {
+  #toolbar {
+    max-width:$appWidth;
+  }
+
+  #content-images-panel {
+    height: $imagesPanelResponsiveHeight;
+
+    .itembank {
+      height:calc(#{$imagesPanelResponsiveHeight} - 2*#{$appPanelPadding});
+    }
+  }
 }
