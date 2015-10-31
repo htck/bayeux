@@ -14,6 +14,8 @@
 /* globals saveAs */
 angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document) {
 // Constants
+      constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
+
       constants.ELEMENT_SCALE_MIN = 0.2;
       constants.ELEMENT_SCALE_MAX = 5; 
       constants.SHOWHANDLES=true;
@@ -256,6 +258,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         //text[0].textContent = '';
         text.attr({text: ''});
         text.inited = true;
+        // set text handles size
+        var tesxtFt = paper.freeTransform(text);
+        tesxtFt.setOpts({distance: $scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
         $scope.$apply();
       });
       background.attr({'fill':'url(images/background_2.jpg)', 'fill-opacity':'1', 'stroke':'none'});
