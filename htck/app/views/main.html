@@ -7,9 +7,9 @@
 
   <div class="padding-v-50"></div>
 
-  <div id="content" class="container-fluid app_wrapper">
+  <div id="content" class="container app_wrapper">
     <div class="row">
-      <div id="content-left-panel" class="col-lg-3 padding-panel">
+      <div id="content-images-panel" class="col-lg-3 padding-panel">
         <div>
           <md-content>
             <md-tabs class="itembank" md-border-bottom>
@@ -18,7 +18,7 @@
                   <h1 class="md-display-2">{{t.title}}</h1>
                   <div>
                     <md-grid-list
-                      md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
+                      md-cols-sm="2" md-cols-md="6" md-cols-gt-md="3" md-cols-lg="9"
                       md-row-height-gt-md="2:2" md-row-height="2:2"
                       md-gutter="12px" md-gutter-gt-sm="8px" >
                       <md-grid-tile ng-repeat="i in t.images track by $index" class="gray"
@@ -34,57 +34,78 @@
         </div>
       </div>
 
-      <div id="content-middle-panel" class="col-lg-7 padding-panel">
+      <div id="content-middle-panel" class="col-lg-9 padding-panel">
         <div id="paper" class="" data-drop="true" jqyoui-droppable="{onDrop: 'test'}">
         </div>
       </div>
-
-      <div id="content-right-panel" class="col-lg-2 padding-panel text-center">
-        <div ng-if="current">
-          <div class="padding-v-15"></div>
-          <div ng-if="current && current.type==='text'">
-            <p>Color</p>
-             <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
-            <div class="padding-v-15"></div>
-          </div>
-          <p>Opacity</p>
-          <div class="padding-h-30" layout>
-            <md-slider flex min="0" step="0.02" max="1" ng-model="current.opacity" ng-change="elementSetOpacity()" id="opacity-slider" aria-label="Opacity" class>
-            </md-slider>
-          </div>
-          <p>Height</p>
-          <div class="padding-h-30" layout>
-            <md-slider flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" id="height-slider" aria-label="Height" class>
-            </md-slider>
-          </div>
-          <p>Width</p>
-          <div class="padding-h-30" layout>
-            <md-slider flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" id="width-slider" aria-label="Width" class>
-            </md-slider>
-          </div>
-          <div class="padding-v-15"></div>
-          <p>Rotation</p>
-          <div class="padding-h-30" layout>
-            <md-slider flex min="-180" step="1" max="180" ng-model="current.rotation" ng-change="elementSetRotation()" id="rotation-slider" aria-label="Rotation" class>
-            </md-slider>
-          </div>
-          <div class="padding-v-15"></div>
-          <p>Keep ratio</p>
-          <div class="padding-h-30"  layout-align="center" layout>
-            <md-switch ng-model="current.keepratio" ng-change="elementSetKeepRatio()" id="keepratio-switch" aria-label="Keep Ratio">
-            </md-switch>
-          </div>
-          <p>Mirror</p>
-          <div class="padding-h-30"  layout-align="center" layout>
-            <md-switch ng-model="current.mirror" ng-change="elementSetMirror()" id="mirror-switch" aria-label="Mirror">
-            </md-switch>
-          </div>
-          <md-button ng-click="bringToFront()" class="md-primary md-raised">Bring To Front</md-button>
-          <md-button ng-click="remove()" class="md-warn md-raised">Remove</md-button>
-        </div>
+    </div>
+    <div id="toolbar" class="row">
+      <div class="col-lg-3 padding-h-0">
+        <md-button class="md-primary md-raised" ng-click="#">Police</md-button>
+        <md-button class="md-primary md-raised" ng-click="#">Clear</md-button>
+        <md-button class="md-primary md-raised" ng-click="#">Select all</md-button>
+        <md-button class="md-primary md-raised" ng-click="#">Remove selection</md-button>
+        <md-button class="md-primary md-raised" ng-click="#">Brush</md-button>
         <md-button class="md-primary md-raised" ng-click="export()">Submit</md-button>
       </div>
-    </div>
+      <div class="col-lg-9 text-center padding-h-0">
+        <div id="toolbar-element">
+          <div ng-if="current">
+            <div class="row">
+              <div class="col-sm-5">
+                <p class="margin-v-0">Opacity</p>
+                <div class="slider-wrapper" layout>
+                  <md-slider flex min="0" step="0.02" max="1" ng-model="current.opacity" ng-change="elementSetOpacity()" id="opacity-slider" aria-label="Opacity" class>
+                  </md-slider>
+                </div>
+                <p class="margin-v-0">Rotation</p>
+                <div class="slider-wrapper" layout>
+                  <md-slider flex min="-180" step="1" max="180" ng-model="current.rotation" ng-change="elementSetRotation()" id="rotation-slider" aria-label="Rotation" class>
+                  </md-slider>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <p class="margin-v-0">Height</p>
+                <div class="slider-wrapper" layout>
+                  <md-slider flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" id="height-slider" aria-label="Height" class>
+                  </md-slider>
+                </div>
+                <p class="margin-v-0">Width</p>
+                <div class="slider-wrapper" layout>
+                  <md-slider flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" id="width-slider" aria-label="Width" class>
+                  </md-slider>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <p class="margin-v-0">Mirror</p>
+                <div class="slider-wrapper"  layout-align="center" layout>
+                  <md-switch ng-model="current.mirror" ng-change="elementSetMirror()" id="mirror-switch" aria-label="Mirror">
+                  </md-switch>
+                </div>
+                <p class="margin-v-0">Keep ratio</p>
+                <div class="slider-wrapper"  layout-align="center" layout>
+                  <md-switch ng-model="current.keepratio" ng-change="elementSetKeepRatio()" id="keepratio-switch" aria-label="Keep Ratio">
+                  </md-switch>
+                </div>
+              </div>
+            </div>
+            <div class="padding-v-15"></div>
+            <div class="row">
+              <div class="col-sm-8">
+                <div ng-if="current && current.type==='text'">
+                  <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <md-button ng-click="bringToFront()" class="md-primary md-raised">Bring To Front</md-button>
+                <md-button ng-click="remove()" class="md-warn md-raised">Remove</md-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- toolbar -->
+    <div class="padding-v-15"></div>
   </div>
 
   <div class="padding-v-15"></div>
