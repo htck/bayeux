@@ -1,8 +1,16 @@
 $appHeight:700px;
 $appWidth: 850px;
-$appPanelPadding: 10px;
-
+$appPanelPadding: 15px;
 $appBg: #433c37;
-$imagesPanelResponsiveHeight: 300px; // min 248
+$imagesPanelResponsiveHeight: 300px;
 
 $colorPickerSize:40px;
+$contentMaxWidth: 1200px; // correspond to bootstrap "container"
+
+$btnSuccessBgColor: #135000;
+$btnFailBgColor: #920F0F;
+$btnCommonBgColor: #85640E;
+$sliderColor: #9E7D1B;
+$sliderColorLine: #aaa;
+$switchColorOn: #9E7D1B;
+$switchColorOff: #aaa;
