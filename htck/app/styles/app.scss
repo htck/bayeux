@@ -1,78 +1,122 @@
 @import "common.scss";
 
-.app_wrapper {
-	// TODO customize md-tabs look
-	md-content {
-	  background-color: transparent !important;
-	  md-tabs {
-	    background: #f6f6f6;
-	    border: 1px solid #e1e1e1;
-	    md-tabs-canvas {
-	      background: white;
-	    }
-	  }
-	  h1:first-child {
-	    margin-top: 0;
-	  }
-	}
+#ng_view {
+  background: url(../images/background_1.jpg);
+  min-height: 100%;
+}
+
+#title {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 #content {
-	background-color: $appBg;
+	//background-color: $appBg;
+  background: url(../images/background_3.jpg);
+
+  md-content {
+    background-color: transparent;
+
+    md-tabs {
+      background: #f6f6f6;
+      border: 1px solid #e1e1e1;
+      md-tabs-canvas {
+        background: white;
+      }
+    }
+  }
 }
 
-.padding-panel {
-	padding: $appPanelPadding;
-}
-
-#content-images-panel {
-  height: $appHeight;
+#itembank-wrapper {
+  padding-right: 15px;
 
   .itembank {
-  	height:calc(#{$appHeight} - 2*#{$appPanelPadding});
+    height: $appHeight;
   }
-
   .item{
     max-width:100%;
     max-height:100%;
   }
-}
-
-#content-middle-panel {
-	height:$appHeight;
-	//width: $appWidth;
-
-
-/*
-  float: none;
-  margin: 0 auto;*/
+  md-tab-content {
+    overflow-x: hidden;
+  }
 }
 
 #paper {
-	height:calc(#{$appHeight} - 2*#{$appPanelPadding});
-	width: calc(#{$appWidth} - 2*#{$appPanelPadding});
-  min-width: $appWidth;
-  max-width: $appWidth;
-  margin: auto;
-}
-
-#content-right-panel {
-	height:$appHeight;
-  color: white;
-  font-weight: bold;
-}
-
-.circle{
-	width:$colorPickerSize;
-	height:$colorPickerSize;
-	border-radius:$colorPickerSize/2;
-	display:inline-block;
-	margin:0 4px;
+  height: $appHeight;
+  width: $appWidth;
+  margin: auto 0 auto auto;
 }
 
 #toolbar {
+  text-align: center;
   color: white;
   margin: 0 auto;
+}
+
+#toolbar-element {
+  width:$appWidth;
+  max-width:$appWidth;
+  padding-top: 15px;
+}
+
+#readme-wrapper {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#readme {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* small device */
+
+@media (max-width: $contentMaxWidth) {
+  #paper {
+    margin: auto;
+  }
+
+  #toolbar {
+    max-width:$appWidth;
+  }
+
+  #itembank-wrapper {
+    height: $imagesPanelResponsiveHeight;
+
+    .itembank {
+      height:$imagesPanelResponsiveHeight;
+    }
+  }
+}
+
+/* common */
+
+.text-center {
+  text-align: center;
+}
+
+.container {
+  max-width: $contentMaxWidth;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.margin-v-0 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.padding-v-t-15 {
+  padding-top: 15px;
+}
+
+.padding-panel-v {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .slider-wrapper {
@@ -81,16 +125,105 @@
   padding-right: 15px;
 }
 
-@media (max-width: $screen-lg-min) {
-  #toolbar {
-    max-width:$appWidth;
+.circle{
+  width:$colorPickerSize;
+  height:$colorPickerSize;
+  border-radius:$colorPickerSize/2;
+  display:inline-block;
+  margin:0 4px;
+}
+
+/* customization */
+
+#ng_view {
+  /* buttons */
+
+  .btn-success {
+    background-color: $btnSuccessBgColor;
+    color: white;
+  }
+  .btn-fail {
+    background-color: $btnFailBgColor;
+    color: white;
+  }
+  .btn-common {
+    background-color: $btnCommonBgColor;
+    color: white;
   }
 
-  #content-images-panel {
-    height: $imagesPanelResponsiveHeight;
+  /* sliders */
 
-    .itembank {
-      height:calc(#{$imagesPanelResponsiveHeight} - 2*#{$appPanelPadding});
+  .slider-common {
+    .md-track {
+      background-color: $sliderColorLine;
     }
+    .md-track-ticks {
+      background-color: $sliderColor;
+    }
+    .md-focus-thumb {
+      background-color: $sliderColor;
+    }
+    .md-focus-ring {
+      background-color: $sliderColor;
+    }
+    .md-disabled-thumb {
+      background-color: $sliderColor;
+    }
+    &.md-min .md-thumb:after {
+      background-color: $sliderColor;
+    }
+    .md-track.md-track-fill {
+      background-color: $sliderColor;
+    }
+    .md-thumb:after {
+      border-color: $sliderColor;
+      background-color: $sliderColor;
+    }
+    .md-sign {
+      background-color: $sliderColor;
+      &:after {
+        border-top-color: $sliderColor;
+      }
+    }
+    .md-thumb-text {
+      color: $sliderColor;
+    }
+  }
+
+  /* switchs */
+
+  .switch-common {
+    .md-ink-ripple {
+      color: $switchColorOff;
+    }
+    .md-thumb {
+      background-color: $switchColorOn;
+    }
+    .md-bar {
+      background-color: $switchColorOff;
+    }
+
+    &.md-checked {
+      .md-ink-ripple {
+        color: $switchColorOn;
+      }
+      .md-thumb {
+        background-color: $switchColorOn;
+      }
+      .md-bar {
+        background-color: $switchColorOn;
+      }
+      &.md-focused .md-thumb:before {
+        background-color: $switchColorOff;
+      }
+    }
+  }
+}
+
+#toolbar-config {
+  margin-bottom: 15px;
+  background-image: url(../images/background_3.jpg);
+  md-content {
+    background-color: transparent;
   }
 }

@@ -1,21 +1,30 @@
 <div>
-  <div class="padding-v-50"></div>
-
-  <div class="header text-center">
+  <!-- title -->
+  <div id="title" class="text-center">
     <h1 class="margin-v-0">{{constants.config.appTitle}}</h1>
   </div>
+  <!-- /title -->
 
-  <div class="padding-v-50"></div>
+    <div id="toolbar-config" class="container md-whiteframe-z5">
+      <md-content>
+        <section layout="row" layout-align="start center" layout-wrap>
+          <md-button class="md-raised btn-common" ng-click="#">Police</md-button>
+          <md-button class="md-raised btn-common" ng-click="#">Background</md-button>
+          <span class="flex"></span>
+          <md-button class="md-raised btn-success" ng-click="export()">Submit</md-button>
+        </section>
+      </md-content>
+    </div>
 
-  <div id="content" class="container app_wrapper">
-    <div class="row">
-      <div id="content-images-panel" class="col-lg-3 padding-panel">
-        <div>
+  <!-- content -->
+  <div id="content" class="app_wrapper container md-whiteframe-z5">
+    <div id="app-wrapper" layout="column" layout-gt-lg="row">
+      <!-- images -->
+      <div id="itembank-wrapper" class="padding-panel-v" flex="auto">
           <md-content>
             <md-tabs class="itembank" md-border-bottom>
               <md-tab ng-repeat="t in constants.tabs" label="{{t.title}}">
                 <md-content class="md-padding">
-                  <h1 class="md-display-2">{{t.title}}</h1>
                   <div>
                     <md-grid-list
                       md-cols-sm="2" md-cols-md="6" md-cols-gt-md="3" md-cols-lg="9"
@@ -31,93 +40,99 @@
               </md-tab>
             </md-tabs>
           </md-content>
-        </div>
       </div>
-
-      <div id="content-middle-panel" class="col-lg-9 padding-panel">
+      <!-- /images -->
+      <!-- paper -->
+      <div id="paper-wrapper" class="padding-panel-v" flex="initial">
         <div id="paper" class="" data-drop="true" jqyoui-droppable="{onDrop: 'test'}">
         </div>
       </div>
+      <!-- /paper -->
     </div>
-    <div id="toolbar" class="row">
-      <div class="col-lg-3 padding-h-0">
-        <md-button class="md-primary md-raised" ng-click="#">Police</md-button>
-        <md-button class="md-primary md-raised" ng-click="#">Clear</md-button>
-        <md-button class="md-primary md-raised" ng-click="#">Select all</md-button>
-        <md-button class="md-primary md-raised" ng-click="#">Remove selection</md-button>
-        <md-button class="md-primary md-raised" ng-click="#">Brush</md-button>
-        <md-button class="md-primary md-raised" ng-click="export()">Submit</md-button>
+
+    <!-- toolbar -->
+    <div id="toolbar" layout="column" layout-gt-lg="row">
+      <div flex="auto">
+        <md-content>
+          <section layout="row" layout-gt-lg="column" layout-align="center center" layout-wrap>
+              <md-button class="md-raised btn-common" ng-click="#">Clear</md-button>
+              <md-button class="md-raised btn-common" ng-click="#">Select all</md-button>
+              <md-button class="md-raised btn-common" ng-click="#">Remove selection</md-button>
+              <md-button class="md-raised btn-common" ng-click="#">Brush</md-button>
+          </section>
+        </md-content>
       </div>
-      <div class="col-lg-9 text-center padding-h-0">
+      <div flex="initial" layout-wrap>
         <div id="toolbar-element">
           <div ng-if="current">
-            <div class="row">
-              <div class="col-sm-5">
+            <div layout="row">
+              <div flex="40">
                 <p class="margin-v-0">Opacity</p>
                 <div class="slider-wrapper" layout>
-                  <md-slider flex min="0" step="0.02" max="1" ng-model="current.opacity" ng-change="elementSetOpacity()" id="opacity-slider" aria-label="Opacity" class>
+                  <md-slider class="slider-common" flex min="0" step="0.02" max="1" ng-model="current.opacity" ng-change="elementSetOpacity()" id="opacity-slider" aria-label="Opacity" class>
                   </md-slider>
                 </div>
                 <p class="margin-v-0">Rotation</p>
                 <div class="slider-wrapper" layout>
-                  <md-slider flex min="-180" step="1" max="180" ng-model="current.rotation" ng-change="elementSetRotation()" id="rotation-slider" aria-label="Rotation" class>
+                  <md-slider class="slider-common" flex min="-180" step="1" max="180" ng-model="current.rotation" ng-change="elementSetRotation()" id="rotation-slider" aria-label="Rotation" class>
                   </md-slider>
                 </div>
               </div>
-              <div class="col-sm-5">
+              <div flex="40">
                 <p class="margin-v-0">Height</p>
                 <div class="slider-wrapper" layout>
-                  <md-slider flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" id="height-slider" aria-label="Height" class>
+                  <md-slider class="slider-common" flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" id="height-slider" aria-label="Height" class>
                   </md-slider>
                 </div>
                 <p class="margin-v-0">Width</p>
                 <div class="slider-wrapper" layout>
-                  <md-slider flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" id="width-slider" aria-label="Width" class>
+                  <md-slider class="slider-common" flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" id="width-slider" aria-label="Width" class>
                   </md-slider>
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div flex="20">
                 <p class="margin-v-0">Mirror</p>
                 <div class="slider-wrapper"  layout-align="center" layout>
-                  <md-switch ng-model="current.mirror" ng-change="elementSetMirror()" id="mirror-switch" aria-label="Mirror">
+                  <md-switch class="switch-common" ng-model="current.mirror" ng-change="elementSetMirror()" id="mirror-switch" aria-label="Mirror">
                   </md-switch>
                 </div>
                 <p class="margin-v-0">Keep ratio</p>
                 <div class="slider-wrapper"  layout-align="center" layout>
-                  <md-switch ng-model="current.keepratio" ng-change="elementSetKeepRatio()" id="keepratio-switch" aria-label="Keep Ratio">
+                  <md-switch class="switch-common" ng-model="current.keepratio" ng-change="elementSetKeepRatio()" id="keepratio-switch" aria-label="Keep Ratio">
                   </md-switch>
                 </div>
               </div>
             </div>
-            <div class="padding-v-15"></div>
-            <div class="row">
-              <div class="col-sm-8">
+            <div class="padding-v-t-15" layout="row">
+              <div flex="60">
                 <div ng-if="current && current.type==='text'">
                   <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
                 </div>
               </div>
-              <div class="col-sm-4">
-                <md-button ng-click="bringToFront()" class="md-primary md-raised">Bring To Front</md-button>
-                <md-button ng-click="remove()" class="md-warn md-raised">Remove</md-button>
+              <div flex="40">
+                <md-content>
+                  <section layout="row" layout-align="end center" layout-wrap>
+                    <md-button ng-click="bringToFront()" class="md-raised btn-common">Bring To Front</md-button>
+                    <md-button ng-click="remove()" class="md-raised btn-fail">Remove</md-button>
+                  </section>
+                </md-content>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div> <!-- toolbar -->
-    <div class="padding-v-15"></div>
+    </div>
+    <!-- /toolbar -->
   </div>
+  <!-- /content -->
 
-  <div class="padding-v-15"></div>
-
-  <div id="readme" class="container">
-    <h1>Original Historic Tale Construction Kit</h1>
-    <p>Project/Fork description</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <div id="readme-wrapper">
+    <div id="readme" class="container">
+      <h1>Original Historic Tale Construction Kit</h1>
+      <p>Project/Fork description</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
   </div>
-
-  <div class="padding-h-15"></div>
-  <div class="padding-v-15"></div>
 
   <canvas id="canvas" ng-show="false"></canvas>
 </div>
