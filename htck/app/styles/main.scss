@@ -1,41 +1,4 @@
 // bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 @import "common.scss";
-
-.margin-v-0 {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.padding-h-0 {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.padding-h-30 {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.padding-v-15 {
-  padding-top: 15px;
-}
-
-.padding-v-50 {
-  padding-top: 50px;
-}
-
-body {
-}
-
-#readme {
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-#ng_view {
-  background: url(../images/background_1.jpg);
- // width:100%;
-}
-
 @import "app.scss";
