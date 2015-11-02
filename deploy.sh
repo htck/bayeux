@@ -1,5 +1,5 @@
 #!/bin/bash
-cd $1
+#cd $1
 git checkout master
 cd htck
 npm cache clean
@@ -13,7 +13,8 @@ git branch -D gh-pages
 cp -R htck/dist/ /tmp/
 ls /tmp
 git checkout --orphan gh-pages
-rm -rf *
+# Remove all git tracked files (keeps libs and node_modules)
+git ls-files -z | xargs -0 rm -f
 rm .gitignore
 mv /tmp/dist/* .
 ls
