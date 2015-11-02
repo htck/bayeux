@@ -12,7 +12,7 @@
 /* globals $ */
 /* globals canvg */
 /* globals saveAs */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document) {
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hotkeys) {
 // Constants
       constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
 
@@ -436,6 +436,17 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.carretPointer.remove();
         $scope.carretPointer = null;
       }
+
+      // Hotkeys
+
+      hotkeys.add({
+        combo: 'del',
+        description: 'Removes current element',
+        callback: function(){
+          $log.debug('Hotkey Suppr');
+          $scope.remove();
+        }
+      });
 
 /*************************************************************** Drag & drop */
 
