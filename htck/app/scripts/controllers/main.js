@@ -228,6 +228,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
         $scope.current.ft.attrs.rotate=$scope.current.rotation;
         $scope.current.ft.apply();
+        updateCarretPosition();
       };
 
       $scope.elementSetKeepRatio = function(){
@@ -244,6 +245,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.current.ft.attrs.scale.x = - $scope.current.ft.attrs.scale.x;
         $scope.current.ft.attrs.ratio = $scope.elementRatio();
         $scope.current.ft.apply();
+        updateCarretPosition();
       };
       $scope.elementSetOpacity = function(){
         if(!$scope.current) {
