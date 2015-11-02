@@ -15,7 +15,8 @@ angular
     'ngRoute',
     'ngTouch',
     'ngMaterial',
-    'ngDragDrop'
+    'ngDragDrop',
+    'cfp.hotkeys'
   ])
   .config(function ($routeProvider) {
     $routeProvider
