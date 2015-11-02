@@ -23,6 +23,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       constants.ELEMENT_DEFAULT_WIDTH=1;
       constants.ELEMENT_DEFAULT_ROTATION=0;
       constants.ELEMENT_DEFAULT_KEEPRATIO=true;
+      constants.ELEMENT_DISPLACEMENT=3;
   		$scope.constants = constants;
 
       $scope.font = constants.fonts[0];
@@ -485,8 +486,26 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       hotkeys.add({
         combo: 'ctrl+m',
-        description: 'Mirrors the currently selected element',
+        description: 'Mirrors currently selected element',
         callback: $scope.elementSetMirror
+      });
+
+      hotkeys.add({
+        combo: 'up',
+        description: 'Slightly moves currently selected element up',
+        callback: function(event) {
+          event.preventDefault();
+          moveElement(0, -constants.ELEMENT_DISPLACEMENT);
+        }
+      });
+
+      hotkeys.add({
+        combo: 'down',
+        description: 'Slightly moves currently selected element down',
+        callback: function(event) {
+          event.preventDefault();
+          moveElement(0, constants.ELEMENT_DISPLACEMENT);
+        }
       });
 
 /*************************************************************** Drag & drop */
