@@ -508,6 +508,30 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
       });
 
+      hotkeys.add({
+        combo: 'right',
+        description: 'Slightly moves currently selected element to the right',
+        callback: function(event) {
+          if(!$scope.current || $scope.current.type ==='text'){
+            return;
+          }
+          event.preventDefault();
+          moveElement(constants.ELEMENT_DISPLACEMENT, 0);
+        }
+      });
+
+      hotkeys.add({
+        combo: 'left',
+        description: 'Slightly moves currently selected element to the left',
+        callback: function(event) {
+          if(!$scope.current || $scope.current.type ==='text'){
+            return;
+          }
+          event.preventDefault();
+          moveElement(-constants.ELEMENT_DISPLACEMENT, 0);
+        }
+      });
+
 /*************************************************************** Drag & drop */
 
       $scope.test = function(event, ui) {
