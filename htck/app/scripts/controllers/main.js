@@ -49,6 +49,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if($scope.current && $scope.current.type === 'text') {
           addCarret();
         }
+        else{
+          removeCarret();
+        }
       }
 
   		function getSizeOfImage(src) {
