@@ -441,8 +441,14 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       hotkeys.add({
         combo: 'del',
-        description: 'Removes current element',
+        description: 'Removes currently selected element',
         callback: $scope.remove
+      });
+
+      hotkeys.add({
+        combo: 'esc',
+        description: 'Unfocuses from currently selected element',
+        callback: unfocus
       });
 
 /*************************************************************** Drag & drop */
