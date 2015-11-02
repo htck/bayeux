@@ -460,6 +460,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
       });
 
+      hotkeys.add({
+        combo: 'ctrl+shift+s',
+        description: 'Exports canvas to png',
+        callback: function (event){
+          event.preventDefault();
+          $scope.export();
+        }
+      });
+
 /*************************************************************** Drag & drop */
 
       $scope.test = function(event, ui) {
