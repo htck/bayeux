@@ -174,6 +174,14 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.current.toFront();
       };
 
+      $scope.bringToBack = function(){
+        if(!$scope.current) {
+          return;
+        }
+        $scope.current.toBack();
+        background.toBack();
+      };
+
       $scope.elementRatio = function(){
         return $scope.current.ft.attrs.scale.x / $scope.current.ft.attrs.scale.y; 
       };
