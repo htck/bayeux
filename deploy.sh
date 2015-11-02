@@ -2,7 +2,7 @@
 #cd $1
 branch=${1:-"master"}
 echo "Deploying $branch to gh-pages"
-git checkout master
+git checkout $branch
 cd htck
 npm cache clean
 npm install
