@@ -484,6 +484,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       });
 
       hotkeys.add({
+        combo: 'ctrl+space',
+        description: 'Puts currently selected element to the back',
+        callback: function (event){
+          event.preventDefault();
+          $scope.bringToBack();
+        }
+      });
+
+      hotkeys.add({
         combo: 'ctrl+shift+s',
         description: 'Exports canvas to png',
         callback: function (event){
