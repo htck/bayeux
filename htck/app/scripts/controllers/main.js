@@ -469,6 +469,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
       });
 
+      hotkeys.add({
+        combo: 'ctrl+m',
+        description: 'Mirrors the currently selected element',
+        callback: $scope.elementSetMirror
+      });
+
 /*************************************************************** Drag & drop */
 
       $scope.test = function(event, ui) {
