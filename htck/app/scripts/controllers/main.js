@@ -451,6 +451,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         callback: unfocus
       });
 
+      hotkeys.add({
+        combo: 'space',
+        description: 'Bring currently selected element to the front',
+        callback: function (event){
+          event.preventDefault();
+          $scope.bringToFront();
+        }
+      });
+
 /*************************************************************** Drag & drop */
 
       $scope.test = function(event, ui) {
