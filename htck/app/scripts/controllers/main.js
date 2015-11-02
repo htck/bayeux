@@ -278,7 +278,11 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         tesxtFt.setOpts({distance: $scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
         $scope.$apply();
       });
-      background.attr({'fill':'url(images/background_2.jpg)', 'fill-opacity':'1', 'stroke':'none'});
+      background.attr({'fill':'url('+constants.backgrounds[0]+')', 'fill-opacity':'1', 'stroke':'none'});
+
+      $scope.setBackground = function(imgUrl){
+        background.attr({'fill':'url('+imgUrl+')', 'fill-opacity':'1', 'stroke':'none'});
+      };
 
       // Function gotten from SVGFix
       // source : https://code.google.com/p/svgfix/
