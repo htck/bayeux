@@ -442,10 +442,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       hotkeys.add({
         combo: 'del',
         description: 'Removes current element',
-        callback: function(){
-          $log.debug('Hotkey Suppr');
-          $scope.remove();
-        }
+        callback: $scope.remove
       });
 
 /*************************************************************** Drag & drop */
