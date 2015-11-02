@@ -261,13 +261,13 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
 
-        $scope.current.attr({'text-anchor': 'start', 'font-family': $scope.font, 'font-size': '25px', 'fill': $scope.fontColor || constants.colors[0]});
+        $scope.current.attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': $scope.fontColor || constants.colors[0]});
         updateCarretPosition();
       };
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
       background.mousedown(function(evt) {
-        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-family': $scope.font, 'font-size': '25px', 'fill': constants.colors[0]});
+        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': constants.colors[0]});
         addElement(text);
         $scope.carret = 0;
         //text[0].textContent = '';

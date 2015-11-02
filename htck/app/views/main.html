@@ -48,8 +48,8 @@
             <div class="padding-v-15"></div>
             <label>Font</label>
               <md-select ng-model="$parent.$parent.font" ng-change="elementChangeFont()">
-                <md-option ng-repeat="f in constants.fonts" value="{{f}}">
-                  {{f}}
+                <md-option ng-repeat="f in constants.fonts" ng-value="f">
+                  {{f.font}}
                 </md-option>
               </md-select>
           </div>

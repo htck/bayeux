@@ -132,8 +132,14 @@ var constants = {
     },
   ],
   "fonts":[
-    "Bayeux",
-    "Augusta"
+    {
+      font:"Bayeux",
+      size: 25
+    },
+    {
+      font:"Augusta",
+      size: 35
+    }
   ]
 }
 
