@@ -46,6 +46,12 @@
             <p>Color</p>
              <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
             <div class="padding-v-15"></div>
+            <label>Font</label>
+              <md-select ng-model="$parent.$parent.font" ng-change="elementChangeFont()">
+                <md-option ng-repeat="f in constants.fonts" value="{{f}}">
+                  {{f}}
+                </md-option>
+              </md-select>
           </div>
           <p>Opacity</p>
           <div class="padding-h-30" layout>

@@ -132,7 +132,8 @@ var constants = {
     },
   ],
   "fonts":[
-    "Bayeux"
+    "Bayeux",
+    "Augusta"
   ]
 }
 

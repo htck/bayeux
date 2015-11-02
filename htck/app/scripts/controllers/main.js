@@ -25,6 +25,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       constants.ELEMENT_DEFAULT_KEEPRATIO=true;
   		$scope.constants = constants;
 
+      $scope.font = constants.fonts[0];
+
       var paper = new Raphael('paper');
   		$log.debug('Paper', paper);
   		var HEIGHT = paper.height, WIDTH = paper.width;
@@ -254,10 +256,18 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.current.attr({opacity: $scope.current.opacity}); 
       };
       
+      $scope.elementChangeFont = function() {
+        if(!$scope.current || $scope.current.type !== 'text') {
+          return;
+        }
+
+        $scope.current.attr({'text-anchor': 'start', 'font-family': $scope.font, 'font-size': '25px', 'fill': $scope.fontColor || constants.colors[0]});
+        updateCarretPosition();
+      };
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
       background.mousedown(function(evt) {
-        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-family': constants.fonts[0], 'font-size': '25px', 'fill': constants.colors[0]});
+        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-family': $scope.font, 'font-size': '25px', 'fill': constants.colors[0]});
         addElement(text);
         $scope.carret = 0;
         //text[0].textContent = '';
@@ -362,6 +372,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       $scope.setFontColor = function(color) {
         $scope.current.attr({ fill: color});
+        $scope.fontColor = color;
         if($scope.carretPointer){
           $scope.carretPointer.attr({ fill: color});
         }
