@@ -1,5 +1,7 @@
 #!/bin/bash
 #cd $1
+branch=${1:-"master"}
+echo "Deploying $branch to gh-pages"
 git checkout master
 cd htck
 npm cache clean
@@ -19,7 +21,7 @@ rm .gitignore
 mv /tmp/dist/* .
 ls
 git add content/ images/ index.html  scripts/ styles/ views/
-git commit -am "Deploying to gh-pages"
+git commit -am "Deploying $branch to gh-pages"
 git push --delete origin gh-pages
 git push --set-upstream origin gh-pages
 git checkout master
