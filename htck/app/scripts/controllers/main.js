@@ -66,6 +66,20 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
   			return {w:width, h:height};
   		}
 
+      // Moves the element
+      function moveElement(dx, dy) {
+        if(!$scope.current) {
+          return;
+        }
+        var x = $scope.current.attr('x');
+        var y = $scope.current.attr('y');
+
+        $scope.current.ft.attrs.translate.x += dx;
+        $scope.current.ft.attrs.translate.y += dy;
+
+        $scope.current.ft.apply();
+      }
+
       // Triggers when an element is clicked
   		function elementMouseDown (/*evt, x, y*/){
   			// TODO
