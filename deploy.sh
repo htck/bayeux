@@ -1,25 +1,29 @@
 #!/bin/bash
-#cd $1
 branch=${1:-"master"}
 echo "Deploying $branch to gh-pages"
 git checkout $branch
 cd htck
+# Update all dependencies
 npm cache clean
 npm install
 bower install
+# Build app
 grunt build
 ls
 cd ..
 ls htck
 git branch -D gh-pages 
+# Save built app to tmp folder
 cp -R htck/dist/ /tmp/
 ls /tmp
 git checkout --orphan gh-pages
 # Remove all git tracked files (keeps libs and node_modules)
 git ls-files -z | xargs -0 rm -f
 rm .gitignore
+# Move back built app
 mv /tmp/dist/* .
 ls
+# Deploy
 git add content/ images/ index.html  scripts/ styles/ views/
 git commit -am "Deploying $branch to gh-pages"
 git push --delete origin gh-pages
