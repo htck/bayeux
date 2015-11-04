@@ -13,9 +13,14 @@ sudo npm install npm -g
 sudo npm install -g bower
 sudo npm install -g grunt-cli
 
+su vagrant <<EOF
 cd "$REPO_PATH"/"$PROJECT_NAME"
-su vagrant -c "npm install"
-su vagrant -c "bower install"
+mkdir -p /home/vagrant/node_modules
+rm -rf $REPO_PATH/$PROJECT_NAME/node_modules
+ln -s /home/vagrant/node_modules $REPO_PATH/$PROJECT_NAME/node_modules
+npm install
+bower install
+EOF
 sudo ln -s /vagrant/deploy.sh /usr/bin/deploy
 chmod 400 /home/vagrant/.ssh/id_rsa
 #grunt serve
