@@ -17,6 +17,11 @@
   md-content {
     background-color: transparent;
 
+    // issue :/
+    md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]) {
+      color: rgba(0, 0, 0, 0.54);
+    }
+
     md-tabs {
       background: #f6f6f6;
       border: 1px solid #e1e1e1;
@@ -58,6 +63,10 @@
   width:$appWidth;
   max-width:$appWidth;
   padding-top: 15px;
+}
+
+#wrapper-font-selector {
+  background: #85640E;
 }
 
 #readme-wrapper {
