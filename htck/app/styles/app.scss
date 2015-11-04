@@ -11,24 +11,17 @@
 }
 
 #content {
-<<<<<<< HEAD
   //background-color: $appBg;
-=======
-	//background-color: $appBg;
->>>>>>> design was deeply reworked again. todo: beautify+scss check
   background: url(../images/background_3.jpg);
 
   md-content {
     background-color: transparent;
 
-<<<<<<< HEAD
     // issue :/
     md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]) {
       color: rgba(0, 0, 0, 0.54);
     }
 
-=======
->>>>>>> design was deeply reworked again. todo: beautify+scss check
     md-tabs {
       background: #f6f6f6;
       border: 1px solid #e1e1e1;
@@ -39,19 +32,11 @@
   }
 }
 
-<<<<<<< HEAD
 .itembank-wrapper {
   overflow: hidden;
 
   .itembank {
     height: 100%;
-=======
-#itembank-wrapper {
-  padding-right: 15px;
-
-  .itembank {
-    height: $appHeight;
->>>>>>> design was deeply reworked again. todo: beautify+scss check
   }
   .item{
     max-width:100%;
@@ -217,13 +202,5 @@
         background-color: $switchColorOff;
       }
     }
-  }
-}
-
-#toolbar-config {
-  margin-bottom: 15px;
-  background-image: url(../images/background_3.jpg);
-  md-content {
-    background-color: transparent;
   }
 }

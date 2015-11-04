@@ -44,8 +44,6 @@
     <div id="toolbar-config" class="container md-whiteframe-z5">
       <md-content>
         <section layout="row" layout-align="start center" layout-wrap>
-          <md-button class="md-raised btn-common" ng-click="#">Police</md-button>
-          <md-button class="md-raised btn-common" ng-click="#">Background</md-button>
           <span class="flex"></span>
           <md-button class="md-raised btn-success" ng-click="export()">Submit</md-button>
         </section>
@@ -77,7 +75,6 @@
 
               <md-tab label="Backgrounds" ng-if="constants.backgrounds.length > 1">
                 <md-content class="md-padding">
-                  <h1 class="md-display-2">Backgrounds</h1>
                   <div>
                     <md-grid-list
                       md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
@@ -252,7 +249,19 @@
             <div class="padding-v-t-15" layout="row">
               <div flex="60">
                 <div ng-if="current && current.type==='text'">
-                  <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
+                  <div layout="row">
+                    <div flex="40" id="wrapper-font-selector">
+                      <label>Font</label>
+                      <md-select style="margin: 0px;" ng-model="$parent.$parent.font" ng-change="elementChangeFont()">
+                        <md-option ng-repeat="f in constants.fonts" ng-value="f">
+                          {{f.font}}
+                        </md-option>
+                      </md-select>
+                    </div>
+                    <div flex="60">
+                      <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div flex="40">
