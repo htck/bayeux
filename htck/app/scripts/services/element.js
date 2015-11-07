@@ -13,7 +13,16 @@ angular.module('htckApp').factory('hElement', function() {
     element.ft.apply();
   }
 
+  function remove(element) {
+    if(!element) {
+      return;
+    }
+    element.ft.unplug();
+    element.remove();
+  }
+
   return {
-    move: move
+    move: move,
+    remove: remove
   };
 });

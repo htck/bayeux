@@ -37,8 +37,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         if($scope.current && $scope.current.type === 'text' && !$scope.current[0].textContent.length) {
-          $scope.current.ft.unplug();
-          $scope.current.remove();
+          hElement.remove($scope.current);
         }
         if($scope.current && $scope.current.ft){
           $scope.current.ft.hideHandles();
@@ -136,12 +135,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       // Removes an element
       $scope.remove = function() {
-        if(!$scope.current) {
-          return;
+        if($scope.current) {
+          hElement.remove($scope.current);
+          unfocus();
         }
-        $scope.current.ft.unplug();
-        $scope.current.remove();
-        unfocus();
       };
 
       $scope.bringToFront = function(){
