@@ -53,7 +53,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           hTextEdit.addCaret();
         }
         else{
-          removeCaret();
+          hTextEdit.removeCaret();
         }
       }
 
@@ -136,7 +136,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       function unfocus(){
         $log.debug('Unfocus');
         //$scope.current = null;
-        removeCaret();
+        hTextEdit.removeCaret();
         setCurrent(null);
       }
 
