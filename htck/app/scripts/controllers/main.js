@@ -362,8 +362,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $log.debug(evt);
         if(evt.key === 'Backspace') {
           if($scope.current[0].textContent.length && $scope.caret > 0){
-            console.log('REMOVE');
-            //$scope.current[0].textContent = ;
             $scope.current.attr({text: $scope.current[0].textContent.substr(0,$scope.caret-1)+$scope.current[0].textContent.substr($scope.caret)});
             $scope.caret--;
             updateCaretPosition();
