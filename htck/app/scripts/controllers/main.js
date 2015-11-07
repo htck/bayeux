@@ -81,13 +81,13 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
         // set default values
         ft.attrs.y=constants.ELEMENT_DEFAULT_HEIGHT;
-        setHeight($scope.current, ft.attrs.y);
+        hElement.setHeight($scope.current, ft.attrs.y);
 
         ft.attrs.x=constants.ELEMENT_DEFAULT_WIDTH;
-        setWidth($scope.current, ft.attrs.x);
+        hElement.setWidth($scope.current, ft.attrs.x);
 
         ft.attrs.rotate=constants.ELEMENT_DEFAULT_ROTATION;
-        setRotation($scope.current, ft.attrs.rotate);
+        hElement.setRotation($scope.current, ft.attrs.rotate);
 
         $scope.current.opacity = 1;
 
@@ -156,9 +156,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         background.toBack();
       };
 
-      $scope.elementRatio = function(){
-        return $scope.current.ft.attrs.scale.x / $scope.current.ft.attrs.scale.y; 
-      };
 
       //modified by sliders 
       $scope.elementSetHeight = function(){
@@ -167,12 +164,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }        
         
         if($scope.current.keepratio) {
-          $scope.current.ft.attrs.scale.x = $scope.elementRatio() * $scope.current.height;
+          $scope.current.ft.attrs.scale.x = elementRatio($scope.current) * $scope.current.height;
           $scope.elementChangedWidth($scope.current.ft.attrs.scale.x);
           $scope.current.ft.attrs.scale.y = $scope.current.height;
         } else {
           $scope.current.ft.attrs.scale.y = $scope.current.height;
-          $scope.current.ft.attrs.ratio = $scope.elementRatio();
+          $scope.current.ft.attrs.ratio = elementRatio($scope.current);
         }                       
         $scope.current.ft.apply();
         hTextEdit.updateCaretPosition();
@@ -184,54 +181,42 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }        
         if($scope.current.keepratio){
-          $scope.current.ft.attrs.scale.y = $scope.isFlipped() * $scope.current.width / $scope.elementRatio();
+          $scope.current.ft.attrs.scale.y = $scope.isFlipped() * $scope.current.width / elementRatio($scope.current);
           $scope.elementChangedHeight($scope.current.ft.attrs.scale.y);
           $scope.current.ft.attrs.scale.x = $scope.isFlipped() * $scope.current.width;
         } else {
           $scope.current.ft.attrs.scale.x = $scope.isFlipped() * $scope.current.width;
-          $scope.current.ft.attrs.ratio = $scope.elementRatio();
+          $scope.current.ft.attrs.ratio = elementRatio($scope.current);
         }        
         $scope.current.ft.apply();
         hTextEdit.updateCaretPosition();
       };
-
-      function setHeight(element, height){
-        element.height = Math.abs(height);
-      }
 
       //modified by handles 
       $scope.elementChangedHeight = function(height){
         if(!$scope.current) {
           return;
         }
-        setHeight($scope.current, height);
+        hElement.setHeight($scope.current, height);
         hTextEdit.updateCaretPosition();
       };
-      
-
-      function setWidth(element, width){
-        element.width = Math.abs(width);
-      }
 
       //modified by handles 
-      $scope.elementChangedWidth = function(width){    
+      $scope.elementChangedWidth = function(width){
         if(!$scope.current) {
           return;
-        }    
-        setWidth($scope.current, width);
+        }
+        hElement.setWidth($scope.current, width);
         hTextEdit.updateCaretPosition();
       };
 
-      function setRotation(element, angle){
-        element.rotation = angle;
-      }
-
+      //modified by handles 
       $scope.elementChangedRotation = function(angle){
         if(!$scope.current) {
           return;
         }
         angle=Math.floor(angle);
-        setRotation($scope.current, angle);
+        hElement.setRotation($scope.current, angle);
         hTextEdit.updateCaretPosition();
       };
 
@@ -245,21 +230,17 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       };
 
       $scope.elementSetKeepRatio = function(){
-        if(!$scope.current) {
-          return;
-        }
-        $scope.current.ft.setOpts({keepRatio: $scope.current.keepratio});
+        hElement.setKeepRatio($scope.current);
       };
 
       $scope.elementSetMirror = function() {
         if(!$scope.current) {
           return;
         }
-        $scope.current.ft.attrs.scale.x = - $scope.current.ft.attrs.scale.x;
-        $scope.current.ft.attrs.ratio = $scope.elementRatio();
-        $scope.current.ft.apply();
+        hElement.setMirror($scope.current);
         hTextEdit.updateCaretPosition();
       };
+
       $scope.elementSetOpacity = function(){
         if(!$scope.current) {
           return;
