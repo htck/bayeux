@@ -10,9 +10,7 @@
 /* globals constants */
 /* globals Raphael */
 /* globals $ */
-/* globals canvg */
-/* globals saveAs */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hotkeys) {
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hotkeys, hExport) {
 // Constants
       constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
 
@@ -24,11 +22,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       constants.ELEMENT_DEFAULT_ROTATION=0;
       constants.ELEMENT_DEFAULT_KEEPRATIO=true;
       constants.ELEMENT_DISPLACEMENT=3;
+      constants.RAPHAEL_PAPER='paper';
   		$scope.constants = constants;
 
       $scope.font = constants.fonts[0];
 
-      var paper = new Raphael('paper');
+      var paper = new Raphael(constants.RAPHAEL_PAPER);
   		$log.debug('Paper', paper);
   		var HEIGHT = paper.height, WIDTH = paper.width;
 
@@ -319,38 +318,11 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         background.attr({'fill':'url('+imgUrl+')', 'fill-opacity':'1', 'stroke':'none'});
       };
 
-      // Function gotten from SVGFix
-      // source : https://code.google.com/p/svgfix/
-      function svgfix (text) {
-        var fixed = text ;
-        fixed = $.trim(fixed);
-        if (fixed.indexOf( 'xmlns:xlink' ) === -1 ) {
-          fixed = fixed.replace ('<svg ', '<svg xmlns:xlink="http://www.w3.org/1999/xlink" '); 
-        }
-        fixed = fixed.replace (' href', ' xlink:href'); 
-        return fixed; 
-      }
-
       $scope.export = function(){
         $log.debug('Exporting');
         // Unfocus to remove handles from elements
         unfocus();
-        // Get the svg element created by Raphael
-        var svg = document.getElementById("paper").children[0];
-        var svgStr = svgfix(svg.outerHTML);
-
-        // Convert to canvas using canvg
-        canvg(document.getElementById('canvas'), svgStr, {
-          renderCallback: function() {
-            var canvas = document.getElementById('canvas');
-
-            // Get blob from canvas image
-            canvas.toBlob(function(blob){
-              // Save to file using FileSaver.js
-              saveAs(blob, "TheGloriousTaleOfBayeux.png");  // TODO generate random name for file
-            });
-          }
-        });
+        hExport(constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux.png');
       };
 
       function handleKeyPress (evt) {
