@@ -18,7 +18,8 @@ angular
     'ngDragDrop',
     'cfp.hotkeys'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $logProvider) {
+    $logProvider.debugEnabled(false);
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
