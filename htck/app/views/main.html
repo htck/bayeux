@@ -6,6 +6,10 @@
   </div>
 
   <div class="padding-v-50"></div>
+  <div class="toolBar">
+      <md-button class="md-primary md-raised" ng-click="export()">Submit</md-button>
+  </div>
+  <div class="padding-v-15"></div>
 <section layout="row" class="app_wrapper">
   <!-- Left block -->
   <md-sidenav class="left-panel" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
@@ -110,7 +114,6 @@
         <md-button ng-click="bringToBack()" class="md-primary md-raised">Bring To Back</md-button>
         <md-button ng-click="remove()" class="md-warn md-raised">Remove</md-button>
       </div>
-      <md-button class="md-primary md-raised" ng-click="export()">Submit</md-button>
     </div>
   </div>
 </section>
