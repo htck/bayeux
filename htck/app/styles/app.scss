@@ -22,14 +22,16 @@
 }
 
 .padding-panel {
-	padding: $appPanelPadding;
+	//padding: $appPanelPadding;
 }
 
 #content-left-panel {
   height: $appHeight;
 
+	padding:0;
+
   .itembank {
-  	height:calc(#{$appHeight} - 2*#{$appPanelPadding});
+  	height:$appHeight;
   }
 
   .item{
@@ -41,7 +43,7 @@
 #content-middle-panel {
 	height:$appHeight;
 	//width: $appWidth;
-
+	padding:0;
 
 /*
   float: none;
@@ -49,16 +51,19 @@
 }
 
 #paper {
-	height:calc(#{$appHeight} - 2*#{$appPanelPadding});
-	width: calc(#{$appWidth} - 2*#{$appPanelPadding});
-  min-width: $appWidth;
-  max-width: $appWidth;
+	//height:calc(#{$appHeight} - 2*#{$appPanelPadding});
+	//width: calc(#{$appWidth} - 2*#{$appPanelPadding});
+  //min-width: $appWidth;
+  //max-width: $appWidth;
+  height:100%;
+  width:100%;
   margin: auto;
 }
 
 #content-right-panel {
 	height:$appHeight;
   color: white;
+	padding:0;
   font-weight: bold;
 }
 

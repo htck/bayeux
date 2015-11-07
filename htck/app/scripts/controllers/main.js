@@ -16,14 +16,19 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       constants.ELEMENT_DEFAULT_KEEPRATIO=true;
       constants.ELEMENT_DISPLACEMENT=3;
       constants.RAPHAEL_PAPER='paper';
+      constants.W = 900;
+      constants.H = 675;
   		$scope.constants = constants;
 
       $scope.font = constants.fonts[0];
 
-      var paper = new Raphael(constants.RAPHAEL_PAPER);
+      var paper = new Raphael(constants.RAPHAEL_PAPER, constants.W, constants.H);
       $scope.paper = paper;
   		$log.debug('Paper', paper);
   		var HEIGHT = paper.height, WIDTH = paper.width;
+      paper.setViewBox(0,0,WIDTH,HEIGHT,true);
+      paper.setSize('100%', '100%');
+      console.log(WIDTH, HEIGHT);
 
       function setCurrent(newCurrent) {
         if($scope.current && newCurrent && $scope.current.id === newCurrent.id){
