@@ -397,6 +397,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       $scope.$on('$destroy', function () {
         $document.off('keydown', handleKeyPress);
+        $timeout.cancel(caretBlinker);
       });
 
       $scope.setFontColor = function(color) {
@@ -428,6 +429,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
         // Transform pointer
         $scope.caretPointer.transform($scope.current.transform());
+
+        $scope.caretPointer.attr({'fill-opacity': 1});
 
         cloneText.remove();
       }
@@ -550,6 +553,17 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           moveElement(-constants.ELEMENT_DISPLACEMENT, 0);
         }
       });
+
+      function blinkCaret(){
+        return $timeout(function (){
+          if($scope.caretPointer){
+            $scope.caretPointer.attr({'fill-opacity': 1 - $scope.caretPointer.attr('fill-opacity')});
+          }
+          caretBlinker = blinkCaret();
+        }, 1000);
+      }
+
+      var caretBlinker = blinkCaret();
 
 /*************************************************************** Drag & drop */
 
