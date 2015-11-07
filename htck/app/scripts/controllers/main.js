@@ -10,7 +10,7 @@
 /* globals constants */
 /* globals Raphael */
 /* globals $ */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hotkeys, hExport, hTextEdit) {
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hExport, hTextEdit, hHotkeys) {
 // Constants
       constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
 
@@ -78,6 +78,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
         $scope.current.ft.apply();
       }
+      $scope.moveElement = moveElement;
 
       // Triggers when an element is clicked
   		function elementMouseDown (/*evt, x, y*/){
@@ -139,6 +140,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         hTextEdit.removeCaret();
         setCurrent(null);
       }
+      $scope.unfocus = unfocus;
 
       //
       $scope.isFlipped = function() {
@@ -326,12 +328,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         hExport(constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux.png');
       };
 
-      hTextEdit.init($scope);
-
-      $scope.$on('$destroy', function () {
-        hTextEdit.destroy();
-      });
-
       $scope.setFontColor = function(color) {
         $scope.current.attr({ fill: color});
         $scope.fontColor = color;
@@ -340,94 +336,16 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
       };
 
-      // Hotkeys
-
-      hotkeys.add({
-        combo: 'del',
-        description: 'Removes currently selected element',
-        callback: $scope.remove
+      $scope.$on('$destroy', function () {
+        hTextEdit.destroy();
       });
 
-      hotkeys.add({
-        combo: 'esc',
-        description: 'Unfocuses from currently selected element',
-        callback: unfocus
-      });
+      function init(){
+        hTextEdit.init($scope);
+        hHotkeys($scope);
+      }
 
-      hotkeys.add({
-        combo: 'space',
-        description: 'Bring currently selected element to the front',
-        callback: function (event){
-          event.preventDefault();
-          $scope.bringToFront();
-        }
-      });
-
-      hotkeys.add({
-        combo: 'ctrl+space',
-        description: 'Puts currently selected element to the back',
-        callback: function (event){
-          event.preventDefault();
-          $scope.bringToBack();
-        }
-      });
-
-      hotkeys.add({
-        combo: 'ctrl+shift+s',
-        description: 'Exports canvas to png',
-        callback: function (event){
-          event.preventDefault();
-          $scope.export();
-        }
-      });
-
-      hotkeys.add({
-        combo: 'ctrl+m',
-        description: 'Mirrors currently selected element',
-        callback: $scope.elementSetMirror
-      });
-
-      hotkeys.add({
-        combo: 'up',
-        description: 'Slightly moves currently selected element up',
-        callback: function(event) {
-          event.preventDefault();
-          moveElement(0, -constants.ELEMENT_DISPLACEMENT);
-        }
-      });
-
-      hotkeys.add({
-        combo: 'down',
-        description: 'Slightly moves currently selected element down',
-        callback: function(event) {
-          event.preventDefault();
-          moveElement(0, constants.ELEMENT_DISPLACEMENT);
-        }
-      });
-
-      hotkeys.add({
-        combo: 'right',
-        description: 'Slightly moves currently selected element to the right',
-        callback: function(event) {
-          if(!$scope.current || $scope.current.type ==='text'){
-            return;
-          }
-          event.preventDefault();
-          moveElement(constants.ELEMENT_DISPLACEMENT, 0);
-        }
-      });
-
-      hotkeys.add({
-        combo: 'left',
-        description: 'Slightly moves currently selected element to the left',
-        callback: function(event) {
-          if(!$scope.current || $scope.current.type ==='text'){
-            return;
-          }
-          event.preventDefault();
-          moveElement(-constants.ELEMENT_DISPLACEMENT, 0);
-        }
-      });
+      init();
 
 /*************************************************************** Drag & drop */
 
