@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 /**
  * @ngdoc function
@@ -106,13 +106,13 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
         // set default values
         ft.attrs.y=constants.ELEMENT_DEFAULT_HEIGHT;
-        $scope.elementChangedHeight(ft.attrs.y);
+        setHeight($scope.current, ft.attrs.y);
 
         ft.attrs.x=constants.ELEMENT_DEFAULT_WIDTH;
-        $scope.elementChangedWidth(ft.attrs.x);
+        setWidth($scope.current, ft.attrs.x);
 
         ft.attrs.rotate=constants.ELEMENT_DEFAULT_ROTATION;
-        $scope.elementChangedRotation(ft.attrs.rotate);
+        setRotation($scope.current, ft.attrs.rotate);
 
         $scope.current.opacity = 1;
 
@@ -221,23 +221,35 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         updateCaretPosition();
       };
 
+      function setHeight(element, height){
+        element.height = Math.abs(height);
+      };
+
       //modified by handles 
       $scope.elementChangedHeight = function(height){
         if(!$scope.current) {
           return;
         }
-        $scope.current.height = Math.abs(height);
+        setHeight($scope.current, height);
         updateCaretPosition();
       };
       
+
+      function setWidth(element, width){
+        element.width = Math.abs(width);
+      };
 
       //modified by handles 
       $scope.elementChangedWidth = function(width){    
         if(!$scope.current) {
           return;
         }    
-        $scope.current.width = Math.abs(width);
+        setWidth($scope.current, width);
         updateCaretPosition();
+      };
+
+      function setRotation(element, angle){
+        element.rotation = angle;
       };
 
       $scope.elementChangedRotation = function(angle){
@@ -245,7 +257,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         angle=Math.floor(angle);
-        $scope.current.rotation = angle;
+        setRotation($scope.current, angle);
         updateCaretPosition();
       };
 
@@ -423,8 +435,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           w = 0;
         }
 
-        console.log($scope.caret);
-
         $scope.caretPointer.attr({x: x+w});
 
         // Transform pointer
@@ -441,10 +451,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(!$scope.current.inited){
           $scope.caret = 0;
         }
-        console.log($scope.current);
-
-        console.log($scope.current.getBBox(true).width);
-        console.log($scope.current.getBBox(true).height);
 
         var x = $scope.current.attr('x');
         var y = $scope.current.attr('y');
