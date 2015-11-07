@@ -76,7 +76,7 @@
 #content-right-panel {
 	//height:$appHeight;
   color: white;
-	padding:0;
+	padding:$appPanelPadding;
   font-weight: bold;
 }
 
@@ -102,8 +102,26 @@
 	display:inline-block;
 	margin:0 4px;
 }
+@media screen and (max-width: 960px) {
+    .circle{
+		width:$colorPickerSizeMD;
+		height:$colorPickerSizeMD;
+		border-radius:$colorPickerSizeMD/2;
+	}
+}
+@media screen and (max-width: 600px) {
+    .circle{
+		width:$colorPickerSizeSM;
+		height:$colorPickerSizeSM;
+		border-radius:$colorPickerSizeSM/2;
+	}
+}
 
 .toolBar {
 	height:50px;
 	background: $appBg;
+}
+
+.text-properties {
+	padding: 0 $appPanelPadding;
 }
