@@ -10,7 +10,7 @@
 /* globals constants */
 /* globals Raphael */
 /* globals $ */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hotkeys, hExport) {
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hotkeys, hExport, hTextEdit) {
 // Constants
       constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
 
@@ -325,58 +325,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         hExport(constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux.png');
       };
 
-      function handleKeyPress (evt) {
-        if(!$scope.current || $scope.current.type !== 'text'){
-          return;
-        }
-        $log.debug(evt);
-        if(evt.key === 'Backspace') {
-          if($scope.current[0].textContent.length && $scope.caret > 0){
-            $scope.current.attr({text: $scope.current[0].textContent.substr(0,$scope.caret-1)+$scope.current[0].textContent.substr($scope.caret)});
-            $scope.caret--;
-            updateCaretPosition();
-          }
-          evt.stopPropagation();
-          evt.preventDefault();
-          return;
-        }
-        if(evt.key === 'ArrowLeft') {
-          if($scope.caret > 0){
-            $scope.caret--;
-            updateCaretPosition();
-          }
-          evt.stopPropagation();
-          evt.preventDefault();
-          return;
-        }
-        if(evt.key === 'ArrowRight') {
-          if($scope.caret < $scope.current[0].textContent.length){
-            $scope.caret++;
-            updateCaretPosition();
-          }
-          evt.stopPropagation();
-          evt.preventDefault();
-          return;
-        }
-        // Check if letter key
-        if((!evt.key.match('^[a-zA-Z]$')) && (evt.key !== ' ') || evt.key.length > 1){ // TODO better regex
-          return;
-        }
-        var k = (evt.key === ' ') ? ' ' : evt.key.toUpperCase();
-
-        //$scope.current[0].textContent = $scope.current[0].textContent.substr(0,$scope.caret)+k+$scope.current[0].textContent.substr($scope.caret);
-        $scope.current.attr({text: $scope.current[0].textContent.substr(0,$scope.caret)+k+$scope.current[0].textContent.substr($scope.caret)});
-        $scope.caret++;
-        updateCaretPosition();
-
-        evt.stopPropagation();
-        evt.preventDefault();
-      }
-
-      $document.on('keydown', handleKeyPress);
+      hTextEdit.init($scope);
 
       $scope.$on('$destroy', function () {
-        $document.off('keydown', handleKeyPress);
+        hTextEdit.destroy();
         $timeout.cancel(caretBlinker);
       });
 
