@@ -72,8 +72,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(!$scope.current) {
           return;
         }
-        var x = $scope.current.attr('x');
-        var y = $scope.current.attr('y');
 
         $scope.current.ft.attrs.translate.x += dx;
         $scope.current.ft.attrs.translate.y += dy;
@@ -223,7 +221,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       function setHeight(element, height){
         element.height = Math.abs(height);
-      };
+      }
 
       //modified by handles 
       $scope.elementChangedHeight = function(height){
@@ -237,7 +235,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       function setWidth(element, width){
         element.width = Math.abs(width);
-      };
+      }
 
       //modified by handles 
       $scope.elementChangedWidth = function(width){    
@@ -250,7 +248,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       function setRotation(element, angle){
         element.rotation = angle;
-      };
+      }
 
       $scope.elementChangedRotation = function(angle){
         if(!$scope.current) {
@@ -425,7 +423,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         var cloneText = $scope.current.clone();
         cloneText.attr({'fill':'blue'});
         var x = cloneText.attr('x');
-        var y = cloneText.attr('y');
         cloneText.attr({text: $scope.current[0].textContent.substr(0, $scope.caret)});
         var w = cloneText.getBBox(true).width;
         if($scope.caret === 0){
