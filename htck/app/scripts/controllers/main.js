@@ -10,7 +10,7 @@
 /* globals constants */
 /* globals Raphael */
 /* globals $ */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hExport, hTextEdit, hHotkeys) {
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hExport, hTextEdit, hHotkeys, hElement) {
 // Constants
       constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
 
@@ -66,19 +66,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
   			return {w:width, h:height};
   		}
-
-      // Moves the element
-      function moveElement(dx, dy) {
-        if(!$scope.current) {
-          return;
-        }
-
-        $scope.current.ft.attrs.translate.x += dx;
-        $scope.current.ft.attrs.translate.y += dy;
-
-        $scope.current.ft.apply();
-      }
-      $scope.moveElement = moveElement;
 
       // Triggers when an element is clicked
   		function elementMouseDown (/*evt, x, y*/){

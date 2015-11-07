@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('htckApp').factory('hHotkeys', function(hotkeys) {
+angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement) {
   function init(parent) {
     var scope = parent.$new();
     // Hotkeys
@@ -55,7 +55,7 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys) {
       description: 'Slightly moves currently selected element up',
       callback: function(event) {
         event.preventDefault();
-        scope.$parent.moveElement(0, -constants.ELEMENT_DISPLACEMENT);
+        hElement.move(scope.$parent.current, 0, -constants.ELEMENT_DISPLACEMENT);
       }
     });
 
@@ -64,7 +64,7 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys) {
       description: 'Slightly moves currently selected element down',
       callback: function(event) {
         event.preventDefault();
-        scope.$parent.moveElement(0, constants.ELEMENT_DISPLACEMENT);
+        hElement.move(scope.$parent.current, 0, constants.ELEMENT_DISPLACEMENT);
       }
     });
 
@@ -76,7 +76,7 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys) {
           return;
         }
         event.preventDefault();
-        scope.$parent.moveElement(constants.ELEMENT_DISPLACEMENT, 0);
+        hElement.move(scope.$parent.current, constants.ELEMENT_DISPLACEMENT, 0);
       }
     });
 
@@ -88,7 +88,7 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys) {
           return;
         }
         event.preventDefault();
-        scope.$parent.moveElement(-constants.ELEMENT_DISPLACEMENT, 0);
+        hElement.move(scope.$parent.current, -constants.ELEMENT_DISPLACEMENT, 0);
       }
     });
   }
