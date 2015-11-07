@@ -1,5 +1,6 @@
 'use strict';
 
+/* globals constants */
 angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement) {
   function init(parent) {
     var scope = parent.$new();

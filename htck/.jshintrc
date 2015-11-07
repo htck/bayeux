@@ -13,5 +13,12 @@
   "globals": {
     "angular": false
   },
-  "validthis":true
+  "validthis":true,
+  "freeze": true,
+  "indent": 4,
+  "immed": true,
+  "noempty": true,
+  "nonbsp": true,
+  "quotmark": "single",
+  "trailing": true
 }

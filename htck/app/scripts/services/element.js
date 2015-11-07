@@ -4,7 +4,7 @@ angular.module('htckApp').factory('hElement', function() {
 
   function elementRatio(element){
     return element.ft.attrs.scale.x / element.ft.attrs.scale.y; 
-  };
+  }
 
   // Moves the element
   function move(element, dx, dy) {
@@ -52,7 +52,7 @@ angular.module('htckApp').factory('hElement', function() {
       return;
     }
     element.ft.setOpts({keepRatio: element.keepratio});
-  };
+  }
 
   function setMirror(element) {
     if(!element) {
@@ -61,7 +61,7 @@ angular.module('htckApp').factory('hElement', function() {
     element.ft.attrs.scale.x = - element.ft.attrs.scale.x;
     element.ft.attrs.ratio = elementRatio(element);
     element.ft.apply();
-  };
+  }
 
   return {
     move: move,

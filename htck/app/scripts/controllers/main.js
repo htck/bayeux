@@ -1,17 +1,10 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name htckApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the htckApp
- */
 /* globals constants */
 /* globals Raphael */
 /* globals $ */
 angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hExport, hTextEdit, hHotkeys, hElement, hTools) {
-// Constants
+      // Constants
       constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
 
       constants.ELEMENT_SCALE_MIN = 0.2;
@@ -98,15 +91,16 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       }
 
       function handleFtChanged(ft, events) {
-        if (events.indexOf("rotate") >= 0) {
+        if (events.indexOf('rotate') >= 0) {
           $scope.elementChangedRotation(ft.attrs.rotate);
           $scope.$apply();
         }
-        if (events.indexOf("scale") >= 0) {
+        if (events.indexOf('scale') >= 0) {
           $scope.elementChangedHeight(ft.attrs.scale.y);
           $scope.elementChangedWidth(ft.attrs.scale.x);
           $scope.$apply();
         }
+        hTextEdit.updateCaretPosition();
       }
 
       // Unselects an element
@@ -164,12 +158,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }        
         
         if($scope.current.keepratio) {
-          $scope.current.ft.attrs.scale.x = elementRatio($scope.current) * $scope.current.height;
+          $scope.current.ft.attrs.scale.x = hElement.elementRatio($scope.current) * $scope.current.height;
           $scope.elementChangedWidth($scope.current.ft.attrs.scale.x);
           $scope.current.ft.attrs.scale.y = $scope.current.height;
         } else {
           $scope.current.ft.attrs.scale.y = $scope.current.height;
-          $scope.current.ft.attrs.ratio = elementRatio($scope.current);
+          $scope.current.ft.attrs.ratio = hElement.elementRatio($scope.current);
         }                       
         $scope.current.ft.apply();
         hTextEdit.updateCaretPosition();
@@ -181,12 +175,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }        
         if($scope.current.keepratio){
-          $scope.current.ft.attrs.scale.y = $scope.isFlipped() * $scope.current.width / elementRatio($scope.current);
+          $scope.current.ft.attrs.scale.y = $scope.isFlipped() * $scope.current.width / hElement.elementRatio($scope.current);
           $scope.elementChangedHeight($scope.current.ft.attrs.scale.y);
           $scope.current.ft.attrs.scale.x = $scope.isFlipped() * $scope.current.width;
         } else {
           $scope.current.ft.attrs.scale.x = $scope.isFlipped() * $scope.current.width;
-          $scope.current.ft.attrs.ratio = elementRatio($scope.current);
+          $scope.current.ft.attrs.ratio = hElement.elementRatio($scope.current);
         }        
         $scope.current.ft.apply();
         hTextEdit.updateCaretPosition();
@@ -301,14 +295,4 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       }
 
       init();
-
-/*************************************************************** Drag & drop */
-
-      $scope.test = function(event, ui) {
-        console.log(ui);
-        var src=ui.draggable.context.currentSrc;
-        var x = ui.offset.left - $('#paper').offset().left;
-        var y = ui.offset.top - $('#paper').offset().top;
-        $scope.addImage(src, x, y);
-      };
   });
