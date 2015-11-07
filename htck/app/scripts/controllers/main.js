@@ -10,7 +10,7 @@
 /* globals constants */
 /* globals Raphael */
 /* globals $ */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hExport, hTextEdit, hHotkeys, hElement) {
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, hExport, hTextEdit, hHotkeys, hElement, hTools) {
 // Constants
       constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
 
@@ -56,16 +56,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           hTextEdit.removeCaret();
         }
       }
-
-  		function getSizeOfImage(src) {
-  			var fimg = new Image(); 
-  			fimg.src = src;
-
-  			var width = fimg.width;
-  			var height = fimg.height;
-
-  			return {w:width, h:height};
-  		}
 
       // Triggers when an element is clicked
   		function elementMouseDown (/*evt, x, y*/){
@@ -137,7 +127,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       // Adds an image as a raphael element from its url
   		$scope.addImage = function(src, x, y){
-  			var size = getSizeOfImage(src);
+  			var size = hTools.getSizeOfImage(src);
         x=(x)?x:(WIDTH - size.w)/2;
         y=(y)?y:(HEIGHT - size.h)/2;
   			var ie = paper.image(src, x, y, size.w, size.h);  // TODO
