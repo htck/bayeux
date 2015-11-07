@@ -201,6 +201,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           $scope.current.ft.attrs.ratio = $scope.elementRatio();
         }                       
         $scope.current.ft.apply();
+        updateCarretPosition();
       };
 
       //modified by sliders 
@@ -216,7 +217,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           $scope.current.ft.attrs.scale.x = $scope.isFlipped() * $scope.current.width;
           $scope.current.ft.attrs.ratio = $scope.elementRatio();
         }        
-        $scope.current.ft.apply();    
+        $scope.current.ft.apply();
+        updateCarretPosition();
       };
 
       //modified by handles 
@@ -285,7 +287,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
 
         $scope.current.attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': $scope.fontColor || constants.colors[0]});
-        updateCarretPosition();
+        $timeout(updateCarretPosition);
       };
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
