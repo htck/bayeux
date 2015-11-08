@@ -317,6 +317,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
             var element = $scope.addImage(img.img, sf[0], sf[1]);
 
+            var rot = hTools.randInt(-$scope.brush.randRotationRange, $scope.brush.randRotationRange);
+            console.log(rot);
+            hElement.setRotation(element, rot);
           }
         }
       }

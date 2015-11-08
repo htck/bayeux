@@ -45,6 +45,8 @@ angular.module('htckApp').factory('hElement', function() {
       return;
     }
     element.rotation = angle;
+    element.ft.attrs.rotate=element.rotation;
+    element.ft.apply();
   }
 
   function setKeepRatio(element){

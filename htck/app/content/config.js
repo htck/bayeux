@@ -152,7 +152,7 @@ var constants = {
       icon:"content//images/folc/01_group.png",
       speed:300,
       randSizeRange: 0.2,
-      randRotationRange: 10,
+      randRotationRange: 3,
       scale: 0.5,
       images:[
         {
