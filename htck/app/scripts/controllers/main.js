@@ -93,6 +93,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.elementSetKeepRatio();
 
         ft.setOpts({'drag':['self']});
+
+        return ie;
       }
 
       function handleFtChanged(ft, events) {
@@ -129,7 +131,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         x=(x)?x:(WIDTH - size.w)/2;
         y=(y)?y:(HEIGHT - size.h)/2;
   			var ie = paper.image(src, x, y, size.w, size.h);  // TODO
-  			addElement(ie);
+  			return addElement(ie);
   		};
 
       // Removes an element
@@ -256,15 +258,21 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $timeout(hTextEdit.updateCaretPosition);
       };
 
+      function scaleFactors(x, y){
+        var paperElement = $('#paper');
+        var pw = paperElement.width(), ph = pw / constants.W * constants.H, actualHeight = paperElement.height();
+        return [x / pw * constants.W, (y / ph * constants.H) - (actualHeight - ph)/2];
+      }
+
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
       background.mousedown(function(evt) {
         $scope.backgroundDown = true;
         if($scope.brush){
           return;
         }
-        var paperElement = $('#paper');
-        var pw = paperElement.width(), ph = pw / constants.W * constants.H, actualHeight = paperElement.height();
-        var text = paper.text(evt.layerX / pw * constants.W, (evt.layerY / ph * constants.H) - (actualHeight - ph)/2, 'H').attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': constants.colors[0]});
+        
+        var sf = scaleFactors(evt.layerX, evt.layerY);
+        var text = paper.text(sf[0], sf[1], 'H').attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': constants.colors[0]});
         addElement(text);
         $scope.caret = 0;
         //text[0].textContent = '';
@@ -278,9 +286,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       });
       background.attr({'fill':'url('+constants.backgrounds[0]+')', 'fill-opacity':'1', 'stroke':'none'});
 
-      background.mouseup(function(evt) {
+      function paperUnfocus(){
         $scope.backgroundDown = false;
-      });
+      }
+
+      background.mouseup(paperUnfocus);
+      //background.mouseout(paperUnfocus);
+
+      $('#paper').mouseup(paperUnfocus);
+      $('#paper').mouseleave(paperUnfocus);
 
       $scope.setBackground = function(imgUrl){
         background.attr({'fill':'url('+imgUrl+')', 'fill-opacity':'1', 'stroke':'none'});
@@ -292,7 +306,17 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if($scope.backgroundDown && $scope.brush){
           if(!$scope.brush.timeStamp || (evt.timeStamp - $scope.brush.timeStamp) >= $scope.brush.speed){
             $scope.brush.timeStamp = evt.timeStamp;
-            
+            $log.debug('Brush event');
+            var paperElement = $('#paper');
+            var paperOffset = $('#paper').offset();
+            var img = $scope.brush.images[hTools.randInt(0, $scope.brush.images.length -1)];
+
+            var x = evt.pageX - paperOffset.left;
+            var y = evt.pageY - paperOffset.top;
+            var sf = scaleFactors(x,y);
+
+            var element = $scope.addImage(img.img, sf[0], sf[1]);
+
           }
         }
       }
@@ -305,7 +329,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
         else{
           $scope.brush = brush;
-          background.mousemove(brushHandler);
+          //background.mousemove(brushHandler);
+          $('#paper').mousemove(brushHandler);
         }
       };
 

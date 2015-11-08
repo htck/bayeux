@@ -153,13 +153,15 @@ var constants = {
       speed:300,
       randSizeRange: 0.2,
       randRotationRange: 10,
+      scale: 0.5,
       images:[
         {
           img:"content//images/folc/01_group.png"
         },
         {
           img:"content//images/folc/02_staring-guys.png",
-          mirror:true
+          mirror:true,
+          scale: 0.8
         }
       ]
     }

@@ -11,7 +11,12 @@ angular.module('htckApp').factory('hTools', function() {
     return {w:width, h:height};
   }
 
+  function randInt(lb, ub) {
+      return Math.floor(Math.random() * (ub - lb + 1)) + lb;
+  }
+
   return {
-    getSizeOfImage: getSizeOfImage
+    getSizeOfImage: getSizeOfImage,
+    randInt: randInt
   };
 });
