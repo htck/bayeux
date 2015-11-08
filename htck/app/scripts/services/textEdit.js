@@ -96,6 +96,16 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $timeo
     evt.preventDefault();
   }
 
+  function popChar (textElement) {
+    if(!textElement || textElement.type !== 'text'){
+      return;
+    }
+
+    textElement.attr({text: textElement[0].textContent.substr(0,scope.$parent.caret-1)+textElement[0].textContent.substr(scope.$parent.caret)});
+    textElement.caret--;
+    updateCaretPosition();
+  }
+
   function addCaret() {
     removeCaret();
     scope.$parent.caret = scope.$parent.current[0].textContent.length;
@@ -127,6 +137,7 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $timeo
     destroy:destroy,
     updateCaretPosition: updateCaretPosition,
     addCaret: addCaret,
-    removeCaret: removeCaret
+    removeCaret: removeCaret,
+    popChar: popChar
   };
 });

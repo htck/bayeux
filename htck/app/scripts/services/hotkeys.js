@@ -1,7 +1,7 @@
 'use strict';
 
 /* globals constants */
-angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement) {
+angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextEdit) {
   function init(parent) {
     var scope = parent.$new();
     // Hotkeys
@@ -47,6 +47,9 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement) {
       description: 'Exports canvas to png',
       callback: function (event){
         event.preventDefault();
+        if(scope.$parent.current && scope.$parent.current.type ==='text'){
+          hTextEdit.popChar(scope.$parent.current);
+        }
         scope.$parent.export();
       }
     });
@@ -54,7 +57,12 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement) {
     hotkeys.add({
       combo: 'ctrl+m',
       description: 'Mirrors currently selected element',
-      callback: scope.$parent.elementSetMirror
+      callback: function(){
+        scope.$parent.elementSetMirror();
+        if(scope.$parent.current && scope.$parent.current.type ==='text'){
+          hTextEdit.popChar(scope.$parent.current);
+        }
+      }
     });
 
     hotkeys.add({
