@@ -318,8 +318,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
             var element = $scope.addImage(img.img, sf[0], sf[1]);
 
             var rot = hTools.randInt(-$scope.brush.randRotationRange, $scope.brush.randRotationRange);
-            console.log(rot);
             hElement.setRotation(element, rot);
+
+            var mirror = ($scope.brush.mirror && !img.mirror) || (!$scope.brush.mirror && img.mirror);
+            if(mirror){
+              hElement.setMirror(element);
+            }
+            if($scope.brush.randMirror ? (hTools.randInt(0,1)) : false){
+              hElement.setMirror(element);
+            }
           }
         }
       }
