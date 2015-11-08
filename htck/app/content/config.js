@@ -151,7 +151,7 @@ var constants = {
     {
       name:"Folks",
       icon:"content//images/folc/01_group.png",
-      speed:250,
+      speed:100,
       randScaleRange: 0.1,
       randRotationRange: 3,
       scale: 0.8,
@@ -180,7 +180,7 @@ var constants = {
     {
       name:"Folks-Mirror",
       icon:"content//images/folc/02_staring-guys.png",
-      speed:250,
+      speed:100,
       randScaleRange: 0.1,
       randRotationRange: 3,
       scale: 0.8,

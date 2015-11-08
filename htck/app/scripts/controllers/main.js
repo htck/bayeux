@@ -306,7 +306,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           if(!$scope.brush.timeStamp || (evt.timeStamp - $scope.brush.timeStamp) >= $scope.brush.speed){
             $scope.brush.timeStamp = evt.timeStamp;
             $log.debug('Brush event');
-            var paperElement = $('#paper');
             var paperOffset = $('#paper').offset();
             var img = $scope.brush.images[hTools.randInt(0, $scope.brush.images.length -1)];
 
