@@ -42,13 +42,7 @@
 	padding:0;
 
 	.itembank {
-		@media screen and (min-width: 960px) {
-			md-tabs-content-wrapper{
-				max-height:40vw;
-				overflow-y:auto;
-				overflow-x:hidden;
-			}
-		}
+
 	}
 
 	.item {
@@ -93,9 +87,9 @@
 // Big Screens
 @media screen and (min-width: 960px) {
     #content-right-panel{
-  		  max-height:44vw;
-		 overflow-y:auto;
-		 overflow-x:hidden;
+  		max-height:calc((100vw - #{$leftPanelMinWidth}) * 4/3 * 0.39);
+		overflow-y:auto;
+		overflow-x:hidden;
   	}
 }
 

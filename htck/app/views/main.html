@@ -14,13 +14,14 @@
 <section layout="row" class="app_wrapper">
   <!-- Left block -->
   <md-sidenav class="left-panel" class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-    <md-content>
-      <md-button ng-click="close()" class="md-primary" hide-gt-md>
-        Close
-      </md-button>
-        <md-content id="content-left-panel">
-          <md-tabs class="itembank" md-border-bottom md-dynamic-height>
-            <md-tab ng-repeat="t in constants.tabs" label="{{t.title}}">
+    <md-content layout="column" layout-fill>
+        <md-button ng-if="false" flex ng-click="close()" class="md-primary" hide-gt-md>
+          Close
+        </md-button>
+        <md-content flex layout="column" layout-fill id="content-left-panel">
+        <div flex>
+          <md-tabs layout-fill class="itembank" md-border-bottom>
+            <md-tab flex ng-repeat="t in constants.tabs" label="{{t.title}}">
               <md-content class="md-padding">
                 <h1 class="md-display-2">{{t.title}}</h1>
                 <div>
@@ -54,6 +55,7 @@
               </md-content>
             </md-tab>
           </md-tabs>
+        </div>
         </md-content>
     </md-content>
   </md-sidenav>
