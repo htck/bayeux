@@ -2,7 +2,6 @@
 
 /* globals constants */
 /* globals Raphael */
-/* globals $ */
 angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, $mdSidenav, hExport, hTextEdit, hHotkeys, hElement, hTools) {
       // Constants
       constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
@@ -303,12 +302,11 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       // ---- Layout
 
-      $scope.toggleLeft = buildDelayedToggler('left');
       /**
      * Supplies a function that will continue to operate until the
      * time is up.
      */
-    function debounce(func, wait, context) {
+    function debounce(func, wait/*, context*/) {
       var timer;
       return function debounced() {
         var context = $scope,
@@ -329,17 +327,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $mdSidenav(navID)
           .toggle()
           .then(function () {
-            $log.debug("toggle " + navID + " is done");
+            $log.debug('toggle ' + navID + ' is done');
           });
       }, 200);
     }
-    function buildToggler(navID) {
-      return function() {
-        $mdSidenav(navID)
-          .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      }
-    }
+    $scope.toggleLeft = buildDelayedToggler('left');
+
   });
