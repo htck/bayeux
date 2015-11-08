@@ -226,6 +226,44 @@ var constants = {
           scale:0.9
         }
       ]
+    },
+    {
+      name:"Corpses",
+      icon:"content//images/brave/10_dead_warrior4.png",
+      speed:450,
+      randScaleRange: 0.2,
+      randRotationRange: 10,
+      scale: 0.6,
+      randMirror: true,
+      images:[
+        {
+          img:"content//images/misc/16_sword.png",
+          scale:0.8
+        },
+        {
+          img:"content//images/misc/17_sword_helmet.png",
+          scale:0.7
+        },
+        {
+          img:"content//images/misc/09_shield.png",
+          scale:0.7
+        },
+        {
+          img:"content//images/brave/06_beheaded_warrior1.png"
+        },
+        {
+          img:"content//images/brave/07_dead_warrior2.png"
+        },
+        {
+          img:"content//images/brave/08_dead_warrior2.png"
+        },
+        {
+          img:"content//images/brave/09_dead_warrior3.png"
+        },
+        {
+          img:"content//images/brave/10_dead_warrior4.png"
+        }
+      ]
     }
   ]
 }
