@@ -138,11 +138,13 @@ var constants = {
   "fonts":[
     {
       font:"Bayeux",
-      size: 25
+      size: 25,
+      uppercase: true
     },
     {
       font:"Augusta",
-      size: 35
+      size: 35,
+      uppercase: false
     }
   ]
 }
