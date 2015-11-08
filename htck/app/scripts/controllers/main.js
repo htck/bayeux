@@ -2,6 +2,7 @@
 
 /* globals constants */
 /* globals Raphael */
+/* globals $ */
 angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, $mdSidenav, hExport, hTextEdit, hHotkeys, hElement, hTools) {
       // Constants
       constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
@@ -257,7 +258,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
       background.mousedown(function(evt) {
-        var text = paper.text(evt.layerX, evt.layerY, 'H').attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': constants.colors[0]});
+        var paperElement = $('#paper');
+        var pw = paperElement.width(), ph = pw / constants.W * constants.H, actualHeight = paperElement.height();
+        var text = paper.text(evt.layerX / pw * constants.W, (evt.layerY / ph * constants.H) - (actualHeight - ph)/2, 'H').attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': constants.colors[0]});
         addElement(text);
         $scope.caret = 0;
         //text[0].textContent = '';
