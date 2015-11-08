@@ -3,6 +3,7 @@
 /* globals $ */
 /* globals canvg */
 /* globals saveAs */
+/* globals constants */
 angular.module('htckApp').factory('hExport', function() {
   // Function gotten from SVGFix
   // source : https://code.google.com/p/svgfix/
@@ -16,10 +17,14 @@ angular.module('htckApp').factory('hExport', function() {
     return fixed; 
   }
 
-  function exportRaphael(raphaelPaperId, canvasId, fileName){
+  function exportRaphael(raphaelPaperId, canvasId, fileName, paper){
+    paper.setSize(constants.W+'px',constants.H+'px');
     // Get the svg element created by Raphael
     var svg = document.getElementById(raphaelPaperId).children[0];
     var svgStr = svgfix(svg.outerHTML);
+
+    paper.setSize('100%','100%');
+
 
     // Convert to canvas using canvg
     canvg(document.getElementById(canvasId), svgStr, {

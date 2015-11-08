@@ -279,7 +279,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $log.debug('Exporting');
         // Unfocus to remove handles from elements
         unfocus();
-        hExport(constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux.png');
+        hExport(constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux.png', paper);
       };
 
       $scope.setFontColor = function(color) {

@@ -27,6 +27,11 @@
 	background: $appBg;
 }
 
+#canvas {
+	width:$appWidth;
+	height:$appHeight;
+}
+
 // --- Sidenav
 
 .left-panel{
