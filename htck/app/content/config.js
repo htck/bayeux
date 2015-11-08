@@ -208,7 +208,7 @@ var constants = {
     },
     {
       name:"Birds",
-      icon:"content//images/folc/01_group.png",
+      icon:"content//images/beasts/03_bird1.png",
       speed:500,
       randScaleRange: 0.2,
       randRotationRange: 30,

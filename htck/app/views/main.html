@@ -140,7 +140,8 @@
       <md-button class="md-primary md-raised" ng-click="export()">Submit</md-button>
       <md-button class="md-warn md-raised">Clear all</md-button>
       brushes : 
-      <md-button ng-repeat="b in constants.brushes" class="md-raised" ng-click="setBrush(b)"></md-button>
+      <md-button ng-class="b.classe" ng-repeat="b in constants.brushes" ng-click="setBrush(b)" class="png-icon" style="background-image:url({{b.icon}})">
+      </md-button>
   </div>
 
   <div class="padding-v-15"></div>

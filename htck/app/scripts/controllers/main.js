@@ -28,7 +28,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
   		var HEIGHT = paper.height, WIDTH = paper.width;
       paper.setViewBox(0,0,WIDTH,HEIGHT,true);
       paper.setSize('100%', '100%');
-      console.log(WIDTH, HEIGHT);
 
       function setCurrent(newCurrent) {
         if($scope.current && newCurrent && $scope.current.id === newCurrent.id){
@@ -344,10 +343,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         background.unmousemove(brushHandler);
         unfocus();
         if($scope.brush && brush.name === $scope.brush.name){
+          $scope.brush.classe=undefined;
           $scope.brush = undefined;
         }
         else{
+          if($scope.brush){
+            $scope.brush.classe=undefined;
+          }
           $scope.brush = brush;
+          $scope.brush.classe='brush-active';
           //background.mousemove(brushHandler);
           $('#paper').mousemove(brushHandler);
         }
