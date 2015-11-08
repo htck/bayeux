@@ -85,7 +85,10 @@
 // --- Media Queries
 
 // Big Screens
-@media screen and (min-width: 960px) {
+@media screen and (max-width: 1200px) {
+	.left-panel{
+		height:$mdLeftPanelHeight;
+	}
 }
 
 // Medium Screens

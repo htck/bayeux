@@ -11,13 +11,10 @@
       <md-button class="md-primary md-raised" ng-click="export()">Submit</md-button>
   </div>
   <div class="padding-v-15"></div>
-<section layout="row" class="app_wrapper">
+<section layout-gt-lg="row" class="app_wrapper">
   <!-- Left block -->
-  <md-sidenav class="left-panel" class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-lg')">
+  <div class="left-panel" flex="20">
     <md-content layout="column" layout-fill>
-        <md-button ng-if="false" flex ng-click="close()" class="md-primary" hide-gt-md>
-          Close
-        </md-button>
         <md-content flex layout="column" layout-fill id="content-left-panel">
         <div flex>
           <md-tabs layout-fill class="itembank" md-border-bottom>
@@ -26,7 +23,7 @@
                 <h1 class="md-display-2">{{t.title}}</h1>
                 <div>
                   <md-grid-list
-                    md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
+                    md-cols-md="10" md-cols-sm="8" md-cols-lg="10" md-cols-gt-lg="3"
                     md-row-height-gt-md="2:2" md-row-height="2:2"
                     md-gutter="12px" md-gutter-gt-sm="8px" >
                     <md-grid-tile ng-repeat="i in t.images track by $index" class="gray"
@@ -43,7 +40,7 @@
                 <h1 class="md-display-2">Backgrounds</h1>
                 <div>
                   <md-grid-list
-                    md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
+                    md-cols-md="10" md-cols-sm="10" md-cols-lg="10" md-cols-gt-lg="3"
                     md-row-height-gt-md="2:2" md-row-height="2:2"
                     md-gutter="12px" md-gutter-gt-sm="8px" >
                     <md-grid-tile ng-repeat="i in constants.backgrounds track by $index" class="gray"
@@ -58,7 +55,7 @@
         </div>
         </md-content>
     </md-content>
-  </md-sidenav>
+  </div>
   <!-- Right Block -->
   <div flex layout="column" layout-gt-md="row" layout-fill>
     <!-- Middle Panel -->
