@@ -258,6 +258,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
       background.mousedown(function(evt) {
+        $scope.backgroundDown = true;
+        if($scope.brush){
+          return;
+        }
         var paperElement = $('#paper');
         var pw = paperElement.width(), ph = pw / constants.W * constants.H, actualHeight = paperElement.height();
         var text = paper.text(evt.layerX / pw * constants.W, (evt.layerY / ph * constants.H) - (actualHeight - ph)/2, 'H').attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': constants.colors[0]});
@@ -269,9 +273,14 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         // set text handles size
         var tesxtFt = paper.freeTransform(text);
         tesxtFt.setOpts({distance: $scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
+
         $scope.$apply();
       });
       background.attr({'fill':'url('+constants.backgrounds[0]+')', 'fill-opacity':'1', 'stroke':'none'});
+
+      background.mouseup(function(evt) {
+        $scope.backgroundDown = false;
+      });
 
       $scope.setBackground = function(imgUrl){
         background.attr({'fill':'url('+imgUrl+')', 'fill-opacity':'1', 'stroke':'none'});
@@ -279,12 +288,18 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       // Brushes
 
-      function brushHandler(a, b, c){
-        
+      function brushHandler(evt){
+        if($scope.backgroundDown && $scope.brush){
+          if(!$scope.brush.timeStamp || (evt.timeStamp - $scope.brush.timeStamp) >= $scope.brush.speed){
+            $scope.brush.timeStamp = evt.timeStamp;
+            
+          }
+        }
       }
 
       $scope.setBrush = function (brush){
         background.unmousemove(brushHandler);
+        unfocus();
         if($scope.brush && brush.icon === $scope.brush.icon){
           $scope.brush = undefined;
         }
@@ -292,8 +307,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           $scope.brush = brush;
           background.mousemove(brushHandler);
         }
-
-        console.log($scope.brush);
       };
 
       $scope.export = function(){
