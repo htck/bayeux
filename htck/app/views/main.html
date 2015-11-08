@@ -7,13 +7,13 @@
 
   <div class="padding-v-50"></div>
   <div class="toolBar">
-      <md-button ng-click="toggleLeft()" class="md-primary md-raised" hide-gt-md>Image Bank</md-button>
+      <md-button ng-click="toggleLeft()" class="md-primary md-raised" hide-gt-lg>Image Bank</md-button>
       <md-button class="md-primary md-raised" ng-click="export()">Submit</md-button>
   </div>
   <div class="padding-v-15"></div>
 <section layout="row" class="app_wrapper">
   <!-- Left block -->
-  <md-sidenav class="left-panel" class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+  <md-sidenav class="left-panel" class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-lg')">
     <md-content layout="column" layout-fill>
         <md-button ng-if="false" flex ng-click="close()" class="md-primary" hide-gt-md>
           Close
@@ -60,19 +60,19 @@
     </md-content>
   </md-sidenav>
   <!-- Right Block -->
-  <div flex layout="row" layout-sm="column">
+  <div flex layout="column" layout-gt-md="row" layout-fill>
     <!-- Middle Panel -->
-    <div flex="70" id="content-middle-panel">
+    <div flex="75" id="content-middle-panel">
       <div id="paper" class="" data-drop="true" jqyoui-droppable="{onDrop: 'test'}">
       </div>
     </div>
     <!-- Right Panel -->
-    <div flex="30" id="content-right-panel" class="padding-panel">
+    <div flex="25" id="content-right-panel" class="padding-panel">
       <div ng-if="current">
         <div class="text-center">
-          <md-button ng-click="bringToFront()" class="md-primary md-raised">Bring To Front</md-button>
-          <md-button ng-click="bringToBack()" class="md-primary md-raised">Bring To Back</md-button>
-          <md-button ng-click="remove()" class="md-warn md-raised">Remove</md-button>
+          <md-button ng-click="bringToFront()" class="md-primary md-raised icon-button">F</md-button>
+          <md-button ng-click="bringToBack()" class="md-primary md-raised icon-button">B</md-button>
+          <md-button ng-click="remove()" class="md-warn md-raised icon-button">X</md-button>
         </div>
           <div class="padding-v-15"></div>
         <div layout>

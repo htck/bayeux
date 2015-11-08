@@ -41,4 +41,9 @@ body {
 	padding: $appPanelPadding;
 }
 
+.icon-button {
+  min-width: 30px;
+  width: 30px;
+}
+
 @import "app.scss";
