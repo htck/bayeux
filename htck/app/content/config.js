@@ -153,7 +153,7 @@ var constants = {
       speed:300,
       randScaleRange: 0.1,
       randRotationRange: 3,
-      scale: 0.5,
+      scale: 0.8,
       mirror: false,
       randMirror: false,
       images:[

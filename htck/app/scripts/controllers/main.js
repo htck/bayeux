@@ -320,6 +320,13 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
             var rot = hTools.randInt(-$scope.brush.randRotationRange, $scope.brush.randRotationRange);
             hElement.setRotation(element, rot);
 
+            var scale = $scope.brush.scale * (img.scale || 1) * ($scope.brush.randScaleRange ?  (1 - hTools.rand(-$scope.brush.randScaleRange * 100, $scope.brush.randScaleRange * 100) / 100) : 1);
+            element.ft.attrs.scale.y = scale;
+            $scope.elementChangedHeight(element.ft.attrs.scale.y);
+            element.ft.attrs.scale.x = scale;
+            $scope.elementChangedWidth(element.ft.attrs.scale.x);
+            element.ft.apply();
+
             var mirror = ($scope.brush.mirror && !img.mirror) || (!$scope.brush.mirror && img.mirror);
             if(mirror){
               hElement.setMirror(element);

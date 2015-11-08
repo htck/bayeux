@@ -15,8 +15,13 @@ angular.module('htckApp').factory('hTools', function() {
       return Math.floor(Math.random() * (ub - lb + 1)) + lb;
   }
 
+  function rand(lb, ub) {
+      return Math.random() * (ub - lb + 1) + lb;
+  }
+
   return {
     getSizeOfImage: getSizeOfImage,
-    randInt: randInt
+    randInt: randInt,
+    rand: rand
   };
 });
