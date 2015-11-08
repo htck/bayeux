@@ -23,6 +23,9 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement) {
       description: 'Bring currently selected element to the front',
       callback: function (event){
         event.preventDefault();
+        if(!scope.$parent.current || scope.$parent.current.type ==='text'){
+          return;
+        }
         scope.$parent.bringToFront();
       }
     });
@@ -32,6 +35,9 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement) {
       description: 'Puts currently selected element to the back',
       callback: function (event){
         event.preventDefault();
+        if(!scope.$parent.current || scope.$parent.current.type ==='text'){
+          return;
+        }
         scope.$parent.bringToBack();
       }
     });
