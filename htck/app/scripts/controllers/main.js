@@ -311,8 +311,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
             var paperOffset = $('#paper').offset();
             var img = $scope.brush.images[hTools.randInt(0, $scope.brush.images.length -1)];
 
-            var x = evt.pageX - paperOffset.left;
-            var y = evt.pageY - paperOffset.top;
+            var imgSize = hTools.getSizeOfImage(img.img);
+
+            var x = evt.pageX - paperOffset.left - imgSize.w/4;
+            var y = evt.pageY - paperOffset.top - imgSize.h/4;
             var sf = scaleFactors(x,y);
 
             var element = $scope.addImage(img.img, sf[0], sf[1]);
