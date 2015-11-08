@@ -149,6 +149,7 @@ var constants = {
   ],
   "brushes":[
     {
+      name:"Folks",
       icon:"content//images/folc/01_group.png",
       speed:250,
       randScaleRange: 0.1,
@@ -173,6 +174,56 @@ var constants = {
           img:"content//images/folc/08_woman1.png",
           mirror:true,
           scale: 0.9
+        }
+      ]
+    },
+    {
+      name:"Folks-Mirror",
+      icon:"content//images/folc/02_staring-guys.png",
+      speed:250,
+      randScaleRange: 0.1,
+      randRotationRange: 3,
+      scale: 0.8,
+      mirror: true,
+      randMirror: false,
+      images:[
+        {
+          img:"content//images/folc/01_group.png"
+        },
+        {
+          img:"content//images/folc/02_staring-guys.png",
+          mirror:true,
+          scale: 0.8
+        },
+        {
+          img:"content//images/folc/05_gesturing_guy.png",
+          scale:0.9
+        },
+        {
+          img:"content//images/folc/08_woman1.png",
+          mirror:true,
+          scale: 0.9
+        }
+      ]
+    },
+    {
+      name:"Birds",
+      icon:"content//images/folc/01_group.png",
+      speed:500,
+      randScaleRange: 0.2,
+      randRotationRange: 30,
+      scale: 0.6,
+      randMirror: true,
+      images:[
+        {
+          img:"content//images/beasts/03_bird1.png"
+        },
+        {
+          img:"content//images/beasts/05_bird3.png"
+        },
+        {
+          img:"content//images/beasts/08_bird6.png",
+          scale:0.9
         }
       ]
     }

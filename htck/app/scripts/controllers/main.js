@@ -343,7 +343,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       $scope.setBrush = function (brush){
         background.unmousemove(brushHandler);
         unfocus();
-        if($scope.brush && brush.icon === $scope.brush.icon){
+        if($scope.brush && brush.name === $scope.brush.name){
           $scope.brush = undefined;
         }
         else{
