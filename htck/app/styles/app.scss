@@ -1,98 +1,78 @@
 @import "common.scss";
 
+// --- App
+
 .app_wrapper {
 	// TODO customize md-tabs look
 	md-content {
-	  background-color: transparent !important;
-	  md-tabs {
-	    background: #f6f6f6;
-	    border: 1px solid #e1e1e1;
-	    md-tabs-canvas {
-	      background: white;
-	    }
-	  }
-	  h1:first-child {
-	    margin-top: 0;
-	  }
+		background-color: transparent !important;
+		md-tabs {
+			background: #f6f6f6;
+			border: 1px solid #e1e1e1;
+			md-tabs-canvas {
+				background: white;
+			}
+		}
+		h1:first-child {
+			margin-top: 0;
+		}
 	}
-
-	background-color: $appBg;
 }
 
-.padding-panel {
-	//padding: $appPanelPadding;
+.toolBar {
+	height:$toolBarHeight;
 }
+
+.toolBar, .app_wrapper {
+	background: $appBg;
+}
+
+// --- Sidenav
 
 .left-panel{
 	min-width:$leftPanelMinWidth !important;
 }
 
 #content-left-panel {
-  //height: $appHeight;
-  //height: 100%;
-
 	padding:0;
 
-  .itembank {
-  	//height:$appHeight;
-  	//height: 100%;
-
-  	@media screen and (min-width: 960px) {
-	    md-tabs-content-wrapper{
-	  		 max-height:40vw;
-	  		 overflow-y:auto;
-	  		 overflow-x:hidden;
-	  	}
+	.itembank {
+		@media screen and (min-width: 960px) {
+			md-tabs-content-wrapper{
+				max-height:40vw;
+				overflow-y:auto;
+				overflow-x:hidden;
+			}
+		}
 	}
-  }
 
-  .item{
-  	max-width:100%;
-	max-height:100%;
-  }
+	.item {
+		max-width:100%;
+		max-height:100%;
+	}
+}
+
+// --- Canvas Panel
+
+#paper {
+	height:100%;
+	width:100%;
+	margin: 0 auto;
 }
 
 #content-middle-panel {
-	//height:$appHeight;
-	//width: $appWidth;
 	padding:0;
-	border:solid 1px red;
-
-/*
-  float: none;
-  margin: 0 auto;*/
 }
 
-#paper {
-	//height:calc(#{$appHeight} - 2*#{$appPanelPadding});
-	//width: calc(#{$appWidth} - 2*#{$appPanelPadding});
-  //min-width: $appWidth;
-  //max-width: $appWidth;
-  height:100%;
-  width:100%;
-  margin: 0 auto;
-}
+// --- Properties panel
 
 #content-right-panel {
-	//height:$appHeight;
-  color: white;
-	padding:$appPanelPadding;
-  font-weight: bold;
+	color: white;
+	font-weight: bold;
 }
 
-@media screen and (max-width: 960px) {
-    #content-right-panel{
-  		  max-height:53vw;
-		 overflow-y:auto;
-		 overflow-x:hidden;
-  	}
-}
-@media screen and (min-width: 960px) {
-    #content-right-panel{
-  		  max-height:44vw;
-		 overflow-y:auto;
-		 overflow-x:hidden;
-  	}
+.text-properties {
+	padding: 0 $appPanelPadding;
 }
 
 .circle{
@@ -102,26 +82,38 @@
 	display:inline-block;
 	margin:0 4px;
 }
+
+// --- Media Queries
+
+// Big Screens
+@media screen and (min-width: 960px) {
+    #content-right-panel{
+  		  max-height:44vw;
+		 overflow-y:auto;
+		 overflow-x:hidden;
+  	}
+}
+
+// Medium Screens
 @media screen and (max-width: 960px) {
     .circle{
 		width:$colorPickerSizeMD;
 		height:$colorPickerSizeMD;
 		border-radius:$colorPickerSizeMD/2;
 	}
+
+	#content-right-panel{
+  		  max-height:53vw;
+		 overflow-y:auto;
+		 overflow-x:hidden;
+  	}
 }
+
+// Small Screens
 @media screen and (max-width: 600px) {
     .circle{
 		width:$colorPickerSizeSM;
 		height:$colorPickerSizeSM;
 		border-radius:$colorPickerSizeSM/2;
 	}
-}
-
-.toolBar {
-	height:50px;
-	background: $appBg;
-}
-
-.text-properties {
-	padding: 0 $appPanelPadding;
 }

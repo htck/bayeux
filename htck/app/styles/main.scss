@@ -37,4 +37,8 @@ body {
  // width:100%;
 }
 
+.padding-panel {
+	padding: $appPanelPadding;
+}
+
 @import "app.scss";

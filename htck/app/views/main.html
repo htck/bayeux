@@ -65,7 +65,7 @@
       </div>
     </div>
     <!-- Right Panel -->
-    <div flex="30" id="content-right-panel">
+    <div flex="30" id="content-right-panel" class="padding-panel">
       <div ng-if="current">
         <div class="text-center">
           <md-button ng-click="bringToFront()" class="md-primary md-raised">Bring To Front</md-button>
@@ -122,7 +122,7 @@
         </div>
 
         <div class="padding-v-30"></div>
-        
+
         <div ng-if="current && current.type==='text'" class="text-properties">
           <div class="text-center">
            <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
