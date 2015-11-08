@@ -150,7 +150,7 @@ var constants = {
   "brushes":[
     {
       icon:"content//images/folc/01_group.png",
-      speed:300,
+      speed:250,
       randScaleRange: 0.1,
       randRotationRange: 3,
       scale: 0.8,
@@ -164,6 +164,15 @@ var constants = {
           img:"content//images/folc/02_staring-guys.png",
           mirror:true,
           scale: 0.8
+        },
+        {
+          img:"content//images/folc/05_gesturing_guy.png",
+          scale:0.9
+        },
+        {
+          img:"content//images/folc/08_woman1.png",
+          mirror:true,
+          scale: 0.9
         }
       ]
     }
