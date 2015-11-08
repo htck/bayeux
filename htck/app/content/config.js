@@ -146,6 +146,23 @@ var constants = {
       size: 35,
       uppercase: false
     }
+  ],
+  "brushes":[
+    {
+      icon:"content//images/folc/01_group.png",
+      speed:300,
+      randSizeRange: 0.2,
+      randRotationRange: 10,
+      images:[
+        {
+          img:"content//images/folc/01_group.png"
+        },
+        {
+          img:"content//images/folc/02_staring-guys.png",
+          mirror:true
+        }
+      ]
+    }
   ]
 }
 

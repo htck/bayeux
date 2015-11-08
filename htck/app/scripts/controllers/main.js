@@ -277,6 +277,25 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         background.attr({'fill':'url('+imgUrl+')', 'fill-opacity':'1', 'stroke':'none'});
       };
 
+      // Brushes
+
+      function brushHandler(a, b, c){
+        
+      }
+
+      $scope.setBrush = function (brush){
+        background.unmousemove(brushHandler);
+        if($scope.brush && brush.icon === $scope.brush.icon){
+          $scope.brush = undefined;
+        }
+        else{
+          $scope.brush = brush;
+          background.mousemove(brushHandler);
+        }
+
+        console.log($scope.brush);
+      };
+
       $scope.export = function(){
         $log.debug('Exporting');
         // Unfocus to remove handles from elements
