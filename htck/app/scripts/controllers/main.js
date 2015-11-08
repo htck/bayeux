@@ -296,6 +296,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       function init(){
         hTextEdit.init($scope);
         hHotkeys($scope);
+        paper.canvas.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
+        $timeout(function(){$scope.$apply()});
       }
 
       init();
