@@ -18,9 +18,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       constants.RAPHAEL_PAPER='paper';
       constants.W = 900;
       constants.H = 675;
+      constants.TEXT_DEFAULT_SIZE = '30px';
+      constants.TEXT_DEFAULT_FONT_COLOR = '#000000';
   		$scope.constants = constants;
 
-      $scope.font = constants.fonts[0];
+      $scope.font = (constants.fonts && constants.fonts.length) ? constants.fonts[0] : undefined;
+      $scope.fontColor = (constants.colors && constants.colors.length) ? constants.colors[0] : constants.TEXT_DEFAULT_FONT_COLOR;
 
       var paper = new Raphael(constants.RAPHAEL_PAPER, constants.W, constants.H);
       $scope.paper = paper;
@@ -257,7 +260,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
 
-        $scope.current.attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': $scope.fontColor || constants.colors[0]});
+        $scope.current.attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px' || constants.TEXT_DEFAULT_SIZE, 'fill': $scope.fontColor});
         $timeout(hTextEdit.updateCaretPosition);
       };
 
@@ -273,9 +276,11 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if($scope.brush){
           return;
         }
-        
+        if(!$scope.font){
+          return;
+        }
         var sf = scaleFactors(evt.layerX, evt.layerY);
-        var text = paper.text(sf[0], sf[1], 'H').attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': constants.colors[0]});
+        var text = paper.text(sf[0], sf[1], 'H').attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': $scope.fontColor});
         addElement(text);
         $scope.caret = 0;
         //text[0].textContent = '';

@@ -22,9 +22,6 @@ describe('Controller: MainCtrl', function () {
   }));
 
   // Things it should have
-  it('should have a default font', function () {
-    expect(scope.font).toBeTruthy();
-  });
 
   it('should have constants', function () {
     expect(scope.constants).toBeTruthy();
@@ -72,4 +69,13 @@ describe('Controller: MainCtrl', function () {
     expect(scope.addImage('/path/to/nothing.jpg')).toBe(undefined);
   });
 
+  // Text Elements
+
+  it('should have a default font', function () {
+    if(scope.constants.fonts.length && scope.constants.fonts.length){
+      expect(scope.font).toBeTruthy();
+    }
+  });
+
+  
 });
