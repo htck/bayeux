@@ -43,7 +43,8 @@ module.exports = function(config) {
       'lib/raphael_free_transform/raphael.free_transform.js',
       "app/scripts/**/*.js",
       "test/mock/**/*.js",
-      "test/spec/**/*.js"
+      "test/spec/**/*.js",
+      { pattern: 'app/content/**/*', included: false, served: true }
     ],
 
     preprocessors: {
@@ -55,7 +56,7 @@ module.exports = function(config) {
     ],
 
     // web server port
-    port: 8080,
+    port: 9876,
 
     // Start these browsers, currently available:
     // - Chrome
@@ -86,7 +87,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
     // Uncomment the following lines if you are using grunt's server to run the tests
     // proxies: {
@@ -100,6 +101,10 @@ module.exports = function(config) {
       // include beforeEach(module('templates')) in unit tests
       moduleName: 'templates'
     },
+
+    /*proxies :{
+      '/': 'http://localhost:8080/'
+    }*/
 
   });
 };

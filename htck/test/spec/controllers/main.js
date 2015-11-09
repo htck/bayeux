@@ -61,4 +61,15 @@ describe('Controller: MainCtrl', function () {
     scope.setBrush(scope.constants.brushes[0]);
     expect(scope.brush).toBe(undefined);
   });
+
+  // Image Elements
+  // it('should add images as elements', function () {
+  //   scope.addImage(scope.constants.tabs[0].images[0]);
+  //   expect(scope.current).toBeTruthy();
+  // });
+  
+  it('should fail silently when adding a false image', function () {
+    expect(scope.addImage('/path/to/nothing.jpg')).toBe(undefined);
+  });
+
 });

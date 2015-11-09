@@ -129,6 +129,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
   			var size = hTools.getSizeOfImage(src);
         x=(x)?x:(WIDTH - size.w)/2;
         y=(y)?y:(HEIGHT - size.h)/2;
+        if(size.h === 0 || size.w === 0){
+          return;
+        }
+        $log.debug(size);
   			var ie = paper.image(src, x, y, size.w, size.h);  // TODO
   			return addElement(ie);
   		};
