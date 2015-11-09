@@ -384,8 +384,37 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    protractor: {
+      options: {
+        // Location of your protractor config file
+        configFile: "test/protractor-conf.js",
+     
+        // Do you want the output to use fun colors?
+        noColor: false,
+     
+        // Set to true if you would like to use the Protractor command line debugging tool
+        // debug: true,
+     
+        // Additional arguments that are passed to the webdriver command
+        //args: { }
+      },
+      e2e: {
+        options: {
+          // Stops Grunt process if a test fails
+          keepAlive: true
+        }
+      },
+      continuous: {
+        options: {
+          keepAlive: true
+        }
+      }
     }
   });
+
+  grunt.loadNpmTasks('grunt-protractor-runner');
 
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
@@ -414,7 +443,8 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    //'karma'
+    'protractor:e2e'
   ]);
 
   grunt.registerTask('build', [
