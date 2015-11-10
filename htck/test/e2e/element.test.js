@@ -27,26 +27,17 @@ describe('Element related', function() {
       );
   });
 
-  // TODO - Better drag n drop on slider
-  // TODO - Find constants and not manually entered numbers
-  it('should rescale an element height with ratio', function() {
-    var slider = element(by.id('height-slider'));
-    slider.click();
-    for(var i=0; i<50; i++){
-      slider.sendKeys(protractor.Key.ARROW_LEFT);
-    }
-    addedElement.get(defaultElementsOnStage).getAttribute('transform').then(function(matrix) {
-      matrix = matrix.substring(7, matrix.length-1);
-      var factors = matrix.split(',');
-      expect(factors[0]).toBe(factors[3]);  // Same ratio
-      expect(factors[0]).toBe('0.2');       // constants.ELEMENT_SCALE_MIN
-    });
-  });
+
+  // Scaling sliders
 
   // TODO - Better drag n drop on slider
   // TODO - Find constants and not manually entered numbers
-  it('should rescale an element width with ratio', function() {
-    var slider = element(by.id('width-slider'));
+  function sliderTest(id, widthFactor, heightFactor, keepRatio){
+    if(keepRatio){
+      var keepRatioSwitch = element(by.id('keepratio-switch'));
+      keepRatioSwitch.click();
+    }
+    var slider = element(by.id(id));
     slider.click();
     for(var i=0; i<50; i++){
       slider.sendKeys(protractor.Key.ARROW_LEFT);
@@ -54,9 +45,22 @@ describe('Element related', function() {
     addedElement.get(defaultElementsOnStage).getAttribute('transform').then(function(matrix) {
       matrix = matrix.substring(7, matrix.length-1);
       var factors = matrix.split(',');
-      expect(factors[0]).toBe(factors[3]);  // Same ratio
-      expect(factors[0]).toBe('0.2');       // constants.ELEMENT_SCALE_MIN
+      expect(factors[3]).toBe(heightFactor);      // height
+      expect(factors[0]).toBe(widthFactor);       // width
     });
+  }
+
+  it('should rescale an element height with ratio', function() {
+    sliderTest('height-slider', '0.2', '0.2'); // constants.ELEMENT_SCALE_MIN
+  });
+  it('should rescale an element width with ratio', function() {
+    sliderTest('width-slider', '0.2', '0.2');
+  });
+  it('should rescale an element height without ratio', function() {
+    sliderTest('height-slider', '1', '0.2', true);
+  });
+  it('should rescale an element width without ratio', function() {
+    sliderTest('width-slider', '0.2', '1', true);
   });
 
 
