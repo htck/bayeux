@@ -430,7 +430,9 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('test-continuous', ['connect:test', 'protractor:continuous', 'watch:protractor']);
+  //grunt.registerTask('test-continuous', ['connect:test', 'protractor:continuous', 'watch:protractor']);
+  grunt.registerTask('test-e2e', ['clean:server', 'wiredep', 'concurrent:test', 'autoprefixer', 'connect:test', 'protractor:e2e']);
+  grunt.registerTask('test-unit', ['clean:server', 'wiredep', 'concurrent:test', 'autoprefixer', 'connect:test', 'karma']);
 
   grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
