@@ -1,11 +1,11 @@
 exports.config = {
-  // location of the Selenium JAR file and chromedriver, use these if you installed protractor locally
+  // location of the Selenium JAR file and chromedriver
   seleniumServerJar: '../node_modules/protractor/selenium/selenium-server-standalone-2.47.1.jar',
   chromeDriver: '../node_modules/protractor/selenium/chromedriver',
  
-  // location of your E2E test specs
+  // Tests location
   specs: [
-    '../test/e2e/*.js'
+    '../test/e2e/*.test.js'
   ],
  
   // configure multiple browsers to run tests
@@ -15,17 +15,10 @@ exports.config = {
     'browserName': 'chrome'
   }*/],
  
-  // or configure a single browser
-  /*
-  capabilities: {
-    'browserName': 'firefox'
-  }
-  */
- 
-  // url where your app is running, relative URLs are prepending with this URL
+  // App URL, /!\ synchronize port with gruntFile
   baseUrl: 'http://localhost:9001/',
  
-  // testing framework, jasmine is the default
+  // Testing framework
   framework: 'jasmine',
 
   jasmineNodeOpts: {

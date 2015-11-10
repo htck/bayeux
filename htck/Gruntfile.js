@@ -64,6 +64,11 @@ module.exports = function (grunt) {
           '<%= appConfig.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
+      // ,
+      // protractor: {
+      //   files: ['app/**/*.js', 'test/e2e/*.test.js'],
+      //   tasks: ['protractor:continuous']
+      // }
     },
 
     // The actual grunt server settings
@@ -388,22 +393,15 @@ module.exports = function (grunt) {
 
     protractor: {
       options: {
-        // Location of your protractor config file
-        configFile: "test/protractor-conf.js",
-     
-        // Do you want the output to use fun colors?
+        configFile: 'test/protractor-conf.js',
         noColor: false,
-     
         // Set to true if you would like to use the Protractor command line debugging tool
         // debug: true,
-     
-        // Additional arguments that are passed to the webdriver command
-        //args: { }
       },
       e2e: {
         options: {
           // Stops Grunt process if a test fails
-          keepAlive: true
+          keepAlive: false
         }
       },
       continuous: {
@@ -431,6 +429,8 @@ module.exports = function (grunt) {
       'watch'
     ]);
   });
+
+  grunt.registerTask('test-continuous', ['connect:test', 'protractor:continuous', 'watch:protractor']);
 
   grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');

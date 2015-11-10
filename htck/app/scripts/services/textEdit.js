@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('htckApp').factory('hTextEdit', function ($document, $log, $timeout) {
+angular.module('htckApp').factory('hTextEdit', function ($document, $log, $interval) {
   var scope = {};
 
   function init(parent){
@@ -9,20 +9,17 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $timeo
   }
 
   function destroy(){
-    $timeout.cancel(caretBlinker);
+    $interval.cancel(caretBlinker);
     $document.off('keydown', handleKeyPress);
   }
 
   function blinkCaret(){
-    return $timeout(function (){
-      if(scope.$parent.caretPointer){
-        scope.$parent.caretPointer.attr({'fill-opacity': 1 - scope.$parent.caretPointer.attr('fill-opacity')});
-      }
-      caretBlinker = blinkCaret();
-    }, 1000);
+    if(scope.$parent.caretPointer){
+      scope.$parent.caretPointer.attr({'fill-opacity': 1 - scope.$parent.caretPointer.attr('fill-opacity')});
+    }
   }
 
-  var caretBlinker = blinkCaret();
+  var caretBlinker = $interval(blinkCaret, 500);
 
   function updateCaretPosition() {
     if(!scope.$parent.current || scope.$parent.current.type !== 'text'){
