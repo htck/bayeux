@@ -41,9 +41,8 @@ module.exports = function(config) {
       'lib/angular-mocks/angular-mocks.js',
       // endbower
       'lib/raphael_free_transform/raphael.free_transform.js',
-      "app/scripts/**/*.js",
-      "test/mock/**/*.js",
-      "test/spec/**/*.js",
+      'app/scripts/**/*.js',
+      'test/unit/**/*.js',
       { pattern: 'app/content/**/*', included: false, served: true }
     ],
 
