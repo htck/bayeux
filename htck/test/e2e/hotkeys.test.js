@@ -29,6 +29,15 @@ describe('Hotkeys general', function() {
     expect(propertiesPanel.isPresent()).toBeFalsy();
   });
 
+
+  // Remove (del)
+  it('should remove element on del', function() {
+    element(by.id('paper')).sendKeys(protractor.Key.DELETE);
+    addedElement.then(function(elems) {
+        expect(elems.length).toEqual(0 + defaultElementsOnStage);
+      }
+    );
+  });
 });
 
 // TODO Async series
