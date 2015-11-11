@@ -31,7 +31,7 @@ describe('Element related', function() {
   // Scaling sliders
 
   // TODO - Better drag n drop on slider
-  // TODO - Find constants and not manually entered numbers
+  // TODO - Bind constants and not manually entered numbers
   function sliderTest(id, widthFactor, heightFactor, keepRatio){
     if(keepRatio){
       var keepRatioSwitch = element(by.id('keepratio-switch'));
