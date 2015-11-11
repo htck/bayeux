@@ -32,11 +32,11 @@
   }
 }
 
-#itembank-wrapper {
-  padding-right: 15px;
+.itembank-wrapper {
+  overflow: hidden;
 
   .itembank {
-    height: $appHeight;
+    height: 100%;
   }
   .item{
     max-width:100%;
@@ -48,21 +48,17 @@
 }
 
 #paper {
-  height: $appHeight;
-  width: $appWidth;
-  margin: auto 0 auto auto;
-}
-
-#toolbar {
-  text-align: center;
-  color: white;
-  margin: 0 auto;
+  height:auto;
+  width:100%;
 }
 
 #toolbar-element {
-  width:$appWidth;
-  max-width:$appWidth;
-  padding-top: 15px;
+  color: white;
+}
+
+#toolbar-general {
+  background-image: url(../images/background_3.jpg);
+  margin-top: 15px;
 }
 
 #wrapper-font-selector {
@@ -86,14 +82,10 @@
 
 @media (max-width: $contentMaxWidth) {
   #paper {
-    margin: auto;
+    // max-height: $appHeight;
   }
 
-  #toolbar {
-    max-width:$appWidth;
-  }
-
-  #itembank-wrapper {
+  .itembank-wrapper {
     height: $imagesPanelResponsiveHeight;
 
     .itembank {
@@ -109,29 +101,13 @@
 }
 
 .container {
-  max-width: $contentMaxWidth;
+  max-width: 96%;
   margin: 0 auto;
-  padding: 15px;
 }
 
 .margin-v-0 {
   margin-top: 0px;
   margin-bottom: 0px;
-}
-
-.padding-v-t-15 {
-  padding-top: 15px;
-}
-
-.padding-panel-v {
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.slider-wrapper {
-  height: 45px;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .circle{
@@ -226,13 +202,5 @@
         background-color: $switchColorOff;
       }
     }
-  }
-}
-
-#toolbar-config {
-  margin-bottom: 15px;
-  background-image: url(../images/background_3.jpg);
-  md-content {
-    background-color: transparent;
   }
 }

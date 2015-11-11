@@ -308,6 +308,16 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         background.attr({'fill':'url('+imgUrl+')', 'fill-opacity':'1', 'stroke':'none'});
       };
 
+      // Drag & drop
+
+      $scope.dragDropItemBank = function(event, ui) {
+        var src=ui.draggable.context.currentSrc;
+        var x = ui.offset.left - $('#paper').offset().left;
+        var y = ui.offset.top - $('#paper').offset().top;
+        var sf = scaleFactors(x, y);
+        $scope.addImage(src, sf[0], sf[1]);
+      };
+
       // Brushes
 
       function brushHandler(evt){

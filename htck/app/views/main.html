@@ -5,154 +5,153 @@
   </div>
   <!-- /title -->
 
-    <div id="toolbar-config" class="container md-whiteframe-z5">
-      <md-content>
-        <section layout="row" layout-align="start center" layout-wrap>
-          <span class="flex"></span>
-          <md-button class="md-raised btn-success" ng-click="export()">Submit</md-button>
-        </section>
-      </md-content>
-    </div>
-
   <!-- content -->
   <div id="content" class="app_wrapper container md-whiteframe-z5">
-    <div id="app-wrapper" layout="column" layout-gt-lg="row">
+    <div id="app-wrapper" layout="column" layout-gt-lg="row" layout-padding>
       <!-- images -->
-      <div id="itembank-wrapper" class="padding-panel-v" flex="auto">
-          <md-content>
-            <md-tabs class="itembank" md-border-bottom>
-              <md-tab ng-repeat="t in constants.tabs" label="{{t.title}}">
-                <md-content class="md-padding">
-                  <div>
-                    <md-grid-list
-                      md-cols-sm="2" md-cols-md="6" md-cols-gt-md="3" md-cols-lg="9"
-                      md-row-height-gt-md="2:2" md-row-height="2:2"
-                      md-gutter="12px" md-gutter-gt-sm="8px" >
-                      <md-grid-tile ng-repeat="i in t.images track by $index" class="gray"
-                        md-rowspan="1" md-colspan="1" md-colspan-sm="1">
-                        <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{i}}" ng-click="addImage(i)"></img>
-                      </md-grid-tile>
-                    </md-grid-list>
-                  </div>
-                </md-content>
-              </md-tab>
-              <md-tab label="Backgrounds" ng-if="constants.backgrounds.length > 1">
-                <md-content class="md-padding">
-                  <div>
-                    <md-grid-list
-                      md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
-                      md-row-height-gt-md="2:2" md-row-height="2:2"
-                      md-gutter="12px" md-gutter-gt-sm="8px" >
-                      <md-grid-tile ng-repeat="i in constants.backgrounds track by $index" class="gray"
-                        md-rowspan="1" md-colspan="1" md-colspan-sm="1">
-                        <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{i}}" ng-click="setBackground(i)"></img>
-                      </md-grid-tile>
-                    </md-grid-list>
-                  </div>
-                </md-content>
-              </md-tab>
-            </md-tabs>
-          </md-content>
-      </div>
-      <!-- /images -->
-      <!-- paper -->
-      <div id="paper-wrapper" class="padding-panel-v" flex="initial">
-        <div id="paper" class="" data-drop="true" jqyoui-droppable="{onDrop: 'test'}">
-        </div>
-      </div>
-      <!-- /paper -->
-    </div>
-
-    <!-- toolbar -->
-    <div id="toolbar" layout="column" layout-gt-lg="row">
-      <div flex="auto">
-        <md-content>
-          <section layout="row" layout-gt-lg="column" layout-align="center center" layout-wrap>
-              <md-button class="md-raised btn-common" ng-click="#">Clear</md-button>
-              <md-button class="md-raised btn-common" ng-click="#">Select all</md-button>
-              <md-button class="md-raised btn-common" ng-click="#">Remove selection</md-button>
-              <md-button class="md-raised btn-common" ng-click="#">Brush</md-button>
-          </section>
+      <div flex="20" layout-padding>
+        <md-content class="itembank-wrapper" layout="column" layout-fill>
+          <md-tabs class="itembank" md-border-bottom layout-fill>
+            <md-tab ng-repeat="t in constants.tabs" label="{{t.title}}">
+              <md-content flex class="md-padding">
+                <div>
+                  <md-grid-list
+                    md-cols-sm="2" md-cols-md="6" md-cols-gt-md="3" md-cols-lg="9"
+                    md-row-height-gt-md="2:2" md-row-height="2:2"
+                    md-gutter="12px" md-gutter-gt-sm="8px" >
+                    <md-grid-tile ng-repeat="i in t.images track by $index" class="gray"
+                      md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                      <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{i}}" ng-click="addImage(i)"></img>
+                    </md-grid-tile>
+                  </md-grid-list>
+                </div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Backgrounds" ng-if="constants.backgrounds.length > 1">
+              <md-content class="md-padding">
+                <div>
+                  <md-grid-list
+                    md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
+                    md-row-height-gt-md="2:2" md-row-height="2:2"
+                    md-gutter="12px" md-gutter-gt-sm="8px" >
+                    <md-grid-tile ng-repeat="i in constants.backgrounds track by $index" class="gray"
+                      md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                      <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{i}}" ng-click="setBackground(i)"></img>
+                    </md-grid-tile>
+                  </md-grid-list>
+                </div>
+              </md-content>
+            </md-tab>
+          </md-tabs>
         </md-content>
       </div>
-      <div flex="initial" layout-wrap>
-        <div id="toolbar-element">
-          <div ng-if="current">
-            <div layout="row">
-              <div flex="40">
-                <p class="margin-v-0">Opacity</p>
-                <div class="slider-wrapper" layout>
-                  <md-slider class="slider-common" flex min="0" step="0.02" max="1" ng-model="current.opacity" ng-change="elementSetOpacity()" id="opacity-slider" aria-label="Opacity" class>
-                  </md-slider>
-                </div>
-                <p class="margin-v-0">Rotation</p>
-                <div class="slider-wrapper" layout>
-                  <md-slider class="slider-common" flex min="-180" step="1" max="180" ng-model="current.rotation" ng-change="elementSetRotation()" id="rotation-slider" aria-label="Rotation" class>
-                  </md-slider>
-                </div>
-              </div>
-              <div flex="40">
-                <p class="margin-v-0">Height</p>
-                <div class="slider-wrapper" layout>
-                  <md-slider class="slider-common" flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" id="height-slider" aria-label="Height" class>
-                  </md-slider>
-                </div>
-                <p class="margin-v-0">Width</p>
-                <div class="slider-wrapper" layout>
-                  <md-slider class="slider-common" flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" id="width-slider" aria-label="Width" class>
-                  </md-slider>
-                </div>
-              </div>
-              <div flex="20">
-                <p class="margin-v-0">Mirror</p>
-                <div class="slider-wrapper"  layout-align="center" layout>
-                  <md-switch class="switch-common" ng-model="current.mirror" ng-change="elementSetMirror()" id="mirror-switch" aria-label="Mirror">
-                  </md-switch>
-                </div>
-                <p class="margin-v-0">Keep ratio</p>
-                <div class="slider-wrapper"  layout-align="center" layout>
-                  <md-switch class="switch-common" ng-model="current.keepratio" ng-change="elementSetKeepRatio()" id="keepratio-switch" aria-label="Keep Ratio">
-                  </md-switch>
-                </div>
-              </div>
-            </div>
-            <div class="padding-v-t-15" layout="row">
-              <div flex="60">
-                <div ng-if="current && current.type==='text'">
-                  <div layout="row">
-                    <div flex="40" id="wrapper-font-selector">
-                      <label>Font</label>
-                      <md-select style="margin: 0px;" ng-model="$parent.$parent.font" ng-change="elementChangeFont()">
-                        <md-option ng-repeat="f in constants.fonts" ng-value="f">
-                          {{f.font}}
-                        </md-option>
-                      </md-select>
-                    </div>
-                    <div flex="60">
-                      <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div flex="40">
-                <md-content>
-                  <section layout="row" layout-align="end center" layout-wrap>
-                    <md-button ng-click="bringToFront()" class="md-raised btn-common">Bring To Front</md-button>
-                    <md-button ng-click="remove()" class="md-raised btn-fail">Remove</md-button>
-                  </section>
-                </md-content>
+      <!-- /images -->
+      <div flex="80">
+        <div layout="column" layout-gt-md="row">
+          <!-- paper -->
+          <div id="paper-wrapper" flex="75" layout-padding>
+            <div layout="row" layout-align="center center" layout-fill>
+              <div id="paper" class="" data-drop="true" jqyoui-droppable="{onDrop: 'dragDropItemBank'}">
               </div>
             </div>
           </div>
+          <!-- /paper -->
+          <!-- toolbar -->
+          <div id="toolbar-element" class="text-center" flex="25" layout-padding layout-fill>
+              <div>
+                <div ng-if="current">
+                  <div layout="row" layout-gt-md="column">
+                    <div flex="flex">
+                      <p class="margin-v-0">Opacity</p>
+                      <div layout>
+                        <md-slider class="slider-common" flex min="0" step="0.02" max="1" ng-model="current.opacity" ng-change="elementSetOpacity()" id="opacity-slider" aria-label="Opacity" class>
+                        </md-slider>
+                      </div>
+                      <p class="margin-v-0">Rotation</p>
+                      <div layout>
+                        <md-slider class="slider-common" flex min="-180" step="1" max="180" ng-model="current.rotation" ng-change="elementSetRotation()" id="rotation-slider" aria-label="Rotation" class>
+                        </md-slider>
+                      </div>
+                    </div>
+                    <div flex="flex">
+                      <p class="margin-v-0">Height</p>
+                      <div layout>
+                        <md-slider class="slider-common" flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" id="height-slider" aria-label="Height" class>
+                        </md-slider>
+                      </div>
+                      <p class="margin-v-0">Width</p>
+                      <div layout>
+                        <md-slider class="slider-common" flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" id="width-slider" aria-label="Width" class>
+                        </md-slider>
+                      </div>
+                    </div>
+                    <div flex="20" flex-gt-md="100" layout="column" layout-gt-md="row">
+                      <div flex="flex">
+                        <p class="margin-v-0">Mirror</p>
+                        <div layout-align="center" layout>
+                          <md-switch class="switch-common" ng-model="current.mirror" ng-change="elementSetMirror()" id="mirror-switch" aria-label="Mirror">
+                          </md-switch>
+                        </div>
+                      </div>
+                      <div flex="flex">
+                        <p class="margin-v-0">Keep ratio</p>
+                        <div layout-align="center" layout>
+                          <md-switch class="switch-common" ng-model="current.keepratio" ng-change="elementSetKeepRatio()" id="keepratio-switch" aria-label="Keep Ratio">
+                          </md-switch>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div layout="row" layout-gt-md="column" layout-padding>
+                    <div flex="60" flex-gt-md="100">
+                      <div ng-if="current && current.type==='text'">
+                        <div layout="row" layout-gt-md="column">
+                          <div flex="35" flex-gt-md="100" id="wrapper-font-selector" layout-padding>
+                            <label>Font</label>
+                            <md-select style="margin: 0px;" ng-model="$parent.$parent.font" ng-change="elementChangeFont()">
+                              <md-option ng-repeat="f in constants.fonts" ng-value="f">
+                                {{f.font}}
+                              </md-option>
+                            </md-select>
+                          </div>
+                          <div flex="65" flex-gt-md="100" layout-padding>
+                            <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div flex="40" flex-gt-md="100">
+                      <md-content>
+                        <section layout="row" layout-align="end" layout-align-gt-md="center" layout-wrap>
+                          <md-button ng-click="bringToFront()" class="md-raised btn-common">Front</md-button>
+                          <md-button ng-click="bringToBack()" class="md-raised btn-common">Back</md-button>
+                          <md-button ng-click="remove()" class="md-raised btn-fail">Remove</md-button>
+                        </section>
+                      </md-content>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <!-- /toolbar -->
         </div>
       </div>
     </div>
-    <!-- /toolbar -->
   </div>
   <!-- /content -->
 
-  <div id="readme-wrapper">
-    <div id="readme" class="container">
+  <!-- /toolbar-general -->
+  <div id="toolbar-general" class="container" container md-whiteframe-z5>
+    <md-button class="md-primary md-raised" ng-click="export()">Submit</md-button>
+    <md-button class="md-warn md-raised">Clear all</md-button>
+    brushes : 
+    <md-button ng-class="b.classe" ng-repeat="b in constants.brushes" ng-click="setBrush(b)" class="png-icon" style="background-image:url({{b.icon}})">
+    </md-button>
+  </div>
+  <!-- /toolbar-general -->
+
+  <div id="readme-wrapper" class="container">
+    <div id="readme">
       <h1>Original Historic Tale Construction Kit</h1>
       <p>Project/Fork description</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
