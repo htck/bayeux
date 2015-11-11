@@ -1,16 +1,16 @@
-$appHeight:675px;
-$appWidth: 900px;
-$toolBarHeight: 50px;
-$mdLeftPanelHeight: 350px;
-
-$appPanelPadding: 10px;
-
+$appHeight:700px;
+$appWidth: 100%;
+$appPanelPadding: 15px;
 $appBg: #433c37;
+$imagesPanelResponsiveHeight: 300px;
 
-$leftPanelMinWidth:304px;
+$colorPickerSize:40px;
+$contentMaxWidth: 1200px; // correspond to bootstrap "container"
 
-$colorPickerSize:55px;
-$colorPickerSizeMD:38px;
-$colorPickerSizeSM:28px;
-
-$brushActiveColor: rgba(150,255,150,0.4);
+$btnSuccessBgColor: #135000;
+$btnFailBgColor: #920F0F;
+$btnCommonBgColor: #85640E;
+$sliderColor: #9E7D1B;
+$sliderColorLine: #aaa;
+$switchColorOn: #9E7D1B;
+$switchColorOff: #aaa;

@@ -1,114 +1,206 @@
 @import "common.scss";
 
-// --- App
-
-.app_wrapper {
-	// TODO customize md-tabs look
-	md-content {
-		background-color: transparent !important;
-		md-tabs {
-			background: #f6f6f6;
-			border: 1px solid #e1e1e1;
-			md-tabs-canvas {
-				background: white;
-			}
-		}
-		h1:first-child {
-			margin-top: 0;
-		}
-	}
+#ng_view {
+  background: url(../images/background_1.jpg);
+  min-height: 100%;
 }
 
-.toolBar {
-	height:$toolBarHeight;
+#title {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
-.toolBar, .app_wrapper {
-	background: $appBg;
+#content {
+  //background-color: $appBg;
+  background: url(../images/background_3.jpg);
+
+  md-content {
+    background-color: transparent;
+
+    // issue :/
+    md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]) {
+      color: rgba(0, 0, 0, 0.54);
+    }
+
+    md-tabs {
+      background: #f6f6f6;
+      border: 1px solid #e1e1e1;
+      md-tabs-canvas {
+        background: white;
+      }
+    }
+  }
 }
 
-#canvas {
-	width:$appWidth;
-	height:$appHeight;
+.itembank-wrapper {
+  overflow: hidden;
+
+  .itembank {
+    height: 100%;
+  }
+  .item{
+    max-width:100%;
+    max-height:100%;
+  }
+  md-tab-content {
+    overflow-x: hidden;
+  }
 }
-
-.brush-active {
-	background-color: $brushActiveColor;
-}
-
-// --- Sidenav
-
-.left-panel{
-	min-width:$leftPanelMinWidth !important;
-}
-
-#content-left-panel {
-	padding:0;
-
-	.itembank {
-
-	}
-
-	.item {
-		max-width:100%;
-		max-height:100%;
-	}
-}
-
-// --- Canvas Panel
 
 #paper {
-	height:100%;
-	width:100%;
-	margin: 0 auto;
+  height:auto;
+  width:100%;
 }
 
-#content-middle-panel {
-	padding:0;
+#toolbar-element {
+  color: white;
 }
 
-// --- Properties panel
-
-#content-right-panel {
-	color: white;
-	font-weight: bold;
+#toolbar-general {
+  background-image: url(../images/background_3.jpg);
+  margin-top: 15px;
 }
 
-.text-properties {
-	padding: 0 $appPanelPadding;
+#wrapper-font-selector {
+  background: #85640E;
+}
+
+#readme-wrapper {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#readme {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* small device */
+
+@media (max-width: $contentMaxWidth) {
+  #paper {
+    // max-height: $appHeight;
+  }
+
+  .itembank-wrapper {
+    height: $imagesPanelResponsiveHeight;
+
+    .itembank {
+      height:$imagesPanelResponsiveHeight;
+    }
+  }
+}
+
+/* common */
+
+.text-center {
+  text-align: center;
+}
+
+.container {
+  max-width: 96%;
+  margin: 0 auto;
+}
+
+.margin-v-0 {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .circle{
-	width:$colorPickerSize;
-	height:$colorPickerSize;
-	border-radius:$colorPickerSize/2;
-	display:inline-block;
-	margin:0 4px;
+  width:$colorPickerSize;
+  height:$colorPickerSize;
+  border-radius:$colorPickerSize/2;
+  display:inline-block;
+  margin:0 4px;
 }
 
-// --- Media Queries
+/* customization */
 
-// Big Screens
-@media screen and (max-width: 1200px) {
-	.left-panel{
-		height:$mdLeftPanelHeight;
-	}
-}
+#ng_view {
+  /* buttons */
 
-// Medium Screens
-@media screen and (max-width: 960px) {
-    .circle{
-		width:$colorPickerSizeMD;
-		height:$colorPickerSizeMD;
-		border-radius:$colorPickerSizeMD/2;
-	}
-}
+  .btn-success {
+    background-color: $btnSuccessBgColor;
+    color: white;
+  }
+  .btn-fail {
+    background-color: $btnFailBgColor;
+    color: white;
+  }
+  .btn-common {
+    background-color: $btnCommonBgColor;
+    color: white;
+  }
 
-// Small Screens
-@media screen and (max-width: 600px) {
-    .circle{
-		width:$colorPickerSizeSM;
-		height:$colorPickerSizeSM;
-		border-radius:$colorPickerSizeSM/2;
-	}
+  /* sliders */
+
+  .slider-common {
+    .md-track {
+      background-color: $sliderColorLine;
+    }
+    .md-track-ticks {
+      background-color: $sliderColor;
+    }
+    .md-focus-thumb {
+      background-color: $sliderColor;
+    }
+    .md-focus-ring {
+      background-color: $sliderColor;
+    }
+    .md-disabled-thumb {
+      background-color: $sliderColor;
+    }
+    &.md-min .md-thumb:after {
+      background-color: $sliderColor;
+    }
+    .md-track.md-track-fill {
+      background-color: $sliderColor;
+    }
+    .md-thumb:after {
+      border-color: $sliderColor;
+      background-color: $sliderColor;
+    }
+    .md-sign {
+      background-color: $sliderColor;
+      &:after {
+        border-top-color: $sliderColor;
+      }
+    }
+    .md-thumb-text {
+      color: $sliderColor;
+    }
+  }
+
+  /* switchs */
+
+  .switch-common {
+    .md-ink-ripple {
+      color: $switchColorOff;
+    }
+    .md-thumb {
+      background-color: $switchColorOn;
+    }
+    .md-bar {
+      background-color: $switchColorOff;
+    }
+
+    &.md-checked {
+      .md-ink-ripple {
+        color: $switchColorOn;
+      }
+      .md-thumb {
+        background-color: $switchColorOn;
+      }
+      .md-bar {
+        background-color: $switchColorOn;
+      }
+      &.md-focused .md-thumb:before {
+        background-color: $switchColorOff;
+      }
+    }
+  }
 }

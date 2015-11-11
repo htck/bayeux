@@ -25,7 +25,6 @@ module.exports = function(config) {
       // bower:js
       'lib/jquery/dist/jquery.js',
       'lib/angular/angular.js',
-      'lib/bootstrap-sass-official/assets/javascripts/bootstrap.js',
       'lib/angular-animate/angular-animate.js',
       'lib/angular-aria/angular-aria.js',
       'lib/angular-material/angular-material.js',
