@@ -13,6 +13,11 @@ exports.config = {
     'browserName': 'firefox'
   }/*, {
     'browserName': 'chrome'
+  },
+  {
+    'browserName': 'phantomjs',
+    'phantomjs.binary.path': require('phantomjs').path,
+    'phantomjs.cli.args': ['--ignore-ssl-errors=true', '--web-security=false']
   }*/],
  
   // App URL, /!\ synchronize port with gruntFile
