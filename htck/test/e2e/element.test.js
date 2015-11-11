@@ -63,5 +63,18 @@ describe('Element related', function() {
     sliderTest('width-slider', '0.2', '1', true);
   });
 
+  // Mirror
+
+  it('should mirror element', function() {
+    var mirrorSwitch = element(by.id('mirror-switch'));
+    mirrorSwitch.click();
+    
+    addedElement.get(defaultElementsOnStage).getAttribute('transform').then(function(matrix) {
+      matrix = matrix.substring(7, matrix.length-1);
+      var factors = matrix.split(',');
+      expect(factors[0]).toBe('-1');       // width
+    });
+  });
+
 
 });
