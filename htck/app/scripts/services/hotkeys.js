@@ -43,18 +43,6 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
     });
 
     hotkeys.add({
-      combo: 'ctrl+shift+s',
-      description: 'Exports canvas to png',
-      callback: function (event){
-        event.preventDefault();
-        if(scope.$parent.current && scope.$parent.current.type ==='text'){
-          hTextEdit.popChar(scope.$parent.current);
-        }
-        scope.$parent.export();
-      }
-    });
-
-    hotkeys.add({
       combo: 'ctrl+m',
       description: 'Mirrors currently selected element',
       callback: function(){
@@ -104,6 +92,43 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
         }
         event.preventDefault();
         hElement.move(scope.$parent.current, -constants.ELEMENT_DISPLACEMENT, 0);
+      }
+    });
+
+
+    hotkeys.add({
+      combo: 'ctrl+s',
+      description: 'Saves draft file for further edit',
+      callback: function(evt){
+        evt.preventDefault();
+        if(scope.$parent.current && scope.$parent.current.type ==='text'){
+          hTextEdit.popChar(scope.$parent.current);
+        }
+        scope.$parent.save();
+      }
+    });
+
+    // hotkeys.add({
+    //   combo: 'ctrl+o',
+    //   description: 'Open previously saved file',
+    //   callback: function(evt){
+    //     evt.preventDefault();
+    //     scope.$parent.startImport();
+    //     if(scope.$parent.current && scope.$parent.current.type ==='text'){
+    //       hTextEdit.popChar(scope.$parent.current);
+    //     }
+    //   }
+    // });
+
+    hotkeys.add({
+      combo: 'ctrl+shift+s',
+      description: 'Exports canvas to png',
+      callback: function (event){
+        event.preventDefault();
+        if(scope.$parent.current && scope.$parent.current.type ==='text'){
+          hTextEdit.popChar(scope.$parent.current);
+        }
+        scope.$parent.export();
       }
     });
   }
