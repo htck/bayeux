@@ -52,6 +52,10 @@
   width:100%;
 }
 
+.brush-active {
+  background-color: $brushActiveColor;
+}
+
 #toolbar-element {
   color: white;
 }
