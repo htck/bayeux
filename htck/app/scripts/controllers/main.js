@@ -160,7 +160,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         $scope.current.toBack();
-        background.toBack();
+        $scope.backgroundElement.toBack();
       };
 
 
@@ -298,15 +298,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       background.background = true;
       $scope.backgroundElement = background;
 
-      function paperUnfocus(){
+      $scope.paperUnfocus = function (){
         $scope.backgroundDown = false;
-      }
+      };
 
-      background.mouseup(paperUnfocus);
+      $scope.backgroundElement.mouseup($scope.paperUnfocus);
       //background.mouseout(paperUnfocus);
 
-      $('#paper').mouseup(paperUnfocus);
-      $('#paper').mouseleave(paperUnfocus);
+      $('#paper').mouseup($scope.paperUnfocus);
+      $('#paper').mouseleave($scope.paperUnfocus);
 
       $scope.setBackground = function(imgUrl){
         background.attr({'fill':'url('+imgUrl+')', 'fill-opacity':'1', 'stroke':'none'});
@@ -362,7 +362,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       }
 
       $scope.setBrush = function (brush){
-        background.unmousemove(brushHandler);
+        $scope.backgroundElement.unmousemove(brushHandler);
         unfocus();
         if($scope.brush && brush.name === $scope.brush.name){
           $scope.brush.classe=undefined;

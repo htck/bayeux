@@ -44,6 +44,7 @@ angular.module('htckApp').factory('hSave', function (hElement) {
         el.background = true;
         scope.backgroundElement = el;
         scope.backgroundElement.mousedown(scope.backgroundMousedownHandler);
+        scope.backgroundElement.mouseup(scope.paperUnfocus);
       } else if(data.ft){
         el.mousedown(scope.elementMouseDown);
 
