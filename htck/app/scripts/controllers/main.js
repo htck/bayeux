@@ -261,7 +261,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
 
         $scope.current.attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px' || constants.TEXT_DEFAULT_SIZE, 'fill': $scope.fontColor});
-        $timeout(hTextEdit.updateCaretPosition);
+        $timeout(hTextEdit.updateCaretPosition,10);
       };
 
       function scaleFactors(x, y){
