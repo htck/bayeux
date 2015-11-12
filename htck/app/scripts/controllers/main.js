@@ -270,8 +270,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         return [x / pw * constants.W, (y / ph * constants.H) - (actualHeight - ph)/2];
       }
 
-      var background = paper.rect(0, 0, WIDTH, HEIGHT);
-      background.mousedown(function(evt) {
+      function backgroundMousedownHandler(evt) {
         $scope.backgroundDown = true;
         if($scope.brush){
           return;
@@ -291,8 +290,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         tesxtFt.setOpts({distance: $scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
 
         $scope.$apply();
-      });
+      }
+
+      var background = paper.rect(0, 0, WIDTH, HEIGHT);
+      background.mousedown(backgroundMousedownHandler);
       background.attr({'fill':'url('+constants.backgrounds[0]+')', 'fill-opacity':'1', 'stroke':'none'});
+      background.background = true;
 
       function paperUnfocus(){
         $scope.backgroundDown = false;
@@ -404,12 +407,38 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       $scope.save = function(){
         console.log('Saving stuff');
         unfocus();
-        var json = paper.toJSON();
+        var json = paper.toJSON(function(el, data){
+          console.log(el);
+          if(el.background){
+            data.background = true;
+          }
+
+          data.height = el.height;
+          data.width = el.width;
+          data.rotation = el.rotation;
+          data.opacity = el.opacity;
+          data.keepratio = el.keepratio;
+          data.mirror = el.mirror;
+          return data;
+        });
         console.log(json);
         paper.clear();
-        $timeout(function(){
-          paper.fromJSON(json);
-        }, 5000);
+        paper.fromJSON(json, function(el, data){
+          el.height = data.height;
+          el.width = data.width;
+          el.rotation = data.rotation;
+          el.opacity = data.opacity;
+          el.keepratio = data.keepratio;
+          el.mirror = data.mirror;
+
+          if(data.background){
+            el.background = true;
+            background = el;
+            background.mousedown(backgroundMousedownHandler);
+          }
+
+          return el;
+        });
       };
 
       init();
