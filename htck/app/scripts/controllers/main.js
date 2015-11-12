@@ -405,14 +405,14 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       }
 
       $scope.save = function(){
-        console.log('Saving stuff');
         unfocus();
-        var json = paper.toJSON(function(el, data){
-          console.log(el.ft);
+        // Serialize as json
+        var json = paper.toJSON(function(el, data){ // For each element
+
           if(el.background){
             data.background = true;
           }
-
+          // Save properties
           data.height = el.height;
           data.width = el.width;
           data.rotation = el.rotation;
@@ -425,9 +425,16 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           }
           return data;
         });
-        console.log(json);
+
+        var jsonBlob = new Blob([json], {type: "text/plain;charset=utf-8"});
+        saveAs(jsonBlob, 'TheHolyManuscript.htck');
+      };
+
+      function importFromJson(json){
         paper.clear();
+        // Deserialize from json
         paper.fromJSON(json, function(el, data){
+          // Restore properties
           el.height = data.height;
           el.width = data.width;
           el.rotation = data.rotation;
@@ -435,12 +442,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           el.keepratio = data.keepratio;
           el.mirror = data.mirror;
 
+          // Restore event handlers
           if(data.background){
             el.background = true;
             background = el;
             background.mousedown(backgroundMousedownHandler);
           } else if(data.ft){
             el.mousedown(elementMouseDown);
+
+            // Restore freeTransform
             var ft = paper.freeTransform(el, {}, function(ft, events) {
               handleFtChanged(ft, events);
             });
@@ -464,6 +474,24 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
           return el;
         });
+      }
+
+      $scope.startImport = function(){
+        $('#import-file-chooser').trigger('click');
+      };
+
+      $('#import-file-chooser')[0].onchange = function(evt) { // will trigger each time
+        if(!evt.target.files || !evt.target.files.length){
+          return;
+        }
+        var file = evt.target.files[0]; // FileList object
+
+        var reader = new FileReader();
+        reader.onloadend = (function(evt) {
+            importFromJson(evt.target.result);
+        });
+
+        reader.readAsText(file);
       };
 
       init();

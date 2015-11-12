@@ -149,6 +149,8 @@
     <md-button ng-class="b.classe" ng-repeat="b in constants.brushes" ng-click="setBrush(b)" class="png-icon" style="background-image:url({{b.icon}})">
     </md-button>
     <md-button ng-click="save()" class="md-warn md-raised">Save</md-button>
+    <md-button ng-click="startImport()" class="md-warn md-raised">Import</md-button>
+    <input type="file" id="import-file-chooser" ng-show="false" accept=".htck"> 
   </div>
   <!-- /toolbar-general -->
 
