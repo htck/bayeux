@@ -407,14 +407,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       $scope.save = function(){
         unfocus();
-        hSave.save(paper, 'TheHolyManuscript.htck');
+        hSave.save(paper, 'TheLegendaryManuscript.htck');
       };
 
       $scope.startImport = function(){
-        $('#import-file-chooser').trigger('click');
+        angular.element('#import-file-chooser').trigger('click');
       };
 
-      $('#import-file-chooser')[0].onchange = function (changeEvt) { // will trigger each time
+      // triggers when file is selected
+      angular.element('#import-file-chooser')[0].onchange = function (changeEvt) {
         if(!changeEvt.target.files || !changeEvt.target.files.length){
           return;
         }
