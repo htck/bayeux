@@ -32,15 +32,15 @@ describe('Element related', function() {
 
   // TODO - Better drag n drop on slider
   // TODO - Bind constants and not manually entered numbers
-  function sliderTest(id, widthFactor, heightFactor, keepRatio){
+  function sliderTest(id, widthFactor, heightFactor, keepRatio, maxKeyPress){
     if(keepRatio){
       var keepRatioSwitch = element(by.id('keepratio-switch'));
       keepRatioSwitch.click();
     }
     var slider = element(by.id(id));
     slider.click();
-    for(var i=0; i<50; i++){
-      slider.sendKeys(protractor.Key.ARROW_LEFT);
+    for(var i=0; i<(maxKeyPress || 20); i++){
+      slider.sendKeys(protractor.Key.CONTROL, protractor.Key.ARROW_LEFT);
     }
     addedElement.get(defaultElementsOnStage).getAttribute('transform').then(function(matrix) {
       matrix = matrix.substring(7, matrix.length-1);
@@ -61,6 +61,10 @@ describe('Element related', function() {
   });
   it('should rescale an element width without ratio', function() {
     sliderTest('width-slider', '0.2', '1', true);
+  });
+  // Rotation
+  it('should rotate an element', function() {
+    sliderTest('rotation-slider', '-1', '-1', false, 100); // constants.ELEMENT_SCALE_MIN
   });
 
   // Mirror
