@@ -453,8 +453,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
             hElement.setRotation(el, ft.attrs.rotate);
             hElement.setKeepRatio(el);
 
-
             ft.setOpts({'drag':['self']});
+
+            if(el.type === 'text'){
+              ft.setOpts({distance: $scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
+              el.inited = true;
+            }
             ft.hideHandles();
           }
 
