@@ -401,5 +401,16 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $timeout(function(){$scope.$apply();});
       }
 
+      $scope.save = function(){
+        console.log('Saving stuff');
+        unfocus();
+        var json = paper.toJSON();
+        console.log(json);
+        paper.clear();
+        $timeout(function(){
+          paper.fromJSON(json);
+        }, 5000);
+      };
+
       init();
   });
