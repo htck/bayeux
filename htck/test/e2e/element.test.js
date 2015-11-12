@@ -80,5 +80,59 @@ describe('Element related', function() {
     });
   });
 
+  it('should bring element to front', function() {
+    var firstElement, secondElement;
+    // Get image id for the first element
+    addedElement.get(defaultElementsOnStage).getAttribute('href').then(function(picture) {
+      firstElement = picture;
+      // add a second element
+      var addElButton = element.all(by.css('[ng-click="addImage(i)"]')).get(1);
+      addElButton.click();
+      addedElement = element.all(by.css('#paper image'));
+      // Get image id for the second element
+      return addedElement.get(defaultElementsOnStage+1).getAttribute('href');
+    }).then(function(picture){
+      secondElement = picture;
+
+      // Select the first element again
+      addedElement.get(defaultElementsOnStage).click();
+      // Click Bring To Front Button
+      var bringToFrontButton = element.all(by.css('[ng-click="bringToFront()"]'));
+      bringToFrontButton.click();
+      // Get the image id for the element on top
+      return addedElement.get(defaultElementsOnStage + 1).getAttribute('href');
+    }).then(function(picture){
+      // Expect it to be the first element's image id
+      expect(picture).toBe(firstElement);
+    });
+  });
+
+  // LAL: When bringing an element X to the back, the background is then brought to the back afterwards
+  // but the order of <image> elements is, oddly, X, Background, Y
+  it('should bring element to back', function() {
+    var firstElement, secondElement;
+    // Get image id for the first element
+    addedElement.get(defaultElementsOnStage).getAttribute('href').then(function(picture) {
+      firstElement = picture;
+      // add a second element
+      var addElButton = element.all(by.css('[ng-click="addImage(i)"]')).get(1);
+      addElButton.click();
+      addedElement = element.all(by.css('#paper image'));
+      // Get image id for the second element
+      return addedElement.get(defaultElementsOnStage+1).getAttribute('href');
+    }).then(function(picture){
+      secondElement = picture;
+
+      // Click Bring To Back Button
+      var bringToFrontButton = element.all(by.css('[ng-click="bringToBack()"]'));
+      bringToFrontButton.click();
+      // Get the image id for the element on bottom layer
+      return addedElement.get(0).getAttribute('href');    // See note
+    }).then(function(picture){
+      // Expect it to be the second element's image id
+      expect(picture).toBe(secondElement);
+    });
+  });
+
 
 });
