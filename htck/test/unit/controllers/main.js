@@ -13,7 +13,10 @@ describe('Controller: MainCtrl', function () {
 
     var paper = document.createElement( "div" );
     paper.id = 'paper';
+    var fileChooser = document.createElement( "div" );
+    fileChooser.id = 'import-file-chooser';
     $("body").append(paper);
+    $("body").append(fileChooser);
 
     MainCtrl = $controller('MainCtrl', {
       $scope: scope
