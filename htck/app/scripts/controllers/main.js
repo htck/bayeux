@@ -408,7 +408,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         console.log('Saving stuff');
         unfocus();
         var json = paper.toJSON(function(el, data){
-          console.log(el);
+          console.log(el.ft);
           if(el.background){
             data.background = true;
           }
@@ -419,6 +419,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           data.opacity = el.opacity;
           data.keepratio = el.keepratio;
           data.mirror = el.mirror;
+
+          if(el.ft){
+            data.ft = el.ft.attrs;
+          }
           return data;
         });
         console.log(json);
@@ -435,6 +439,23 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
             el.background = true;
             background = el;
             background.mousedown(backgroundMousedownHandler);
+          } else if(data.ft){
+            el.mousedown(elementMouseDown);
+            var ft = paper.freeTransform(el, {}, function(ft, events) {
+              handleFtChanged(ft, events);
+            });
+
+            el.ft = ft;
+            el.ft.attrs = data.ft;
+
+            hElement.setHeight(el, ft.attrs.y);
+            hElement.setWidth(el, ft.attrs.x);
+            hElement.setRotation(el, ft.attrs.rotate);
+            hElement.setKeepRatio(el);
+
+
+            ft.setOpts({'drag':['self']});
+            ft.hideHandles();
           }
 
           return el;
