@@ -3,7 +3,7 @@
 /* globals constants */
 /* globals Raphael */
 /* globals $ */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, $mdSidenav, hExport, hTextEdit, hHotkeys, hElement, hTools) {
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, $mdSidenav, hExport, hTextEdit, hHotkeys, hElement, hTools, hSave) {
       // Constants
       constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
 
@@ -57,20 +57,20 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       }
 
       // Triggers when an element is clicked
-  		function elementMouseDown (/*evt, x, y*/){
+  		$scope.elementMouseDown = function (/*evt, x, y*/){
   			// TODO
   			$log.debug('Click');
         setCurrent(this);
   			//this.toFront();
         $scope.$apply();
-  		}
+  		};
 
       // Should be called when creating a raphael element
       function addElement(ie){
-        ie.mousedown(elementMouseDown);
+        ie.mousedown($scope.elementMouseDown);
 
         var ft = paper.freeTransform(ie, {}, function(ft, events) {
-          handleFtChanged(ft, events);
+          $scope.handleFtChanged(ft, events);
         });
         
         // to make this work free_transform plugin must implement range.scale for x AND y 
@@ -99,7 +99,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         return ie;
       }
 
-      function handleFtChanged(ft, events) {
+      $scope.handleFtChanged = function (ft, events) {
         if (events.indexOf('rotate') >= 0) {
           $scope.elementChangedRotation(ft.attrs.rotate);
           $scope.$apply();
@@ -110,7 +110,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           $scope.$apply();
         }
         hTextEdit.updateCaretPosition();
-      }
+      };
 
       // Unselects an element
       function unfocus(){
@@ -270,7 +270,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         return [x / pw * constants.W, (y / ph * constants.H) - (actualHeight - ph)/2];
       }
 
-      function backgroundMousedownHandler(evt) {
+      $scope.backgroundMousedownHandler = function (evt) {
         $scope.backgroundDown = true;
         if($scope.brush){
           return;
@@ -290,12 +290,13 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         tesxtFt.setOpts({distance: $scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
 
         $scope.$apply();
-      }
+      };
 
       var background = paper.rect(0, 0, WIDTH, HEIGHT);
-      background.mousedown(backgroundMousedownHandler);
+      background.mousedown($scope.backgroundMousedownHandler);
       background.attr({'fill':'url('+constants.backgrounds[0]+')', 'fill-opacity':'1', 'stroke':'none'});
       background.background = true;
+      $scope.backgroundElement = background;
 
       function paperUnfocus(){
         $scope.backgroundDown = false;
@@ -406,90 +407,23 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       $scope.save = function(){
         unfocus();
-        // Serialize as json
-        var json = paper.toJSON(function(el, data){ // For each element
-
-          if(el.background){
-            data.background = true;
-          }
-          // Save properties
-          data.height = el.height;
-          data.width = el.width;
-          data.rotation = el.rotation;
-          data.opacity = el.opacity;
-          data.keepratio = el.keepratio;
-          data.mirror = el.mirror;
-
-          if(el.ft){
-            data.ft = el.ft.attrs;
-          }
-          return data;
-        });
-
-        var jsonBlob = new Blob([json], {type: "text/plain;charset=utf-8"});
-        saveAs(jsonBlob, 'TheHolyManuscript.htck');
+        hSave.save(paper, 'TheHolyManuscript.htck');
       };
-
-      function importFromJson(json){
-        paper.clear();
-        // Deserialize from json
-        paper.fromJSON(json, function(el, data){
-          // Restore properties
-          el.height = data.height;
-          el.width = data.width;
-          el.rotation = data.rotation;
-          el.opacity = data.opacity;
-          el.keepratio = data.keepratio;
-          el.mirror = data.mirror;
-
-          // Restore event handlers
-          if(data.background){
-            el.background = true;
-            background = el;
-            background.mousedown(backgroundMousedownHandler);
-          } else if(data.ft){
-            el.mousedown(elementMouseDown);
-
-            // Restore freeTransform
-            var ft = paper.freeTransform(el, {}, function(ft, events) {
-              handleFtChanged(ft, events);
-            });
-
-            el.ft = ft;
-            el.ft.attrs = data.ft;
-
-            hElement.setHeight(el, ft.attrs.y);
-            hElement.setWidth(el, ft.attrs.x);
-            hElement.setRotation(el, ft.attrs.rotate);
-            hElement.setKeepRatio(el);
-
-            ft.setOpts({'drag':['self']});
-
-            if(el.type === 'text'){
-              ft.setOpts({distance: $scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
-              el.inited = true;
-            }
-            ft.hideHandles();
-          }
-
-          return el;
-        });
-      }
 
       $scope.startImport = function(){
         $('#import-file-chooser').trigger('click');
       };
 
-      $('#import-file-chooser')[0].onchange = function(evt) { // will trigger each time
-        if(!evt.target.files || !evt.target.files.length){
+      $('#import-file-chooser')[0].onchange = function (changeEvt) { // will trigger each time
+        if(!changeEvt.target.files || !changeEvt.target.files.length){
           return;
         }
-        var file = evt.target.files[0]; // FileList object
+        var file = changeEvt.target.files[0]; // FileList object
 
         var reader = new FileReader();
-        reader.onloadend = (function(evt) {
-            importFromJson(evt.target.result);
-        });
+        reader.onloadend = function (loadEndEvt) {
+            hSave.import(loadEndEvt.target.result, paper, $scope);
+        };
 
         reader.readAsText(file);
       };
