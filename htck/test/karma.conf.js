@@ -30,13 +30,13 @@ module.exports = function(config) {
       'lib/angular-material/angular-material.js',
       'lib/angular-route/angular-route.js',
       'lib/angular-touch/angular-touch.js',
+      'lib/jquery-ui/jquery-ui.js',
+      'lib/angular-dragdrop/src/angular-dragdrop.js',
+      'lib/angular-hotkeys/build/hotkeys.js',
       'lib/canvg/dist/canvg.bundle.js',
       'lib/canvg/dist/canvg.bundle.min.js',
       'lib/FileSaver/FileSaver.js',
       'lib/raphael/raphael.js',
-      'lib/jquery-ui/jquery-ui.js',
-      'lib/angular-dragdrop/src/angular-dragdrop.js',
-      'lib/angular-hotkeys/build/hotkeys.js',
       'lib/angular-mocks/angular-mocks.js',
       // endbower
       'lib/raphael_free_transform/raphael.free_transform.js',
@@ -44,10 +44,6 @@ module.exports = function(config) {
       'test/unit/**/*.js',
       { pattern: 'app/content/**/*', included: false, served: true }
     ],
-
-    preprocessors: {
-      '**/*.html': ['ng-html2js']
-    },
 
     // list of files / patterns to exclude
     exclude: [
