@@ -128,7 +128,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       };
 
       // Adds an image as a raphael element from its url
-  		$scope.addImage = function(src, x, y){
+  		function addImage (src, x, y){
   			var size = hTools.getSizeOfImage(src);
         x=(x)?x:(WIDTH - size.w)/2;
         y=(y)?y:(HEIGHT - size.h)/2;
@@ -138,7 +138,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $log.debug(size);
   			var ie = paper.image(src, x, y, size.w, size.h);  // TODO
   			return addElement(ie);
-  		};
+  		}
+
+      $scope.addImage = function(src, x, y){
+        $scope.setBrush(undefined);
+        addImage(src, x, y);
+      };
 
       // Removes an element
       $scope.remove = function() {
@@ -338,7 +343,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
             var y = evt.pageY - paperOffset.top - imgSize.h/4;
             var sf = scaleFactors(x,y);
 
-            var element = $scope.addImage(img.img, sf[0], sf[1]);
+            var element = addImage(img.img, sf[0], sf[1]);
 
             var rot = hTools.randInt(-$scope.brush.randRotationRange, $scope.brush.randRotationRange);
             hElement.setRotation(element, rot);
@@ -364,7 +369,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       $scope.setBrush = function (brush){
         $scope.backgroundElement.unmousemove(brushHandler);
         unfocus();
-        if($scope.brush && brush.name === $scope.brush.name){
+        if($scope.brush && brush && brush.name === $scope.brush.name){
           $scope.brush.classe=undefined;
           $scope.brush = undefined;
         }
@@ -373,9 +378,11 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
             $scope.brush.classe=undefined;
           }
           $scope.brush = brush;
-          $scope.brush.classe='brush-active';
-          //background.mousemove(brushHandler);
-          $('#paper').mousemove(brushHandler);
+          if($scope.brush){
+            $scope.brush.classe='brush-active';
+            //background.mousemove(brushHandler);
+            $('#paper').mousemove(brushHandler);
+          }
         }
       };
 
