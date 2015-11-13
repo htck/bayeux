@@ -2,3 +2,10 @@
 // endbower
 @import "common.scss";
 @import "app.scss";
+
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
