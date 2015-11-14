@@ -9,3 +9,20 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.gh-forkme {
+	width:100px;
+	height:100px;
+	//background:#151513;
+
+	position: absolute; top: 0; border: 0; right: 0;
+
+	.gh-icon {
+		transform-origin: -14px 25px;
+		transform:rotate(45deg);
+	}
+}
+
+*:focus {
+    outline: none;
+}
