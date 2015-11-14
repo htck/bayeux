@@ -2,6 +2,28 @@
 
 /* globals saveAs */
 angular.module('htckApp').factory('hSave', function (hElement) {
+  var scope = {};
+
+  function init(parent){
+    scope = parent.$new();
+    // triggers when file is selected
+    angular.element('#import-file-chooser')[0].onchange = changeEventHandler;
+  }
+
+  function changeEventHandler(changeEvt) {
+    if(!changeEvt.target.files || !changeEvt.target.files.length){
+      return;
+    }
+    var file = changeEvt.target.files[0]; // FileList object
+
+    var reader = new FileReader();
+    reader.onloadend = function (loadEndEvt) {
+        importFromJson(loadEndEvt.target.result);
+    };
+
+    reader.readAsText(file);
+  }
+
   function save(paper, fileName){
     // Serialize as json
     var json = paper.toJSON(function(el, data){ // For each element
@@ -27,10 +49,10 @@ angular.module('htckApp').factory('hSave', function (hElement) {
     saveAs(jsonBlob, fileName);
   }
 
-  function importFromJson(json, paper, scope){
-    paper.clear();
+  function importFromJson(json){
+    scope.$parent.paper.clear();
     // Deserialize from json
-    paper.fromJSON(json, function (el, data){
+    scope.$parent.paper.fromJSON(json, function (el, data){
       // Restore properties
       el.height = data.height;
       el.width = data.width;
@@ -41,16 +63,13 @@ angular.module('htckApp').factory('hSave', function (hElement) {
 
       // Restore event handlers
       if(data.background){
-        el.background = true;
-        scope.backgroundElement = el;
-        scope.backgroundElement.mousedown(scope.backgroundMousedownHandler);
-        scope.backgroundElement.mouseup(scope.paperUnfocus);
+        scope.$parent.initBackground(el);
       } else if(data.ft){
-        el.mousedown(scope.elementMouseDown);
+        el.mousedown(scope.$parent.elementMouseDown);
 
         // Restore freeTransform
-        var ft = paper.freeTransform(el, {}, function(ft, events) {
-          scope.handleFtChanged(ft, events);
+        var ft = scope.$parent.paper.freeTransform(el, {}, function(ft, events) {
+          scope.$parent.handleFtChanged(ft, events);
         });
 
         el.ft = ft;
@@ -64,7 +83,7 @@ angular.module('htckApp').factory('hSave', function (hElement) {
         ft.setOpts({'drag':['self']});
 
         if(el.type === 'text'){
-          ft.setOpts({distance: scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
+          ft.setOpts({distance: scope.$parent.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
           el.inited = true;
         }
         ft.hideHandles();
@@ -75,6 +94,7 @@ angular.module('htckApp').factory('hSave', function (hElement) {
   }
 
   return {
+    init: init,
     save: save,
     import: importFromJson
   };

@@ -22,16 +22,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       constants.TEXT_DEFAULT_FONT_COLOR = '#000000';
   		$scope.constants = constants;
 
-      $scope.font = (constants.fonts && constants.fonts.length) ? constants.fonts[0] : undefined;
-      $scope.fontColor = (constants.colors && constants.colors.length) ? constants.colors[0] : constants.TEXT_DEFAULT_FONT_COLOR;
-
-      var paper = new Raphael(constants.RAPHAEL_PAPER, constants.W, constants.H);
-      $scope.paper = paper;
-  		$log.debug('Paper', paper);
-  		var HEIGHT = paper.height, WIDTH = paper.width;
-      paper.setViewBox(0,0,WIDTH,HEIGHT,true);
-      paper.setSize('100%', '100%');
-
       function setCurrent(newCurrent) {
         if($scope.current && newCurrent && $scope.current.id === newCurrent.id){
           return;
@@ -69,7 +59,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       function addElement(ie){
         ie.mousedown($scope.elementMouseDown);
 
-        var ft = paper.freeTransform(ie, {}, function(ft, events) {
+        var ft = $scope.paper.freeTransform(ie, {}, function(ft, events) {
           $scope.handleFtChanged(ft, events);
         });
         
@@ -130,13 +120,13 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       // Adds an image as a raphael element from its url
   		function addImage (src, x, y){
   			var size = hTools.getSizeOfImage(src);
-        x=(x)?x:(WIDTH - size.w)/2;
-        y=(y)?y:(HEIGHT - size.h)/2;
+        x=(x)?x:(constants.W - size.w)/2;
+        y=(y)?y:(constants.H - size.h)/2;
         if(size.h === 0 || size.w === 0){
           return;
         }
         $log.debug(size);
-  			var ie = paper.image(src, x, y, size.w, size.h);  // TODO
+  			var ie = $scope.paper.image(src, x, y, size.w, size.h);  // TODO
   			return addElement(ie);
   		}
 
@@ -284,37 +274,25 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         var sf = scaleFactors(evt.layerX, evt.layerY);
-        var text = paper.text(sf[0], sf[1], 'H').attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': $scope.fontColor});
+        var text = $scope.paper.text(sf[0], sf[1], 'H').attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px', 'fill': $scope.fontColor});
         addElement(text);
         $scope.caret = 0;
         //text[0].textContent = '';
         text.attr({text: ''});
         text.inited = true;
         // set text handles size
-        var tesxtFt = paper.freeTransform(text);
+        var tesxtFt = $scope.paper.freeTransform(text);
         tesxtFt.setOpts({distance: $scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
 
         $scope.$apply();
       };
 
-      var background = paper.rect(0, 0, WIDTH, HEIGHT);
-      background.mousedown($scope.backgroundMousedownHandler);
-      background.attr({'fill':'url('+constants.backgrounds[0]+')', 'fill-opacity':'1', 'stroke':'none'});
-      background.background = true;
-      $scope.backgroundElement = background;
-
       $scope.paperUnfocus = function (){
         $scope.backgroundDown = false;
       };
 
-      $scope.backgroundElement.mouseup($scope.paperUnfocus);
-      //background.mouseout(paperUnfocus);
-
-      $('#paper').mouseup($scope.paperUnfocus);
-      $('#paper').mouseleave($scope.paperUnfocus);
-
       $scope.setBackground = function(imgUrl){
-        background.attr({'fill':'url('+imgUrl+')', 'fill-opacity':'1', 'stroke':'none'});
+        $scope.backgroundElement.attr({'fill':'url('+imgUrl+')', 'fill-opacity':'1', 'stroke':'none'});
       };
 
       // Drag & drop
@@ -390,7 +368,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $log.debug('Exporting');
         // Unfocus to remove handles from elements
         unfocus();
-        hExport(constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux.png', paper);
+        hExport(constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux.png', $scope.paper);
       };
 
       $scope.setFontColor = function(color) {
@@ -405,36 +383,46 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         hTextEdit.destroy();
       });
 
-      function init(){
-        hTextEdit.init($scope);
-        hHotkeys($scope);
-        paper.canvas.setAttributeNS('http://www.w3.org/XML/1998/namespace', 'xml:space','preserve');
-        $timeout(function(){$scope.$apply();});
-      }
-
       $scope.save = function(){
         unfocus();
-        hSave.save(paper, 'TheLegendaryManuscript.htck');
+        hSave.save($scope.paper, 'TheLegendaryManuscript.htck');
       };
 
       $scope.startImport = function(){
         angular.element('#import-file-chooser').trigger('click');
       };
 
-      // triggers when file is selected
-      angular.element('#import-file-chooser')[0].onchange = function (changeEvt) {
-        if(!changeEvt.target.files || !changeEvt.target.files.length){
-          return;
-        }
-        var file = changeEvt.target.files[0]; // FileList object
-
-        var reader = new FileReader();
-        reader.onloadend = function (loadEndEvt) {
-            hSave.import(loadEndEvt.target.result, paper, $scope);
-        };
-
-        reader.readAsText(file);
+      $scope.initBackground = function(background) {
+        $scope.backgroundElement = background;
+        $scope.backgroundElement.background = true;
+        $scope.backgroundElement.mousedown($scope.backgroundMousedownHandler);
+        $scope.backgroundElement.mouseup($scope.paperUnfocus);
       };
+
+      function init(){
+        $scope.font = (constants.fonts && constants.fonts.length) ? constants.fonts[0] : undefined;
+        $scope.fontColor = (constants.colors && constants.colors.length) ? constants.colors[0] : constants.TEXT_DEFAULT_FONT_COLOR;
+
+        var paper = new Raphael(constants.RAPHAEL_PAPER, constants.W, constants.H);
+        $scope.paper = paper;
+        $log.debug('Paper', paper);
+        paper.setViewBox(0,0,constants.W,constants.H,true);
+        paper.setSize('100%', '100%');
+        paper.canvas.setAttributeNS('http://www.w3.org/XML/1998/namespace', 'xml:space','preserve');
+
+        var background = $scope.paper.rect(0, 0, constants.W,constants.H);
+        background.attr({'fill':'url('+constants.backgrounds[0]+')', 'fill-opacity':'1', 'stroke':'none'});
+        $scope.initBackground(background);
+
+        $('#paper').mouseup($scope.paperUnfocus);
+        $('#paper').mouseleave($scope.paperUnfocus);
+
+        hTextEdit.init($scope);
+        hSave.init($scope);
+        hHotkeys($scope);
+
+        $timeout(function(){$scope.$apply();});
+      }
 
       init();
   });
