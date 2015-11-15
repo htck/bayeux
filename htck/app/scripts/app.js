@@ -1,5 +1,9 @@
 'use strict';
 
+/* globals constants */
+/* globals params */
+/* globals $ */
+
 /**
  * @ngdoc overview
  * @name htckApp
@@ -19,6 +23,8 @@ angular
     'cfp.hotkeys'
   ])
   .config(function ($routeProvider, $logProvider) {
+    $.extend(constants, params);
+
     $logProvider.debugEnabled(false);
     $routeProvider
       .when('/', {

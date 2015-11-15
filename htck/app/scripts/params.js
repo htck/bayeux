@@ -1,4 +1,6 @@
 // Constants
+/* globals constants */
+/* globals $ */
 var params = {
     ELEMENT_TEXT_HANDLE_DISTANCE : 7,
     ELEMENT_SCALE_MIN : 0.2,
