@@ -9,7 +9,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       constants.ELEMENT_SCALE_MIN = 0.2;
       constants.ELEMENT_SCALE_MAX = 5; 
-      constants.SHOWHANDLES=true;
       constants.ELEMENT_DEFAULT_HEIGHT=1;
       constants.ELEMENT_DEFAULT_WIDTH=1;
       constants.ELEMENT_DEFAULT_ROTATION=0;
@@ -30,13 +29,20 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           hElement.remove($scope.current);
         }
         if($scope.current && $scope.current.ft){
-          $scope.current.ft.hideHandles();
+          // What is quicker, this or Set.forEach ?
+          $scope.current.ft.handles.x.disc.attr({opacity: 0});
+          $scope.current.ft.handles.y.disc.attr({opacity: 0});
+          $scope.current.ft.handles.x.line.attr({opacity: 0});
+          $scope.current.ft.handles.y.line.attr({opacity: 0});
         }
         
         $scope.current = newCurrent;
 
         if($scope.current) {
-          $scope.current.ft.showHandles();
+          $scope.current.ft.handles.x.disc.attr({opacity: 1});
+          $scope.current.ft.handles.y.disc.attr({opacity: 1});
+          $scope.current.ft.handles.x.line.attr({opacity: 1});
+          $scope.current.ft.handles.y.line.attr({opacity: 1});
         }
         if($scope.current && $scope.current.type === 'text') {
           hTextEdit.addCaret();
@@ -46,20 +52,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
       }
 
-      // Triggers when an element is clicked
-  		$scope.elementMouseDown = function (/*evt, x, y*/){
-  			// TODO
-  			$log.debug('Click');
-        setCurrent(this);
-  			//this.toFront();
-        $scope.$apply();
-  		};
-
       // Should be called when creating a raphael element
       function addElement(ie){
-        ie.mousedown($scope.elementMouseDown);
-
         var ft = $scope.paper.freeTransform(ie, {}, function(ft, events) {
+          setCurrent(ft.subject);
           $scope.handleFtChanged(ft, events);
         });
         
@@ -67,7 +63,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         //ft.setOpts({range: {scale: [$scope.constants.ELEMENT_SCALE_MIN*ft.attrs.size.x, $scope.constants.ELEMENT_SCALE_MAX*ft.attrs.size.y] } });
 
         ie.ft = ft;
-        setCurrent(ie);
 
         // set default values
         ft.attrs.y=constants.ELEMENT_DEFAULT_HEIGHT;
@@ -79,9 +74,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         ft.attrs.rotate=constants.ELEMENT_DEFAULT_ROTATION;
         hElement.setRotation($scope.current, ft.attrs.rotate);
 
-        $scope.current.opacity = 1;
+        ie.opacity = 1;
 
-        $scope.current.keepratio = constants.ELEMENT_DEFAULT_KEEPRATIO;
+        ie.keepratio = constants.ELEMENT_DEFAULT_KEEPRATIO;
         $scope.elementSetKeepRatio();
 
         ft.setOpts({'drag':['self']});
@@ -247,7 +242,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(!$scope.current) {
           return;
         }
-        $scope.current.attr({opacity: $scope.current.opacity}); 
+        $scope.current.attr({opacity: $scope.current.opacity});
       };
       
       $scope.elementChangeFont = function() {
