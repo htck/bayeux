@@ -48,6 +48,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         //ft.setOpts({range: {scale: [$scope.constants.ELEMENT_SCALE_MIN*ft.attrs.size.x, $scope.constants.ELEMENT_SCALE_MAX*ft.attrs.size.y] } });
 
         ie.ft = ft;
+        setCurrent(ie);
 
         // set default values
         ft.attrs.y=constants.ELEMENT_DEFAULT_HEIGHT;
