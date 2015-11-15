@@ -4,21 +4,6 @@
 /* globals Raphael */
 /* globals $ */
 angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, $mdSidenav, hExport, hTextEdit, hHotkeys, hElement, hTools, hSave) {
-      // Constants
-      constants.ELEMENT_TEXT_HANDLE_DISTANCE = 7;
-
-      constants.ELEMENT_SCALE_MIN = 0.2;
-      constants.ELEMENT_SCALE_MAX = 5; 
-      constants.ELEMENT_DEFAULT_HEIGHT=1;
-      constants.ELEMENT_DEFAULT_WIDTH=1;
-      constants.ELEMENT_DEFAULT_ROTATION=0;
-      constants.ELEMENT_DEFAULT_KEEPRATIO=true;
-      constants.ELEMENT_DISPLACEMENT=3;
-      constants.RAPHAEL_PAPER='paper';
-      constants.W = 900;
-      constants.H = 675;
-      constants.TEXT_DEFAULT_SIZE = '30px';
-      constants.TEXT_DEFAULT_FONT_COLOR = '#000000';
   		$scope.constants = constants;
 
       function setCurrent(newCurrent) {
