@@ -11,6 +11,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
   }
 
   function saveCurrent() {
+    scope.$parent.unfocus();
     var json = hExport.exportOneJSON(scope.$parent.paper);
 
     pages[currentPageIndex] = json;
