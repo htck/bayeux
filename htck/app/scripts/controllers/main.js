@@ -6,7 +6,7 @@
 angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, $mdSidenav, hExport, hTextEdit, hHotkeys, hElement, hTools, hSave) {
   		$scope.constants = constants;
 
-      function setCurrent(newCurrent) {
+      $scope.setCurrent = function(newCurrent) {
         if($scope.current && newCurrent && $scope.current.id === newCurrent.id){
           return;
         }
@@ -30,10 +30,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
       }
 
-      // Should be called when creating a raphael element
-      function addElement(ie){
+      $scope.provisionElement = function(ie) {
         var ft = $scope.paper.freeTransform(ie, {}, function(ft, events) {
-          setCurrent(ft.subject);
+          $scope.setCurrent(ft.subject);
           $scope.handleFtChanged(ft, events);
         });
         
@@ -41,7 +40,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         //ft.setOpts({range: {scale: [$scope.constants.ELEMENT_SCALE_MIN*ft.attrs.size.x, $scope.constants.ELEMENT_SCALE_MAX*ft.attrs.size.y] } });
 
         ie.ft = ft;
-        setCurrent(ie);
 
         // set default values
         ft.attrs.y=constants.ELEMENT_DEFAULT_HEIGHT;
@@ -59,7 +57,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.elementSetKeepRatio();
 
         ft.setOpts({'drag':['self']});
+      };
 
+      // Should be called when creating a raphael element
+      function addElement(ie){
+        $scope.provisionElement(ie);
+        $scope.setCurrent(ie);
         return ie;
       }
 
@@ -81,7 +84,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $log.debug('Unfocus');
         //$scope.current = null;
         hTextEdit.removeCaret();
-        setCurrent(null);
+        $scope.setCurrent(null);
       }
       $scope.unfocus = unfocus;
 

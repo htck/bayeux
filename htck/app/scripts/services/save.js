@@ -69,6 +69,7 @@ angular.module('htckApp').factory('hSave', function (hElement) {
 
         // Restore freeTransform
         var ft = scope.$parent.paper.freeTransform(el, {}, function(ft, events) {
+          scope.$parent.setCurrent(ft.subject);
           scope.$parent.handleFtChanged(ft, events);
         });
 
@@ -86,7 +87,7 @@ angular.module('htckApp').factory('hSave', function (hElement) {
           ft.setOpts({distance: scope.$parent.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
           el.inited = true;
         }
-        ft.hideHandles();
+        hElement.handles(el);
       }
 
       return el;
