@@ -1,7 +1,7 @@
 'use strict';
 
 /* globals saveAs */
-angular.module('htckApp').factory('hSave', function (hElement) {
+angular.module('htckApp').factory('hSave', function (hElement, hExport) {
   var scope = {};
 
   function init(parent){
@@ -25,25 +25,7 @@ angular.module('htckApp').factory('hSave', function (hElement) {
   }
 
   function save(paper, fileName){
-    // Serialize as json
-    var json = paper.toJSON(function(el, data){ // For each element
-
-      if(el.background){
-        data.background = true;
-      }
-      // Save properties
-      data.height = el.height;
-      data.width = el.width;
-      data.rotation = el.rotation;
-      data.opacity = el.opacity;
-      data.keepratio = el.keepratio;
-      data.mirror = el.mirror;
-
-      if(el.ft){
-        data.ft = el.ft.attrs;
-      }
-      return data;
-    });
+    var json = hExport.exportOneJSON(paper);
 
     var jsonBlob = new Blob([json], {type: 'text/plain;charset=utf-8'});
     saveAs(jsonBlob, fileName);

@@ -17,7 +17,7 @@ angular.module('htckApp').factory('hExport', function() {
     return fixed; 
   }
 
-  function exportRaphael(raphaelPaperId, canvasId, fileName, paper){
+  function exportOnePNG(raphaelPaperId, canvasId, fileName, paper){
     paper.setSize(constants.W+'px',constants.H+'px');
     // Get the svg element created by Raphael
     var svg = document.getElementById(raphaelPaperId).children[0];
@@ -39,5 +39,32 @@ angular.module('htckApp').factory('hExport', function() {
       }
     });
   }
-  return exportRaphael;
+
+  function exportOneJSON(paper) {
+    // Serialize as json
+    var json = paper.toJSON(function(el, data){ // For each element
+
+      if(el.background){
+        data.background = true;
+      }
+      // Save properties
+      data.height = el.height;
+      data.width = el.width;
+      data.rotation = el.rotation;
+      data.opacity = el.opacity;
+      data.keepratio = el.keepratio;
+      data.mirror = el.mirror;
+
+      if(el.ft){
+        data.ft = el.ft.attrs;
+      }
+      return data;
+    });
+    return json;
+  }
+
+  return {
+    exportOnePNG: exportOnePNG,
+    exportOneJSON: exportOneJSON
+  };
 });
