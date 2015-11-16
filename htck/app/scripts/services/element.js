@@ -65,6 +65,14 @@ angular.module('htckApp').factory('hElement', function() {
     element.ft.apply();
   }
 
+  function handles(element, show) {
+    // What is quicker, this or Set.forEach ?
+    element.ft.handles.x.disc.attr({opacity: show ? 1 : 0});
+    element.ft.handles.y.disc.attr({opacity: show ? 1 : 0});
+    element.ft.handles.x.line.attr({opacity: show ? 1 : 0});
+    element.ft.handles.y.line.attr({opacity: show ? 1 : 0});
+  }
+
   return {
     move: move,
     remove: remove,
@@ -73,6 +81,7 @@ angular.module('htckApp').factory('hElement', function() {
     setRotation: setRotation,
     setKeepRatio: setKeepRatio,
     setMirror: setMirror,
-    elementRatio: elementRatio
+    elementRatio: elementRatio,
+    handles: handles
   };
 });

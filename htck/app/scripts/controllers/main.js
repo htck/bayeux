@@ -14,20 +14,13 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           hElement.remove($scope.current);
         }
         if($scope.current && $scope.current.ft){
-          // What is quicker, this or Set.forEach ?
-          $scope.current.ft.handles.x.disc.attr({opacity: 0});
-          $scope.current.ft.handles.y.disc.attr({opacity: 0});
-          $scope.current.ft.handles.x.line.attr({opacity: 0});
-          $scope.current.ft.handles.y.line.attr({opacity: 0});
+          hElement.handles($scope.current);
         }
         
         $scope.current = newCurrent;
 
         if($scope.current) {
-          $scope.current.ft.handles.x.disc.attr({opacity: 1});
-          $scope.current.ft.handles.y.disc.attr({opacity: 1});
-          $scope.current.ft.handles.x.line.attr({opacity: 1});
-          $scope.current.ft.handles.y.line.attr({opacity: 1});
+          hElement.handles($scope.current, true);
         }
         if($scope.current && $scope.current.type === 'text') {
           hTextEdit.addCaret();
