@@ -46,6 +46,11 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
     goto(currentPageIndex+1);
   }
 
+  function createByCopy() {
+    saveCurrent();
+    create(pages[currentPageIndex]);
+  }
+
   function deletePage () {
     pages.splice(currentPageIndex, 1);
     currentPageIndex = (currentPageIndex <= 0) ? (0) : (currentPageIndex - 1);
@@ -62,6 +67,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
     create: create,
     delete: deletePage,
     next: next,
-    prev: prev
+    prev: prev,
+    createByCopy: createByCopy
   };
 });
