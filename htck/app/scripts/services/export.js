@@ -44,6 +44,10 @@ angular.module('htckApp').factory('hExport', function() {
     // Serialize as json
     var json = paper.toJSON(function(el, data){ // For each element
 
+      if(el.handle){
+        return;
+      }
+
       if(el.background){
         data.background = true;
       }

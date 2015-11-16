@@ -58,6 +58,11 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $scope.elementSetKeepRatio();
 
         ft.setOpts({'drag':['self']});
+
+        ie.ft.handles.y.line.handle=true;
+        ie.ft.handles.x.line.handle=true;
+        ie.ft.handles.x.disc.handle=true;
+        ie.ft.handles.y.disc.handle=true;
       };
 
       // Should be called when creating a raphael element
