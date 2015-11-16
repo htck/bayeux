@@ -17,13 +17,22 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
   }
 
   function goto(idx) {
-    currentPageIndex = idx;
     if(pages[idx]) {
+      currentPageIndex = idx;
       hSave.import(pages[idx]);
     }
     else {
       // TODO Error
     }
+  }
+
+  function next() {
+    saveCurrent();
+    goto(currentPageIndex + 1);
+  }
+  function prev() {
+    saveCurrent();
+    goto(currentPageIndex - 1);
   }
 
   function create(json) {
@@ -51,6 +60,8 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
     saveCurrent: saveCurrent,
     goto: goto,
     create: create,
-    delete: deletePage
+    delete: deletePage,
+    next: next,
+    prev: prev
   };
 });

@@ -398,6 +398,8 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         hHotkeys($scope);
         hPages.init($scope);
 
+        $scope.hPages = hPages;
+
         $timeout(function(){$scope.$apply();});
         $timeout(function(){$('#itembank').redraw();},20);    // Chrome redraw for itembank
         $timeout(function(){$('#itembank').redraw();},1000);  // Chrome redraw for itembank
