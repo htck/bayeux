@@ -18,14 +18,17 @@ angular.module('htckApp').factory('hSave', function (hElement, hExport) {
 
     var reader = new FileReader();
     reader.onloadend = function (loadEndEvt) {
-        importFromJson(loadEndEvt.target.result);
+      scope.$parent.hPages.pages = JSON.parse(loadEndEvt.target.result);
+      scope.$parent.hPages.goto(0);
+       // importFromJson(loadEndEvt.target.result);
     };
 
     reader.readAsText(file);
   }
 
-  function save(paper, fileName){
-    var json = hExport.exportOneJSON(paper);
+  function save(pages, fileName){
+    scope.$parent.hPages.saveCurrent();
+    var json = JSON.stringify(pages);
 
     var jsonBlob = new Blob([json], {type: 'text/plain;charset=utf-8'});
     saveAs(jsonBlob, fileName);

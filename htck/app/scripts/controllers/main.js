@@ -28,7 +28,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         else{
           hTextEdit.removeCaret();
         }
-      }
+      };
 
       $scope.provisionElement = function(ie) {
         var ft = $scope.paper.freeTransform(ie, {}, function(ft, events) {
@@ -366,7 +366,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       $scope.save = function(){
         unfocus();
-        hSave.save($scope.paper, 'TheLegendaryManuscript.htck');
+        hSave.save(hPages.pages, 'TheLegendaryManuscript.htck');
       };
 
       $scope.startImport = function(){

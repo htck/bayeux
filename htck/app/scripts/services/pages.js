@@ -2,76 +2,72 @@
 
 angular.module('htckApp').factory('hPages', function (hExport, hSave) {
   var scope = {};
-  var pages = [];
-  var currentPageIndex;
+  this.pages = [];
+  this.currentPageIndex;
 
-  function init(parent){
+  this.init = function(parent){
     scope = parent.$new();
-    currentPageIndex = 0;
+    this.currentPageIndex = 0;
   }
 
-  function saveCurrent() {
+  this.saveCurrent = function() {
     scope.$parent.unfocus();
     var json = hExport.exportOneJSON(scope.$parent.paper);
 
-    pages[currentPageIndex] = json;
+    this.pages[this.currentPageIndex] = json;
   }
 
-  function goto(idx) {
-    if(pages[idx]) {
-      currentPageIndex = idx;
-      hSave.import(pages[idx]);
+  this.goto = function(idx) {
+    if(this.pages[idx]) {
+      this.currentPageIndex = idx;
+      hSave.import(this.pages[idx]);
     }
     // TODO else Error ?
   }
 
-  function next() {
-    saveCurrent();
-    goto(currentPageIndex + 1);
+  this.next = function() {
+    this.saveCurrent();
+    this.goto(this.currentPageIndex + 1);
   }
-  function prev() {
-    saveCurrent();
-    goto(currentPageIndex - 1);
-  }
-
-  function create(json) {
-    saveCurrent();
-    pages.splice(currentPageIndex+1, 0, json);
-    goto(currentPageIndex+1);
+  this.prev = function() {
+    this.saveCurrent();
+    this.goto(this.currentPageIndex - 1);
   }
 
-  function createByCopy() {
-    saveCurrent();
-    create(pages[currentPageIndex]);
+  this.create = function(json) {
+    this.saveCurrent();
+    this.pages.splice(this.currentPageIndex+1, 0, json);
+    this.goto(this.currentPageIndex+1);
   }
 
-  function createNew() {
-    saveCurrent();
-    create(hExport.exportOneJSON(scope.$parent.paper, true));
+  this.createByCopy = function() {
+    this.saveCurrent();
+    this.create(this.pages[this.currentPageIndex]);
   }
 
-  function deletePage () {
-    pages.splice(currentPageIndex, 1);
-    currentPageIndex = (currentPageIndex <= 0) ? (0) : (currentPageIndex - 1);
-    goto(currentPageIndex);
+  this.createNew = function() {
+    this.saveCurrent();
+    this.create(hExport.exportOneJSON(scope.$parent.paper, true));
   }
 
-  function getIndex (){
-    return currentPageIndex;
+  this.deletePage = function() {
+    this.pages.splice(this.currentPageIndex, 1);
+    this.currentPageIndex = (this.currentPageIndex <= 0) ? (0) : (this.currentPageIndex - 1);
+    this.goto(this.currentPageIndex);
   }
 
   return {
-    init: init,
-    pages: pages,
-    getIndex: getIndex,
+    init: this.init,
+    pages: this.pages,
+    currentPageIndex: this.currentPageIndex,
 
-    saveCurrent: saveCurrent,
-    goto: goto,
-    create: create,
-    delete: deletePage,
-    next: next,
-    prev: prev,
-    createByCopy: createByCopy,
-    createNew: createNew
+    saveCurrent: this.saveCurrent,
+    goto: this.goto,
+    create: this.create,
+    delete: this.deletePage,
+    next: this.next,
+    prev: this.prev,
+    createByCopy: this.createByCopy,
+    createNew: this.createNew
   };
 });
