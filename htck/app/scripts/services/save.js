@@ -1,7 +1,7 @@
 'use strict';
 
 /* globals saveAs */
-angular.module('htckApp').factory('hSave', function (hElement, hExport) {
+angular.module('htckApp').factory('hSave', function (hElement) {
   var scope = {};
 
   function init(parent){
