@@ -37,6 +37,12 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
     goto(currentPageIndex+1);
   }
 
+  function deletePage () {
+    pages.splice(currentPageIndex, 1);
+    currentPageIndex = (currentPageIndex <= 0) ? (0) : (currentPageIndex - 1);
+    goto(currentPageIndex);
+  }
+
   return {
     init: init,
     pages: pages,
@@ -44,6 +50,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
 
     saveCurrent: saveCurrent,
     goto: goto,
-    create: create
+    create: create,
+    delete: deletePage
   };
 });
