@@ -40,7 +40,7 @@ angular.module('htckApp').factory('hExport', function() {
     });
   }
 
-  function exportOneJSON(paper) {
+  function exportOneJSON(paper, backgroundOnly) {
     // Serialize as json
     var json = paper.toJSON(function(el, data){ // For each element
 
@@ -50,6 +50,9 @@ angular.module('htckApp').factory('hExport', function() {
 
       if(el.background){
         data.background = true;
+      }
+      else if(backgroundOnly){
+        return;
       }
       // Save properties
       data.height = el.height;

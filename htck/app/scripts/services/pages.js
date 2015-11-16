@@ -22,9 +22,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
       currentPageIndex = idx;
       hSave.import(pages[idx]);
     }
-    else {
-      // TODO Error
-    }
+    // TODO else Error ?
   }
 
   function next() {
@@ -38,11 +36,6 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
 
   function create(json) {
     saveCurrent();
-    if(!json) {
-      // TODO
-      json = '[{"data":{"background":true},"type":"rect","attrs":{"x":0,"y":0,"width":900,"height":675,"rx":0,"ry":0,"fill":"url(content//images/backgrounds/background_1.jpg)","stroke":"none","fill-opacity":"1"},"transform":"","id":0}]';
-    }
-
     pages.splice(currentPageIndex+1, 0, json);
     goto(currentPageIndex+1);
   }
@@ -52,16 +45,25 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
     create(pages[currentPageIndex]);
   }
 
+  function createNew() {
+    saveCurrent();
+    create(hExport.exportOneJSON(scope.$parent.paper, true));
+  }
+
   function deletePage () {
     pages.splice(currentPageIndex, 1);
     currentPageIndex = (currentPageIndex <= 0) ? (0) : (currentPageIndex - 1);
     goto(currentPageIndex);
   }
 
+  function getIndex (){
+    return currentPageIndex;
+  }
+
   return {
     init: init,
     pages: pages,
-    index: currentPageIndex,
+    getIndex: getIndex,
 
     saveCurrent: saveCurrent,
     goto: goto,
@@ -69,6 +71,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
     delete: deletePage,
     next: next,
     prev: prev,
-    createByCopy: createByCopy
+    createByCopy: createByCopy,
+    createNew: createNew
   };
 });
