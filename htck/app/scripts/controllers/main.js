@@ -3,7 +3,7 @@
 /* globals constants */
 /* globals Raphael */
 /* globals $ */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, $mdSidenav, hExport, hTextEdit, hHotkeys, hElement, hTools, hSave) {
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, $mdSidenav, hExport, hTextEdit, hHotkeys, hElement, hTools, hSave, hPages) {
   		$scope.constants = constants;
 
       $scope.setCurrent = function(newCurrent) {
@@ -396,6 +396,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         hTextEdit.init($scope);
         hSave.init($scope);
         hHotkeys($scope);
+        hPages.init($scope);
 
         $timeout(function(){$scope.$apply();});
         $timeout(function(){$('#itembank').redraw();},20);    // Chrome redraw for itembank
