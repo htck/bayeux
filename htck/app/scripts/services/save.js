@@ -1,7 +1,7 @@
 'use strict';
 
 /* globals saveAs */
-angular.module('htckApp').factory('hSave', function (hElement) {
+angular.module('htckApp').factory('hSave', function (hElement, $timeout) {
   var scope = {};
 
   function init(parent){
@@ -77,6 +77,7 @@ angular.module('htckApp').factory('hSave', function (hElement) {
 
       return el;
     });
+    $timeout(scope.$parent.unfocus, 1);
   }
 
   return {
