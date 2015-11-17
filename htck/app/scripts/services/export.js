@@ -70,8 +70,20 @@ angular.module('htckApp').factory('hExport', function() {
     return json;
   }
 
+  // TODO Heavily WIP
+  function exportManyPNG(scope, raphaelPaperId, canvasId, fileBase){
+    var hPages = scope.hPages;
+    hPages.saveCurrent();
+    var i=0, l = hPages.pages.length;
+    for(; i < l; i++){
+      hPages.goto(i);
+      exportOnePNG(raphaelPaperId, canvasId, fileBase + i + '.png', scope.paper);
+    }
+  }
+
   return {
     exportOnePNG: exportOnePNG,
-    exportOneJSON: exportOneJSON
+    exportOneJSON: exportOneJSON,
+    exportManyPNG: exportManyPNG
   };
 });

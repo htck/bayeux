@@ -352,6 +352,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         hExport.exportOnePNG(constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux.png', $scope.paper);
       };
 
+      $scope.exportAll = function(){
+        hExport.exportManyPNG($scope, constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux');
+      };
+
       $scope.setFontColor = function(color) {
         $scope.current.attr({ fill: color});
         $scope.fontColor = color;
