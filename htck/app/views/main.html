@@ -11,7 +11,7 @@
       <!-- images -->
       <div flex="20" layout-padding>
         <md-content class="itembank-wrapper" layout="column" layout-fill>
-          <md-tabs class="itembank" md-border-bottom layout-fill>
+          <md-tabs id="itembank" class="itembank" md-border-bottom layout-fill>
             <md-tab ng-repeat="t in constants.tabs" label="{{t.title}}">
               <md-content flex class="md-padding">
                 <div>
@@ -19,9 +19,8 @@
                     md-cols-sm="2" md-cols-md="6" md-cols-gt-md="3" md-cols-lg="9"
                     md-row-height-gt-md="2:2" md-row-height="2:2"
                     md-gutter="12px" md-gutter-gt-sm="8px" >
-                    <md-grid-tile ng-repeat="i in t.images track by $index" class="gray"
-                      md-rowspan="1" md-colspan="1" md-colspan-sm="1">
-                      <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{i}}" ng-click="addImage(i)"></img>
+                    <md-grid-tile ng-repeat="i in t.images track by $index" class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                      <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{::i}}" ng-click="addImage(i)"></img>
                     </md-grid-tile>
                   </md-grid-list>
                 </div>

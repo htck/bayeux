@@ -19,6 +19,14 @@ angular.module('htckApp').factory('hTools', function() {
       return Math.random() * (ub - lb + 1) + lb;
   }
 
+  jQuery.fn.redraw = function(){
+    jQuery(this).each(function(){
+      this.style.display='none';
+      this.offsetHeight;
+      this.style.display='block';
+    });
+  };
+
   return {
     getSizeOfImage: getSizeOfImage,
     randInt: randInt,
