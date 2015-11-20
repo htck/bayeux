@@ -24,7 +24,7 @@ rm .gitignore
 mv /tmp/dist/* .
 ls
 # Deploy
-git add content/ images/ index.html  scripts/ styles/ views/
+git add content/ images/ index.html  scripts/ styles/ views/ lib/
 git commit -am "Deploying $branch to gh-pages"
 git push --delete origin gh-pages
 git push --set-upstream origin gh-pages

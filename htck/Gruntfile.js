@@ -331,7 +331,12 @@ module.exports = function (grunt) {
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
-        files: [{
+        files: [ {
+          expand: true,
+          cwd: 'lib/font-awesome',
+          src: ['fonts/*'],
+          dest: '<%= appConfig.dist %>/lib/font-awesome/'
+        },{
           expand: true,
           dot: true,
           cwd: '<%= appConfig.app %>',
