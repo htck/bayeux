@@ -235,7 +235,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         if(!$scope.current || $scope.current.type !== 'text') {
           return;
         }
-
         $scope.current.attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px' || constants.TEXT_DEFAULT_SIZE, 'fill': $scope.fontColor});
         $timeout(hTextEdit.updateCaretPosition,10);
       };

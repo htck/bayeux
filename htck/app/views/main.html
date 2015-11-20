@@ -1,7 +1,7 @@
 <div>
   <!-- title -->
   <div id="title" class="text-center">
-    <h1 class="margin-v-0">{{constants.config.appTitle}}</h1>
+    <h1 class="margin-v-0">{{::constants.config.appTitle}}</h1>
   </div>
   <!-- /title -->
 
@@ -12,30 +12,30 @@
       <div flex="20" layout-padding>
         <md-content class="itembank-wrapper" layout="column" layout-fill>
           <md-tabs id="itembank" class="itembank" md-border-bottom layout-fill>
-            <md-tab ng-repeat="t in constants.tabs" label="{{t.title}}">
+            <md-tab ng-repeat="t in constants.tabs track by $index" label="{{::t.title}}">
               <md-content flex class="md-padding">
                 <div>
                   <md-grid-list
                     md-cols-sm="2" md-cols-md="6" md-cols-gt-md="3" md-cols-lg="9"
                     md-row-height-gt-md="2:2" md-row-height="2:2"
                     md-gutter="12px" md-gutter-gt-sm="8px" >
-                    <md-grid-tile ng-repeat="i in t.images track by $index" class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                    <md-grid-tile ng-repeat="i in ::(t.images) track by $index" class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
                       <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{::i}}" ng-click="addImage(i)"></img>
                     </md-grid-tile>
                   </md-grid-list>
                 </div>
               </md-content>
             </md-tab>
-            <md-tab label="Backgrounds" ng-if="constants.backgrounds.length > 1">
+            <md-tab label="Backgrounds" ng-if="::constants.backgrounds.length > 1">
               <md-content class="md-padding">
                 <div>
                   <md-grid-list
                     md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
                     md-row-height-gt-md="2:2" md-row-height="2:2"
                     md-gutter="12px" md-gutter-gt-sm="8px" >
-                    <md-grid-tile ng-repeat="i in constants.backgrounds track by $index" class="gray"
+                    <md-grid-tile ng-repeat="i in ::(constants.backgrounds) track by $index" class="gray"
                       md-rowspan="1" md-colspan="1" md-colspan-sm="1">
-                      <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{i}}" ng-click="setBackground(i)"></img>
+                      <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{::i}}" ng-click="setBackground(i)"></img>
                     </md-grid-tile>
                   </md-grid-list>
                 </div>
@@ -75,12 +75,12 @@
                     <div flex="flex">
                       <p class="margin-v-0">Height</p>
                       <div layout>
-                        <md-slider class="slider-common" flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" id="height-slider" aria-label="Height" class>
+                        <md-slider class="slider-common" flex min="{{::constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{::constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" id="height-slider" aria-label="Height" class>
                         </md-slider>
                       </div>
                       <p class="margin-v-0">Width</p>
                       <div layout>
-                        <md-slider class="slider-common" flex min="{{constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" id="width-slider" aria-label="Width" class>
+                        <md-slider class="slider-common" flex min="{{::constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{::constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" id="width-slider" aria-label="Width" class>
                         </md-slider>
                       </div>
                     </div>
@@ -107,14 +107,14 @@
                         <div layout="row" layout-gt-md="column">
                           <div flex="35" flex-gt-md="100" id="wrapper-font-selector" layout-padding>
                             <label>Font</label>
-                            <md-select style="margin: 0px;" ng-model="$parent.$parent.font" ng-change="elementChangeFont()">
-                              <md-option ng-repeat="f in constants.fonts" ng-value="f">
-                                {{f.font}}
+                            <md-select style="margin: 0px;" ng-model="$parent.font" ng-change="elementChangeFont()">
+                              <md-option ng-repeat="f in ::(constants.fonts) track by $index" ng-value="f">
+                                {{::f.font}}
                               </md-option>
                             </md-select>
                           </div>
                           <div flex="65" flex-gt-md="100" layout-padding>
-                            <div class="circle" ng-repeat="c in constants.colors" style="background:{{c}};" ng-click="setFontColor(c)"></div>
+                            <div class="circle" ng-repeat="c in ::(constants.colors) track by $index" style="background:{{::c}};" ng-click="setFontColor(c)"></div>
                           </div>
                         </div>
                       </div>
@@ -145,7 +145,7 @@
     <md-button class="md-primary md-raised" ng-click="export()">Submit</md-button>
     <md-button class="md-warn md-raised">Clear all</md-button>
     brushes : 
-    <md-button ng-class="b.classe" ng-repeat="b in constants.brushes" ng-click="setBrush(b)" class="png-icon" style="background-image:url({{::(b.icon)}})">
+    <md-button ng-class="b.classe" ng-repeat="b in ::constants.brushes track by $index" ng-click="setBrush(b)" class="png-icon" style="background-image:url({{::(b.icon)}})">
     </md-button>
     <md-button ng-click="save()" class="md-warn md-raised">Save</md-button>
     <md-button ng-click="startImport()" class="md-warn md-raised" id="import-btn">Import</md-button>
