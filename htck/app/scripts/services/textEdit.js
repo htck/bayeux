@@ -46,11 +46,15 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $inter
   }
 
   function handleKeyPress (evt) {
+    if(!evt.key){ // chrome
+      evt.key = String.fromCharCode(evt.which);
+    }
     if(!scope.$parent.current || scope.$parent.current.type !== 'text'){
       return;
     }
     $log.debug(evt);
-    if(evt.key === 'Backspace') {
+    if(evt.key === 'Backspace' || evt.keyCode === 8) {
+      evt.preventDefault();
       if(scope.$parent.current[0].textContent.length && scope.$parent.caret > 0){
         scope.$parent.current.attr({text: scope.$parent.current[0].textContent.substr(0,scope.$parent.caret-1)+scope.$parent.current[0].textContent.substr(scope.$parent.caret)});
         scope.$parent.caret--;
@@ -60,7 +64,7 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $inter
       evt.preventDefault();
       return;
     }
-    if(evt.key === 'ArrowLeft') {
+    if(evt.key === 'ArrowLeft' || evt.keyCode === 37) {
       if(scope.$parent.caret > 0){
         scope.$parent.caret--;
         updateCaretPosition();
@@ -69,7 +73,7 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $inter
       evt.preventDefault();
       return;
     }
-    if(evt.key === 'ArrowRight') {
+    if(evt.key === 'ArrowRight' || evt.keyCode === 39) {
       if(scope.$parent.caret < scope.$parent.current[0].textContent.length){
         scope.$parent.caret++;
         updateCaretPosition();
