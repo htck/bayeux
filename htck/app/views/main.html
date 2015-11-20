@@ -122,9 +122,17 @@
                     <div flex="40" flex-gt-md="100">
                       <md-content>
                         <section layout="row" layout-align="end" layout-align-gt-md="center" layout-wrap>
-                          <md-button ng-click="bringToFront()" class="md-raised btn-common">Front</md-button>
-                          <md-button ng-click="bringToBack()" class="md-raised btn-common">Back</md-button>
-                          <md-button ng-click="remove()" class="md-raised btn-fail">Remove</md-button>
+                          <md-button class="md-icon-button" aria-label="Top layer" ng-click="bringToFront()">
+                            <md-icon class="fa fa-chevron-up"></md-icon>
+                          </md-button>
+
+                          <md-button class="md-icon-button" aria-label="Bottom layer" ng-click="bringToBack()">
+                            <md-icon class="fa fa-chevron-down"></md-icon>
+                          </md-button>
+
+                          <md-button class="md-icon-button md-icon-warn" aria-label="Remove" ng-click="remove()">
+                            <md-icon class="fa fa-times"></md-icon>
+                          </md-button>
                         </section>
                       </md-content>
                     </div>
@@ -199,7 +207,7 @@
       <md-icon class="fa fa-chevron-right"></md-icon>
     </md-button>
 
-    <md-button class="md-icon-button" aria-label="Delete" ng-click="hPages.delete()">
+    <md-button class="md-icon-button md-icon-warn" ng-disabled="hPages.pages.length <= 1" aria-label="Delete" ng-click="hPages.delete()">
       <md-icon class="fa fa-times"></md-icon>
     </md-button>
   </div>

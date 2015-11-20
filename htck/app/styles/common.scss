@@ -4,7 +4,6 @@ $appPanelPadding: 15px;
 $appBg: #433c37;
 $imagesPanelResponsiveHeight: 300px;
 
-$colorPickerSize:40px;
 $contentMaxWidth: 1200px; // correspond to bootstrap "container"
 $contentMinHeightGTLD: 630px;	// This is a temporary workaround for chrome and nested layout-fill
 
@@ -20,6 +19,7 @@ $brushActiveColor: rgba(150,255,150,0.4);
 
 $faSize:25px;
 
+$colorPickerSize:2 * 24px;
 $toolbarHeight:60px;
 
 $defaultTransitionTime: 0.2s;

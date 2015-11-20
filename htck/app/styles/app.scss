@@ -174,10 +174,12 @@
   color:inherit;
 }
 
+
 .md-icon-button{
   color: rgba(0,0,0, 0.75);
   @include transition(color $defaultTransitionTime);
 }
+
 .md-icon-button:hover{
   color: rgba(0,0,0, 0.3);  
 }
@@ -199,8 +201,12 @@
   }
 
   .md-icon-button {
-    background:url('../images/btn-icon-bg.png') no-repeat center center;
     margin:5px;
+    background: url('../images/btn-icon-bg.png') no-repeat center center;
+  }
+
+  .md-icon-warn{
+      background: linear-gradient( rgba(255, 0, 0, 0.3), rgba(255, 0, 0, 0.3)), url('../images/btn-icon-bg.png') no-repeat center center !important;
   }
 
   /* sliders */
