@@ -1,5 +1,6 @@
 'use strict';
 
+/* globals jQuery */
 angular.module('htckApp').factory('hTools', function() {
   function getSizeOfImage(src) {
     var fimg = new Image(); 
@@ -22,7 +23,7 @@ angular.module('htckApp').factory('hTools', function() {
   jQuery.fn.redraw = function(){
     jQuery(this).each(function(){
       this.style.display='none';
-      this.offsetHeight;
+      this.offsetHeight;  /* jshint ignore:line */
       this.style.display='block';
     });
   };
