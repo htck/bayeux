@@ -142,14 +142,36 @@
 
   <!-- /toolbar-general -->
   <div id="toolbar-general" class="container" container md-whiteframe-z5>
-    <md-button class="md-primary md-raised" ng-click="export()">Submit</md-button>
-    <md-button class="md-warn md-raised">Clear all</md-button>
-    brushes : 
-    <md-button aria-label="{{::b.name}}" ng-class="b.classe" ng-repeat="b in ::constants.brushes track by $index" ng-click="setBrush(b)" class="png-icon" style="background-image:url({{::(b.icon)}})">
-    </md-button>
-    <md-button ng-click="save()" class="md-warn md-raised">Save</md-button>
-    <md-button ng-click="startImport()" class="md-warn md-raised" id="import-btn">Import</md-button>
-    <input type="file" id="import-file-chooser" ng-show="false" accept=".htck"> 
+    <span class="fleft">
+      <md-button class="md-icon-button" aria-label="Brushes" ng-click="brushes = !brushes;">
+        <md-icon class="fa fa-paint-brush"></md-icon>
+      </md-button>
+
+      <div class="brushes-wrapper {{brushes ? 'brushes-on' : ''}}">
+        <md-button aria-label="{{::b.name}}" ng-class="b.classe" ng-repeat="b in ::constants.brushes track by $index" ng-click="setBrush(b)" class="png-icon" style="background-image:url({{::(b.icon)}})">
+        </md-button>
+      </div>
+
+      <md-button class="md-icon-button" aria-label="Clear">
+        <md-icon class="fa fa-trash"></md-icon>
+      </md-button>
+
+    </span>
+    <span class="fright">
+      <md-button class="md-icon-button" aria-label="save" ng-click="save()">
+        <md-icon class="fa fa-download"></md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button" aria-label="Open" ng-click="startImport()">
+        <md-icon class="fa fa-folder-open"></md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button" aria-label="Export" ng-click="export()">
+        <md-icon class="fa fa-file-image-o"></md-icon>
+      </md-button>
+
+      <input type="file" id="import-file-chooser" ng-show="false" accept=".htck"> 
+    </span>
   </div>
   <!-- /toolbar-general -->
 

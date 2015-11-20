@@ -20,6 +20,10 @@ $brushActiveColor: rgba(150,255,150,0.4);
 
 $faSize:25px;
 
+$toolbarHeight:60px;
+
+$defaultTransitionTime: 0.2s;
+
 @mixin transition($transition...) {
     -moz-transition:    $transition;
     -o-transition:      $transition;

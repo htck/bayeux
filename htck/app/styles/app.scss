@@ -54,8 +54,29 @@
   width:100%;
 }
 
+.fleft {
+  float:left;
+}
+.fright {
+  float:right;
+}
+
 .brush-active {
   background-color: $brushActiveColor;
+}
+
+.brushes-wrapper{
+  display:inline-block;
+  max-width:0;
+  max-height:$toolbarHeight;
+  overflow:hidden;
+
+  vertical-align:top;
+  @include transition(max-width $defaultTransitionTime);
+}
+
+.brushes-on {
+  max-width: 100%;
 }
 
 #toolbar-element {
@@ -65,6 +86,8 @@
 #toolbar-general {
   background-image: url(../images/background_3.jpg);
   margin-top: 15px;
+  height:$toolbarHeight;
+  vertical-align:top;
 }
 
 .toolbar-text {
@@ -143,7 +166,7 @@
 
 .md-icon-button{
   color: rgba(0,0,0, 0.75);
-  @include transition(color .2s);
+  @include transition(color $defaultTransitionTime);
 }
 .md-icon-button:hover{
   color: rgba(0,0,0, 0.3);  
