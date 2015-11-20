@@ -19,6 +19,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
 
   this.goto = function(idx) {
     if(this.pages[idx]) {
+      scope.$parent.setBrush(undefined);
       this.currentPageIndex = idx;
       hSave.import(this.pages[idx]);
     }
