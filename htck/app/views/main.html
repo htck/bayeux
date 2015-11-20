@@ -167,7 +167,7 @@
       <md-icon class="fa fa-chevron-left"></md-icon>
     </md-button>
 
-    <span>Page : {{hPages.currentPageIndex +1 }}</span>
+    <span class="toolbar-text">Page : {{hPages.currentPageIndex +1 }} / {{hPages.pages.length || 1}}</span>
 
     <md-button ng-disabled="hPages.currentPageIndex >= hPages.pages.length -1" class="md-icon-button" aria-label="Next" ng-click="hPages.next()">
       <md-icon class="fa fa-chevron-right"></md-icon>
