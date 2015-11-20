@@ -34,8 +34,10 @@
 
 .itembank-wrapper {
   overflow: hidden;
+  min-height:$contentMinHeightGTLD;
 
   .itembank {
+    min-height: $contentMinHeightGTLD !important;
     height: 100%;
   }
   .item{
@@ -91,9 +93,11 @@
 
   .itembank-wrapper {
     height: $imagesPanelResponsiveHeight;
+    min-height:auto;
 
     .itembank {
       height:$imagesPanelResponsiveHeight;
+      min-height:auto;
     }
   }
 }
