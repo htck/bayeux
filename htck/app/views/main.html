@@ -153,6 +153,33 @@
   </div>
   <!-- /toolbar-general -->
 
+  <!-- pages toolbar -->
+  <div id="toolbar-general" class="container" container md-whiteframe-z5>
+    <md-button class="md-icon-button" aria-label="New" ng-click="hPages.createNew()">
+      <md-icon class="fa fa-file"></md-icon>
+    </md-button>
+
+    <md-button class="md-icon-button" aria-label="Duplicate" ng-click="hPages.createByCopy()">
+      <md-icon class="fa fa-file-text"></md-icon>
+    </md-button>
+
+    <md-button ng-disabled="hPages.currentPageIndex === 0" class="md-icon-button" aria-label="Previous" ng-click="hPages.prev()">
+      <md-icon class="fa fa-chevron-left"></md-icon>
+    </md-button>
+
+    <span>Page : {{hPages.currentPageIndex +1 }}</span>
+
+    <md-button ng-disabled="hPages.currentPageIndex >= hPages.pages.length -1" class="md-icon-button" aria-label="Next" ng-click="hPages.next()">
+      <md-icon class="fa fa-chevron-right"></md-icon>
+    </md-button>
+
+    <md-button class="md-icon-button" aria-label="Delete" ng-click="hPages.delete()">
+      <md-icon class="fa fa-times"></md-icon>
+    </md-button>
+
+  </div>
+  <!-- /pages toolbar -->
+
   <div id="readme-wrapper" class="container">
     <div id="readme">
       <h1>Original Historic Tale Construction Kit</h1>

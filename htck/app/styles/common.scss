@@ -17,3 +17,12 @@ $switchColorOn: #9E7D1B;
 $switchColorOff: #aaa;
 
 $brushActiveColor: rgba(150,255,150,0.4);
+
+$faSize:25px;
+
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
