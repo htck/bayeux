@@ -83,7 +83,7 @@
   color: white;
 }
 
-#toolbar-general {
+#toolbar-general, #toolbar-pages {
   background-image: url(../images/background_3.jpg);
   margin-top: 15px;
   height:$toolbarHeight;
@@ -94,6 +94,16 @@
   padding: 10px;
   background:url('../images/btn-icon-bg.png') center center;
   border-radius: 5px;
+}
+
+#toolbar-pages {
+  max-height:0px;
+  overflow:hidden;
+  @include transition(max-height $defaultTransitionTime);
+}
+
+.toolbar-pages-active {
+  max-height: $toolbarHeight !important;
 }
 
 #wrapper-font-selector {

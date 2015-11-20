@@ -156,6 +156,10 @@
         <md-icon class="fa fa-trash"></md-icon>
       </md-button>
 
+      <md-button class="md-icon-button" aria-label="Pages" ng-click="pages = !pages;">
+        <md-icon class="fa fa-files-o"></md-icon>
+      </md-button>
+
     </span>
     <span class="fright">
       <md-button class="md-icon-button" aria-label="save" ng-click="save()">
@@ -176,7 +180,7 @@
   <!-- /toolbar-general -->
 
   <!-- pages toolbar -->
-  <div id="toolbar-general" class="container" container md-whiteframe-z5>
+  <div id="toolbar-pages" class="container {{pages ? 'toolbar-pages-active' : ''}}" container md-whiteframe-z5>
     <md-button class="md-icon-button" aria-label="New" ng-click="hPages.createNew()">
       <md-icon class="fa fa-file"></md-icon>
     </md-button>
