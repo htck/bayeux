@@ -4,6 +4,7 @@
 /* globals canvg */
 /* globals saveAs */
 /* globals constants */
+/* globals gifshot */
 angular.module('htckApp').factory('hExport', function (hTools) {
   // Function gotten from SVGFix
   // source : https://code.google.com/p/svgfix/
@@ -29,6 +30,7 @@ angular.module('htckApp').factory('hExport', function (hTools) {
     // Convert to canvas using canvg
     canvg(document.getElementById(canvasId), svgStr, {
       renderCallback: function() {
+        var canvas = document.getElementById(canvasId);
         callback(canvas);
       }
     });
@@ -98,6 +100,7 @@ angular.module('htckApp').factory('hExport', function (hTools) {
         'gifHeight': gifHeight,
         'sampleInterval': 20,
         'interval': gifInterval,
+        'numFrames': base64ImageArray.length,
         'crossOrigin': '' // Firefox
     },function(obj) {
         if(!obj.error) {

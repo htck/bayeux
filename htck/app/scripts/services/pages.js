@@ -1,5 +1,6 @@
 'use strict';
 
+/* globals constants */
 angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, $mdDialog, $log) {
   var scope = {};
   this.pages = [];
@@ -73,7 +74,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, 
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
-    $scope.answer = function(answer) {
+    $scope.answer = function() {
       $mdDialog.hide({});
     };
   }
@@ -93,7 +94,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, 
       locals : {
       }
     })
-    .then(function(answer) {
+    .then(function() {
       scope.$parent.exportGIFRunning = true;
       hExport.exportManyGIF(hPages.pngPages, 'TheLegendaryTaleOfBayeux.gif', 'canvas', hPages.gifWidth, hPages.gifWidth * constants.H / constants.W, hPages.gifInterval, function(){
         scope.$parent.exportGIFRunning = false;
