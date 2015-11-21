@@ -17,7 +17,7 @@ angular.module('htckApp').factory('hExport', function() {
     return fixed; 
   }
 
-  function exportOneBase64(raphaelPaperId, canvasId, fileName, paper, callback){
+  function exportOneCanvas(raphaelPaperId, canvasId, paper, callback){
     paper.setSize(constants.W+'px',constants.H+'px');
     // Get the svg element created by Raphael
     var svg = document.getElementById(raphaelPaperId).children[0];
@@ -29,20 +29,23 @@ angular.module('htckApp').factory('hExport', function() {
     // Convert to canvas using canvg
     canvg(document.getElementById(canvasId), svgStr, {
       renderCallback: function() {
-        var canvas = document.getElementById(canvasId);
-
-        // Get blob from canvas image
-        canvas.toBlob(function(blob){
-          callback(blob);
-        });
+        callback(canvas);
       }
     });
   }
 
+  function exportOneBase64(raphaelPaperId, canvasId, paper, callback){
+    exportOneCanvas(raphaelPaperId, canvasId, paper, function(canvas){
+      callback(canvas.toDataURL());
+    });
+  }
+
   function exportOnePNG(raphaelPaperId, canvasId, fileName, paper){
-    exportOneBase64(raphaelPaperId, canvasId, fileName, paper, function(blob){
-      // Save to file using FileSaver.js
-      saveAs(blob, fileName);  // TODO generate random name for file
+    exportOneCanvas(raphaelPaperId, canvasId, paper, function(canvas){
+      canvas.toBlob(function(blob){
+        // Save to file using FileSaver.js
+        saveAs(blob, fileName);  // TODO generate random name for file
+      });
     });
   }
 
@@ -87,9 +90,29 @@ angular.module('htckApp').factory('hExport', function() {
     }
   }
 
+  function exportManyGIF(base64ImageArray) {
+    console.log(base64ImageArray);
+    gifshot.createGIF({
+        'images': base64ImageArray,
+        'gifwidth': constants.W / 2,
+        'gifheight': constants.H / 2,
+        'crossOrigin': '' // Firefox
+    },function(obj) {
+        if(!obj.error) {
+            var image = obj.image,
+            animatedImage = document.createElement('img');
+            animatedImage.src = image;
+            document.body.appendChild(animatedImage);
+        }
+        console.log(obj);
+    });
+  }
+
   return {
     exportOnePNG: exportOnePNG,
     exportOneJSON: exportOneJSON,
-    exportManyPNG: exportManyPNG
+    exportManyPNG: exportManyPNG,
+    exportManyGIF: exportManyGIF,
+    exportOneBase64: exportOneBase64
   };
 });

@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('htckApp').factory('hPages', function (hExport, hSave) {
+angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout) {
   var scope = {};
   this.pages = [];
+  this.pngPages = [];
   this.currentPageIndex=0;
 
   this.init = function(parent){
@@ -13,6 +14,11 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
   this.saveCurrent = function() {
     scope.$parent.unfocus();
     var json = hExport.exportOneJSON(scope.$parent.paper);
+    var pageIndex = this.currentPageIndex;
+    var hPages = this;
+    hExport.exportOneBase64(constants.RAPHAEL_PAPER, 'canvas', scope.$parent.paper, function(base64){
+      hPages.pngPages[pageIndex] = base64;
+    });
 
     this.pages[this.currentPageIndex] = json;
   };
@@ -58,9 +64,18 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
     this.goto(this.currentPageIndex);
   };
 
+  this.exportGIF = function() {
+    this.saveCurrent();
+    var hPages = this;
+    $timeout(function(){
+      hExport.exportManyGIF(hPages.pngPages);
+    },200);
+  };
+
   return {
     init: this.init,
     pages: this.pages,
+    pngPages: this.pngPages,
     currentPageIndex: this.currentPageIndex,
 
     saveCurrent: this.saveCurrent,
@@ -70,6 +85,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave) {
     next: this.next,
     prev: this.prev,
     createByCopy: this.createByCopy,
-    createNew: this.createNew
+    createNew: this.createNew,
+    exportGIF: this.exportGIF
   };
 });
