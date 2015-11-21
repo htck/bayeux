@@ -91,7 +91,10 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, 
       }
     })
     .then(function(answer) {
-      hExport.exportManyGIF(hPages.pngPages, 'TheLegendaryTaleOfBayeux.gif', 'canvas', hPages.gifWidth, hPages.gifWidth * constants.H / constants.W, hPages.gifInterval);
+      scope.$parent.exportGIFRunning = true;
+      hExport.exportManyGIF(hPages.pngPages, 'TheLegendaryTaleOfBayeux.gif', 'canvas', hPages.gifWidth, hPages.gifWidth * constants.H / constants.W, hPages.gifInterval, function(){
+        scope.$parent.exportGIFRunning = false;
+      });
     }, function() {
       $log.debug('Cancel');
     });

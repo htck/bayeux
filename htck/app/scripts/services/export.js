@@ -40,11 +40,12 @@ angular.module('htckApp').factory('hExport', function (hTools) {
     });
   }
 
-  function exportOnePNG(raphaelPaperId, canvasId, fileName, paper){
+  function exportOnePNG(raphaelPaperId, canvasId, fileName, paper, callback){
     exportOneCanvas(raphaelPaperId, canvasId, paper, function(canvas){
       canvas.toBlob(function(blob){
         // Save to file using FileSaver.js
         saveAs(blob, fileName);  // TODO generate random name for file
+        callback();
       });
     });
   }
@@ -90,7 +91,7 @@ angular.module('htckApp').factory('hExport', function (hTools) {
     }
   }
 
-  function exportManyGIF(base64ImageArray, fileName, canvasId, gifWidth, gifHeight, gifInterval) {
+  function exportManyGIF(base64ImageArray, fileName, canvasId, gifWidth, gifHeight, gifInterval, callback) {
     gifshot.createGIF({
         'images': base64ImageArray,
         'gifWidth': gifWidth,
@@ -104,6 +105,7 @@ angular.module('htckApp').factory('hExport', function (hTools) {
             var blob = hTools.b64toBlob(image.split(',')[1], 'image/gif');
             // Save to file using FileSaver.js
             saveAs(blob, fileName);  // TODO generate random name for file
+            callback();
         }
     });
   }

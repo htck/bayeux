@@ -179,7 +179,8 @@
       </md-button>
 
       <md-button class="md-icon-button" aria-label="Export" ng-click="export()">
-        <md-icon class="fa fa-file-image-o"></md-icon>
+        <md-icon class="fa fa-file-image-o" ng-if="!exportPNGRunning"></md-icon>
+        <span ng-if="exportPNGRunning"><md-icon class="fa-spin fa fa-spinner"></md-icon></span>
       </md-button>
 
       <input type="file" id="import-file-chooser" ng-show="false" accept=".htck"> 
@@ -212,7 +213,8 @@
     </md-button>
 
     <md-button class="md-icon-button" ng-disabled="hPages.pages.length <= 1" aria-label="Delete" ng-click="hPages.exportGIF($event)">
-      <md-icon class="fa fa-film sh-fa-t sh-fa-l"></md-icon>
+      <md-icon class="fa fa-film sh-fa-t sh-fa-l" ng-if="!exportGIFRunning"></md-icon>
+      <span ng-if="exportGIFRunning"><md-icon class="fa-spin fa fa-spinner"></md-icon></span>
     </md-button>
   </div>
   <!-- /pages toolbar -->

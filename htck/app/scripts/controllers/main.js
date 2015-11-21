@@ -349,7 +349,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $log.debug('Exporting');
         // Unfocus to remove handles from elements
         unfocus();
-        hExport.exportOnePNG(constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux.png', $scope.paper);
+        $scope.exportPNGRunning = true;
+        hExport.exportOnePNG(constants.RAPHAEL_PAPER, 'canvas', 'TheGloriousTaleOfBayeux.png', $scope.paper, function(){
+          $scope.exportPNGRunning = false;
+        });
       };
 
       $scope.exportAll = function(){
