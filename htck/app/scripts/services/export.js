@@ -17,7 +17,7 @@ angular.module('htckApp').factory('hExport', function() {
     return fixed; 
   }
 
-  function exportOnePNG(raphaelPaperId, canvasId, fileName, paper){
+  function exportOneBase64(raphaelPaperId, canvasId, fileName, paper, callback){
     paper.setSize(constants.W+'px',constants.H+'px');
     // Get the svg element created by Raphael
     var svg = document.getElementById(raphaelPaperId).children[0];
@@ -33,10 +33,16 @@ angular.module('htckApp').factory('hExport', function() {
 
         // Get blob from canvas image
         canvas.toBlob(function(blob){
-          // Save to file using FileSaver.js
-          saveAs(blob, fileName);  // TODO generate random name for file
+          callback(blob);
         });
       }
+    });
+  }
+
+  function exportOnePNG(raphaelPaperId, canvasId, fileName, paper){
+    exportOneBase64(raphaelPaperId, canvasId, fileName, paper, function(blob){
+      // Save to file using FileSaver.js
+      saveAs(blob, fileName);  // TODO generate random name for file
     });
   }
 
