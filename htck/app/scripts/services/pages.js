@@ -1,10 +1,12 @@
 'use strict';
 
-angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout) {
+angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, $mdDialog, $log) {
   var scope = {};
   this.pages = [];
   this.pngPages = [];
   this.currentPageIndex=0;
+  this.gifInterval = 1;
+  this.gifWidth = constants.W / 2;
 
   this.init = function(parent){
     scope = parent.$new();
@@ -64,12 +66,39 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout) 
     this.goto(this.currentPageIndex);
   };
 
-  this.exportGIF = function() {
+  function gifDialogController($scope, hPages){
+    $scope.hPages = hPages;
+    $scope.constants = constants;
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+    $scope.answer = function(answer) {
+      $mdDialog.hide({});
+    };
+  }
+
+  this.exportGIF = function(ev) {
     this.saveCurrent();
     var hPages = this;
+    $mdDialog.show({
+      controller: gifDialogController,
+      templateUrl: 'views/gifsettings.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      locals : {
+      }
+    })
+    .then(function(answer) {
+      hExport.exportManyGIF(hPages.pngPages, 'TheLegendaryTaleOfBayeux.gif', 'canvas', hPages.gifWidth, hPages.gifWidth * constants.H / constants.W, hPages.gifInterval);
+    }, function() {
+      $log.debug('Cancel');
+    });
+    /*
     $timeout(function(){
       hExport.exportManyGIF(hPages.pngPages, 'TheLegendaryTaleOfBayeux.gif', 'canvas');
-    },200);
+    },200);*/
   };
 
   return {
@@ -77,6 +106,8 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout) 
     pages: this.pages,
     pngPages: this.pngPages,
     currentPageIndex: this.currentPageIndex,
+    gifInterval: this.gifInterval,
+    gifWidth: this.gifWidth,
 
     saveCurrent: this.saveCurrent,
     goto: this.goto,

@@ -22,9 +22,12 @@ $faShift: 4px;
 $iconButtonMargin: 5px;
 
 $colorPickerSize:2 * 24px;
+$mdComponent:48px;
 $toolbarHeight:60px;
 
 $defaultTransitionTime: 0.2s;
+
+$dialogW: 35vw;
 
 @mixin transition($transition...) {
     -moz-transition:    $transition;

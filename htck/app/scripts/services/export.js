@@ -90,11 +90,13 @@ angular.module('htckApp').factory('hExport', function (hTools) {
     }
   }
 
-  function exportManyGIF(base64ImageArray, fileName, canvasId) {
+  function exportManyGIF(base64ImageArray, fileName, canvasId, gifWidth, gifHeight, gifInterval) {
     gifshot.createGIF({
         'images': base64ImageArray,
-        'gifWidth': constants.W / 2,
-        'gifHeight': constants.H / 2,
+        'gifWidth': gifWidth,
+        'gifHeight': gifHeight,
+        'sampleInterval': 20,
+        'interval': gifInterval,
         'crossOrigin': '' // Firefox
     },function(obj) {
         if(!obj.error) {

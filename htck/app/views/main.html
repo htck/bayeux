@@ -165,7 +165,7 @@
       </md-button>
 
       <md-button class="md-icon-button" aria-label="Pages" ng-click="pages = !pages;">
-        <md-icon class="fa fa-files-o"></md-icon>
+        <md-icon class="fa fa-clone"></md-icon>
       </md-button>
 
     </span>
@@ -190,11 +190,11 @@
   <!-- pages toolbar -->
   <div id="toolbar-pages" class="container {{pages ? 'toolbar-pages-active' : ''}}" container md-whiteframe-z5>
     <md-button class="md-icon-button" aria-label="New" ng-click="hPages.createNew()">
-      <md-icon class="fa fa-file"></md-icon>
+      <md-icon class="fa fa-file-o"></md-icon>
     </md-button>
 
     <md-button class="md-icon-button" aria-label="Duplicate" ng-click="hPages.createByCopy()">
-      <md-icon class="fa fa-file-text"></md-icon>
+      <md-icon class="fa fa-files-o"></md-icon>
     </md-button>
 
     <md-button ng-disabled="hPages.currentPageIndex === 0" class="md-icon-button" aria-label="Previous" ng-click="hPages.prev()">
@@ -211,8 +211,8 @@
       <md-icon class="fa fa-times"></md-icon>
     </md-button>
 
-    <md-button class="md-icon-button" ng-disabled="hPages.pages.length <= 1" aria-label="Delete" ng-click="hPages.exportGIF()">
-      <md-icon class="fa fa-times"></md-icon>
+    <md-button class="md-icon-button" ng-disabled="hPages.pages.length <= 1" aria-label="Delete" ng-click="hPages.exportGIF($event)">
+      <md-icon class="fa fa-film sh-fa-t sh-fa-l"></md-icon>
     </md-button>
   </div>
   <!-- /pages toolbar -->

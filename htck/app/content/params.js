@@ -15,7 +15,9 @@ var params = {
     H : 675,
     TEXT_DEFAULT_SIZE : '30px',
     TEXT_DEFAULT_FONT_COLOR : '#000000',
-    DEBOUNCE: 12
+    DEBOUNCE: 12,
+    GIFINTERVAL_MIN: 0.1,
+    GIFINTERVAL_MAX: 5
 };
 
 $.extend(constants, params);

@@ -152,6 +152,9 @@
 .text-center {
   text-align: center;
 }
+.text-right {
+  text-align: right;
+}
 
 .container {
   max-width: 96%;
@@ -161,6 +164,10 @@
 .margin-v-0 {
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.margin-v-30 {
+  margin-top: 30px;
 }
 
 .circle{
@@ -180,16 +187,16 @@
 }
 
 .sh-fa-l{
-  margin-left: -$faShift;
+  margin-left: -$faShift !important;
 }
 .sh-fa-r{
-  margin-right: -$faShift;
+  margin-right: -$faShift !important;
 }
 .sh-fa-b{
-  margin-bottom: -$faShift;
+  margin-bottom: -$faShift !important;
 }
 .sh-fa-t{
-  margin-top: -$faShift;
+  margin-top: -$faShift !important;
 }
 
 
@@ -200,6 +207,15 @@
 
 .md-icon-button:hover{
   color: rgba(0,0,0, 0.3);  
+}
+
+.dialog{
+  width:$dialogW;
+
+  .label{
+    vertical-align:top;
+    padding-top:$mdComponent / 2 - 10px;
+  }
 }
 
 #ng_view {
@@ -228,6 +244,16 @@
   }
 
   /* sliders */
+
+  .gif-interval-wrapper {
+    width:300px;
+    vertical-align:top;
+    margin:$iconButtonMargin;
+  }
+
+  .inline-block {
+    display: inline-block;
+  }
 
   .slider-common {
     .md-track {
