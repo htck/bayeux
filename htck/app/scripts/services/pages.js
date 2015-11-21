@@ -68,7 +68,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout) 
     this.saveCurrent();
     var hPages = this;
     $timeout(function(){
-      hExport.exportManyGIF(hPages.pngPages);
+      hExport.exportManyGIF(hPages.pngPages, 'TheLegendaryTaleOfBayeux.gif', 'canvas');
     },200);
   };
 

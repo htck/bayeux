@@ -4,7 +4,7 @@
 /* globals canvg */
 /* globals saveAs */
 /* globals constants */
-angular.module('htckApp').factory('hExport', function() {
+angular.module('htckApp').factory('hExport', function (hTools) {
   // Function gotten from SVGFix
   // source : https://code.google.com/p/svgfix/
   function svgfix (text) {
@@ -90,21 +90,19 @@ angular.module('htckApp').factory('hExport', function() {
     }
   }
 
-  function exportManyGIF(base64ImageArray) {
-    console.log(base64ImageArray);
+  function exportManyGIF(base64ImageArray, fileName, canvasId) {
     gifshot.createGIF({
         'images': base64ImageArray,
-        'gifwidth': constants.W / 2,
-        'gifheight': constants.H / 2,
+        'gifWidth': constants.W / 2,
+        'gifHeight': constants.H / 2,
         'crossOrigin': '' // Firefox
     },function(obj) {
         if(!obj.error) {
-            var image = obj.image,
-            animatedImage = document.createElement('img');
-            animatedImage.src = image;
-            document.body.appendChild(animatedImage);
+            var image = obj.image;
+            var blob = hTools.b64toBlob(image.split(',')[1], 'image/gif');
+            // Save to file using FileSaver.js
+            saveAs(blob, fileName);  // TODO generate random name for file
         }
-        console.log(obj);
     });
   }
 
