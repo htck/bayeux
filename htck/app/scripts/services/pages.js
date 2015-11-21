@@ -63,6 +63,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, 
 
   this.deletePage = function() {
     this.pages.splice(this.currentPageIndex, 1);
+    this.pngPages.splice(this.currentPageIndex, 1);
     this.currentPageIndex = (this.currentPageIndex <= 0) ? (0) : (this.currentPageIndex - 1);
     this.goto(this.currentPageIndex);
   };
