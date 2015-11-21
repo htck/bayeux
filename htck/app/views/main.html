@@ -80,24 +80,24 @@
                     <div flex="flex">
                       <p class="margin-v-0">Opacity</p>
                       <div layout>
-                        <md-slider class="slider-common" flex min="0" step="0.02" max="1" ng-model="current.opacity" ng-change="elementSetOpacity()" id="opacity-slider" aria-label="Opacity" class>
+                        <md-slider class="slider-common" flex min="0" step="0.02" max="1" ng-model="current.opacity" ng-change="elementSetOpacity()" ng-model-options="{debounce: constants.DEBOUNCE}" id="opacity-slider" aria-label="Opacity" class>
                         </md-slider>
                       </div>
                       <p class="margin-v-0">Rotation</p>
                       <div layout>
-                        <md-slider class="slider-common" flex min="-180" step="1" max="180" ng-model="current.rotation" ng-change="elementSetRotation()" id="rotation-slider" aria-label="Rotation" class>
+                        <md-slider class="slider-common" flex min="-180" step="1" max="180" ng-model="current.rotation" ng-change="elementSetRotation()" ng-model-options="{debounce: constants.DEBOUNCE}" id="rotation-slider" aria-label="Rotation" class>
                         </md-slider>
                       </div>
                     </div>
                     <div flex="flex">
                       <p class="margin-v-0">Height</p>
                       <div layout>
-                        <md-slider class="slider-common" flex min="{{::constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{::constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" id="height-slider" aria-label="Height" class>
+                        <md-slider class="slider-common" flex min="{{::constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{::constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" ng-model-options="{debounce: constants.DEBOUNCE}" id="height-slider" aria-label="Height" class>
                         </md-slider>
                       </div>
                       <p class="margin-v-0">Width</p>
                       <div layout>
-                        <md-slider class="slider-common" flex min="{{::constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{::constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" id="width-slider" aria-label="Width" class>
+                        <md-slider class="slider-common" flex min="{{::constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{::constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" ng-model-options="{debounce: constants.DEBOUNCE}" id="width-slider" aria-label="Width" class>
                         </md-slider>
                       </div>
                     </div>

@@ -14,7 +14,8 @@ var params = {
     W : 900,
     H : 675,
     TEXT_DEFAULT_SIZE : '30px',
-    TEXT_DEFAULT_FONT_COLOR : '#000000'
+    TEXT_DEFAULT_FONT_COLOR : '#000000',
+    DEBOUNCE: 12
 };
 
 $.extend(constants, params);
