@@ -4,13 +4,15 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $inter
   var scope = {};
 
   function init(parent){
-    $document.on('keydown', handleKeyPress);
+    $document.on('keypress', handleKeyPress);
+    $document.on('keydown', handleKeyDown);
     scope = parent.$new();
   }
 
   function destroy(){
     $interval.cancel(caretBlinker);
-    $document.off('keydown', handleKeyPress);
+    $document.off('keypress', handleKeyPress);
+    $document.off('keydown', handleKeyDown);
   }
 
   function blinkCaret(){
@@ -43,6 +45,20 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $inter
     scope.$parent.caretPointer.attr({'fill-opacity': 1});
 
     cloneText.remove();
+  }
+
+  function handleKeyDown(evt) {
+    var forward = false;
+    if(evt.keyCode === 32) {
+      evt.key = ' ';
+      forward = true;
+    }
+    else if(evt.keyCode === 8 || evt.keyCode === 37 || evt.keyCode === 39){
+      forward = true;
+    }
+    if(forward){
+      handleKeyPress(evt);
+    }
   }
 
   function handleKeyPress (evt) {
