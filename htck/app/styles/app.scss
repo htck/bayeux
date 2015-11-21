@@ -123,6 +123,12 @@
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+.layer-management{
+  margin-top:0;
+  margin-bottom: 15px;
+  padding-top:-$iconButtonMargin;
+}
+
 /* small device */
 
 @media (max-width: $contentMaxWidth) {
@@ -170,8 +176,20 @@
 .fa {
   font-size:$faSize;
   margin-top:-3px;
-  margin-left:2px;
   color:inherit;
+}
+
+.sh-fa-l{
+  margin-left: -$faShift;
+}
+.sh-fa-r{
+  margin-right: -$faShift;
+}
+.sh-fa-b{
+  margin-bottom: -$faShift;
+}
+.sh-fa-t{
+  margin-top: -$faShift;
 }
 
 
@@ -201,7 +219,7 @@
   }
 
   .md-icon-button {
-    margin:5px;
+    margin:$iconButtonMargin;
     background: url('../images/btn-icon-bg.png') no-repeat center center;
   }
 

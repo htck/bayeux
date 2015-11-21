@@ -59,6 +59,23 @@
           <div id="toolbar-element" class="text-center" flex="25" layout-padding layout-fill>
               <div>
                 <div ng-show="current">
+                  <div flex="40" flex-gt-md="100" class="layer-management">
+                    <md-content>
+                      <section layout="row" layout-align="end" layout-align-gt-md="center" layout-wrap>
+                        <md-button class="md-icon-button" aria-label="Top layer" ng-click="bringToFront()">
+                          <md-icon class="fa fa-chevron-up sh-fa-t"></md-icon>
+                        </md-button>
+
+                        <md-button class="md-icon-button" aria-label="Bottom layer" ng-click="bringToBack()">
+                          <md-icon class="fa fa-chevron-down sh-fa-t"></md-icon>
+                        </md-button>
+
+                        <md-button class="md-icon-button md-icon-warn" aria-label="Remove" ng-click="remove()">
+                          <md-icon class="fa fa-times"></md-icon>
+                        </md-button>
+                      </section>
+                    </md-content>
+                  </div>
                   <div layout="row" layout-gt-md="column">
                     <div flex="flex">
                       <p class="margin-v-0">Opacity</p>
@@ -118,23 +135,6 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div flex="40" flex-gt-md="100">
-                      <md-content>
-                        <section layout="row" layout-align="end" layout-align-gt-md="center" layout-wrap>
-                          <md-button class="md-icon-button" aria-label="Top layer" ng-click="bringToFront()">
-                            <md-icon class="fa fa-chevron-up"></md-icon>
-                          </md-button>
-
-                          <md-button class="md-icon-button" aria-label="Bottom layer" ng-click="bringToBack()">
-                            <md-icon class="fa fa-chevron-down"></md-icon>
-                          </md-button>
-
-                          <md-button class="md-icon-button md-icon-warn" aria-label="Remove" ng-click="remove()">
-                            <md-icon class="fa fa-times"></md-icon>
-                          </md-button>
-                        </section>
-                      </md-content>
                     </div>
                   </div>
                 </div>
@@ -198,13 +198,13 @@
     </md-button>
 
     <md-button ng-disabled="hPages.currentPageIndex === 0" class="md-icon-button" aria-label="Previous" ng-click="hPages.prev()">
-      <md-icon class="fa fa-chevron-left"></md-icon>
+      <md-icon class="fa fa-chevron-left sh-fa-l sh-fa-b"></md-icon>
     </md-button>
 
     <span class="toolbar-text">Page : {{hPages.currentPageIndex +1 }} / {{hPages.pages.length || 1}}</span>
 
     <md-button ng-disabled="hPages.currentPageIndex >= hPages.pages.length -1" class="md-icon-button" aria-label="Next" ng-click="hPages.next()">
-      <md-icon class="fa fa-chevron-right"></md-icon>
+      <md-icon class="fa fa-chevron-right sh-fa-r sh-fa-b"></md-icon>
     </md-button>
 
     <md-button class="md-icon-button md-icon-warn" ng-disabled="hPages.pages.length <= 1" aria-label="Delete" ng-click="hPages.delete()">
