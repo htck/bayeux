@@ -12,6 +12,15 @@ grunt build
 ls
 cd ..
 ls htck
+
+# Create dist zip file
+cd htck
+cp -R dist htck-Bayeux
+zip -r htck-Bayeux.zip htck-Bayeux/
+mv htck-Bayeux.zip dist/
+rm -rf htck-Bayeux
+cd ..
+
 git branch -D gh-pages 
 # Save built app to tmp folder
 cp -R htck/dist/ /tmp/
@@ -24,7 +33,7 @@ rm .gitignore
 mv /tmp/dist/* .
 ls
 # Deploy
-git add content/ images/ index.html  scripts/ styles/ views/ lib/
+git add content/ images/ index.html  scripts/ styles/ views/ lib/ *.zip
 git commit -am "Deploying $branch to gh-pages"
 git push --delete origin gh-pages
 git push --set-upstream origin gh-pages
