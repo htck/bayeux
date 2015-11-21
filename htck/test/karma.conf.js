@@ -38,6 +38,7 @@ module.exports = function(config) {
       'lib/FileSaver/FileSaver.js',
       'lib/raphael/raphael.js',
       'lib/blueimp-canvas-to-blob/js/canvas-to-blob.js',
+      'lib/gifshot/build/gifshot.js',
       'lib/angular-mocks/angular-mocks.js',
       // endbower
       'lib/raphael_free_transform/raphael.free_transform.js',
