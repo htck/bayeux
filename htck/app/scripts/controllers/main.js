@@ -393,7 +393,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $log.debug('Paper', paper);
         paper.setViewBox(0,0,constants.W,constants.H,true);
         paper.setSize('100%', '100%');
-        paper.canvas.setAttributeNS('http://www.w3.org/XML/1998/namespace', 'xml:space','preserve');
 
         var background = $scope.paper.rect(0, 0, constants.W,constants.H);
         background.attr({'fill':'url('+constants.backgrounds[0]+')', 'fill-opacity':'1', 'stroke':'none'});
