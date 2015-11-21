@@ -79,6 +79,9 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, 
   }
 
   this.exportGIF = function(ev) {
+    if(this.pages.length <= 1){
+      return;
+    }
     this.saveCurrent();
     var hPages = this;
     $mdDialog.show({

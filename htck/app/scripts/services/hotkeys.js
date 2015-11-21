@@ -1,7 +1,7 @@
 'use strict';
 
 /* globals constants */
-angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextEdit) {
+angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextEdit, hPages) {
   function init(parent) {
     var scope = parent.$new();
     // Hotkeys
@@ -129,6 +129,18 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
           hTextEdit.popChar(scope.$parent.current);
         }
         scope.$parent.export();
+      }
+    });
+
+    hotkeys.add({
+      combo: 'ctrl+shift+g',
+      description: 'Exports pages to gif',
+      callback: function (event){
+        event.preventDefault();
+        if(scope.$parent.current && scope.$parent.current.type ==='text'){
+          hTextEdit.popChar(scope.$parent.current);
+        }
+        hPages.exportGIF(null);
       }
     });
   }
