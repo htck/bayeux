@@ -72,6 +72,12 @@ angular.module('htckApp').factory('hSave', function (hElement, $timeout) {
           ft.setOpts({distance: scope.$parent.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
           el.inited = true;
         }
+
+        ft.handles.y.line.handle=true;
+        ft.handles.x.line.handle=true;
+        ft.handles.x.disc.handle=true;
+        ft.handles.y.disc.handle=true;
+        
         hElement.handles(el);
       }
 

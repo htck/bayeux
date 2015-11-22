@@ -46,7 +46,6 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, 
   };
 
   this.create = function(json) {
-    this.saveCurrent();
     this.pages.splice(this.currentPageIndex+1, 0, json);
     this.goto(this.currentPageIndex+1);
   };

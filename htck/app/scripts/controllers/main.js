@@ -33,7 +33,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       $scope.provisionElement = function(ie) {
         var ft = $scope.paper.freeTransform(ie, {}, function(ft, events) {
           $scope.setCurrent(ft.subject);
-          handleFtChanged(ft, events);
+          $scope.handleFtChanged(ft, events);
         });
         
         // to make this work free_transform plugin must implement range.scale for x AND y 
@@ -59,10 +59,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
         ft.setOpts({'drag':['self']});
 
+        if(ie.type === 'text'){
+          ft.setOpts({distance: $scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
+        }
+
         ie.ft.handles.y.line.handle=true;
         ie.ft.handles.x.line.handle=true;
         ie.ft.handles.x.disc.handle=true;
         ie.ft.handles.y.disc.handle=true;
+
       };
 
       // Should be called when creating a raphael element
@@ -71,7 +76,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         return ie;
       }
 
-      function handleFtChanged (ft, events) {
+      $scope.handleFtChanged = function (ft, events) {
         if (events.indexOf('rotate') != -1) {
           hElement.setRotation($scope.current, ft.attrs.rotate);
         }
@@ -235,9 +240,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         //text[0].textContent = '';
         text.attr({text: ''});
         text.inited = true;
-        // set text handles size
-        var tesxtFt = $scope.paper.freeTransform(text);
-        tesxtFt.setOpts({distance: $scope.constants.ELEMENT_TEXT_HANDLE_DISTANCE});
 
         $scope.$apply();
       };
