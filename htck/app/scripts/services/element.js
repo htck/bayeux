@@ -44,7 +44,7 @@ angular.module('htckApp').factory('hElement', function() {
     if(!element){
       return;
     }
-    element.rotation = angle;
+    element.rotation = Math.floor(angle);
     element.ft.attrs.rotate=element.rotation;
     element.ft.apply();
   }

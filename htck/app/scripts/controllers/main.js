@@ -33,7 +33,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       $scope.provisionElement = function(ie) {
         var ft = $scope.paper.freeTransform(ie, {}, function(ft, events) {
           $scope.setCurrent(ft.subject);
-          $scope.handleFtChanged(ft, events);
+          handleFtChanged(ft, events);
         });
         
         // to make this work free_transform plugin must implement range.scale for x AND y 
@@ -71,18 +71,16 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         return ie;
       }
 
-      $scope.handleFtChanged = function (ft, events) {
-        if (events.indexOf('rotate') >= 0) {
-          $scope.elementChangedRotation(ft.attrs.rotate);
-          $scope.$apply();
+      function handleFtChanged (ft, events) {
+        if (events.indexOf('rotate') != -1) {
+          hElement.setRotation($scope.current, ft.attrs.rotate);
         }
-        if (events.indexOf('scale') >= 0) {
+        if (events.indexOf('scale') != -1) {
           $scope.elementChangedHeight(ft.attrs.scale.y);
           $scope.elementChangedWidth(ft.attrs.scale.x);
-          $scope.$apply();
         }
         hTextEdit.updateCaretPosition();
-      };
+      }
 
       // Unselects an element
       function unfocus(){
@@ -178,38 +176,17 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
       //modified by handles 
       $scope.elementChangedHeight = function(height){
-        if(!$scope.current) {
-          return;
-        }
         hElement.setHeight($scope.current, height);
-        hTextEdit.updateCaretPosition();
       };
 
       //modified by handles 
       $scope.elementChangedWidth = function(width){
-        if(!$scope.current) {
-          return;
-        }
         hElement.setWidth($scope.current, width);
-        hTextEdit.updateCaretPosition();
       };
 
-      //modified by handles 
-      $scope.elementChangedRotation = function(angle){
-        if(!$scope.current) {
-          return;
-        }
-        angle=Math.floor(angle);
-        hElement.setRotation($scope.current, angle);
-        hTextEdit.updateCaretPosition();
-      };
-
+      // modified by slider
       $scope.elementSetRotation = function(){
-        if(!$scope.current) {
-          return;
-        }
-        $scope.current.ft.attrs.rotate=$scope.current.rotation;
-        $scope.current.ft.apply();
+        hElement.setRotation($scope.current, $scope.current.rotation);
         hTextEdit.updateCaretPosition();
       };
 
@@ -218,9 +195,6 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       };
 
       $scope.elementSetMirror = function() {
-        if(!$scope.current) {
-          return;
-        }
         hElement.setMirror($scope.current);
         hTextEdit.updateCaretPosition();
       };
