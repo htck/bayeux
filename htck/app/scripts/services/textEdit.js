@@ -102,7 +102,7 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $inter
     if((!evt.key.match('^[a-zA-Z]$')) && (evt.key !== ' ') || evt.key.length > 1){ // TODO better regex
       return;
     }
-    var k = (evt.key === ' ') ? '\u00A0' : (scope.$parent.font.uppercase ? evt.key.toUpperCase() : evt.key);
+    var k = (evt.key === ' ') ? ' ' : (scope.$parent.font.uppercase ? evt.key.toUpperCase() : evt.key);
 
     //scope.$parent.current[0].textContent = scope.$parent.current[0].textContent.substr(0,scope.$parent.caret)+k+scope.$parent.current[0].textContent.substr(scope.$parent.caret);
     scope.$parent.current.attr({text: scope.$parent.current[0].textContent.substr(0,scope.$parent.caret)+k+scope.$parent.current[0].textContent.substr(scope.$parent.caret)});
