@@ -95,6 +95,32 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
       }
     });
 
+    hotkeys.add({
+      combo: 'ctrl+left',
+      description: 'Slightly rotates currently selected element counter clock-wise',
+      callback: function(event) {
+        event.preventDefault();
+        hElement.rotate(scope.$parent.current, -constants.ELEMENT_ROTATION);
+        if(!scope.$parent.current || scope.$parent.current.type ==='text'){
+          scope.$parent.caret = scope.$parent.current[0].textContent.length+1;
+          hTextEdit.updateCaretPosition();
+        }
+      }
+    });
+
+    hotkeys.add({
+      combo: 'ctrl+right',
+      description: 'Slightly rotates currently selected element clock-wise',
+      callback: function(event) {
+        event.preventDefault();
+        hElement.rotate(scope.$parent.current, constants.ELEMENT_ROTATION);
+        if(!scope.$parent.current || scope.$parent.current.type ==='text'){
+          scope.$parent.caret = scope.$parent.current[0].textContent.length;
+          hTextEdit.updateCaretPosition();
+        }
+      }
+    });
+
 
     hotkeys.add({
       combo: 'ctrl+s',

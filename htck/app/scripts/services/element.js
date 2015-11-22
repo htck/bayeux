@@ -49,6 +49,13 @@ angular.module('htckApp').factory('hElement', function() {
     element.ft.apply();
   }
 
+  function rotate(element, angleDiff){
+    if(!element){
+      return;
+    }
+    setRotation(element, element.rotation + angleDiff);
+  }
+
   function setKeepRatio(element){
     if(!element) {
       return;
@@ -82,6 +89,7 @@ angular.module('htckApp').factory('hElement', function() {
     setKeepRatio: setKeepRatio,
     setMirror: setMirror,
     elementRatio: elementRatio,
-    handles: handles
+    handles: handles,
+    rotate: rotate
   };
 });

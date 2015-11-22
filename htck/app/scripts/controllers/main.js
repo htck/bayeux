@@ -77,15 +77,15 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       }
 
       $scope.handleFtChanged = function (ft, events) {
-        if (events.indexOf('rotate') != -1) {
+        if (events.indexOf('rotate') !== -1) {
           hElement.setRotation($scope.current, ft.attrs.rotate);
         }
-        if (events.indexOf('scale') != -1) {
+        if (events.indexOf('scale') !== -1) {
           $scope.elementChangedHeight(ft.attrs.scale.y);
           $scope.elementChangedWidth(ft.attrs.scale.x);
         }
         hTextEdit.updateCaretPosition();
-      }
+      };
 
       // Unselects an element
       function unfocus(){
