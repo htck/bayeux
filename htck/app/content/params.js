@@ -17,7 +17,8 @@ var params = {
     TEXT_DEFAULT_FONT_COLOR : '#000000',
     DEBOUNCE: 12,
     GIFINTERVAL_MIN: 0.1,
-    GIFINTERVAL_MAX: 5
+    GIFINTERVAL_MAX: 5,
+    GIFINTERVAL_STEP: 0.1
 };
 
 $.extend(constants, params);

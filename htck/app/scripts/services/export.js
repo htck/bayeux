@@ -1,28 +1,16 @@
 'use strict';
 
-/* globals $ */
 /* globals canvg */
 /* globals saveAs */
 /* globals constants */
 /* globals gifshot */
 angular.module('htckApp').factory('hExport', function (hTools) {
-  // Function gotten from SVGFix
-  // source : https://code.google.com/p/svgfix/
-  function svgfix (text) {
-    var fixed = text ;
-    fixed = $.trim(fixed);
-    if (fixed.indexOf( 'xmlns:xlink' ) === -1 ) {
-      fixed = fixed.replace ('<svg ', '<svg xmlns:xlink="http://www.w3.org/1999/xlink" '); 
-    }
-    fixed = fixed.replace (' href', ' xlink:href');
-    return fixed; 
-  }
 
   function exportOneCanvas(raphaelPaperId, canvasId, paper, callback){
     paper.setSize(constants.W+'px',constants.H+'px');
     // Get the svg element created by Raphael
     var svg = document.getElementById(raphaelPaperId).children[0];
-    var svgStr = svgfix(svg.outerHTML);
+    var svgStr = hTools.svgfix(svg.outerHTML);
 
     paper.setSize('100%','100%');
 

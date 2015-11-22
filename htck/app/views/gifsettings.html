@@ -5,7 +5,7 @@
 			<strong>Interval</strong> {{hPages.gifInterval}}s
 		</div>
 		<div flex="55">
-			<md-slider class="slider-common" flex min="{{::constants.GIFINTERVAL_MIN}}" step="0.2" max="{{::constants.GIFINTERVAL_MAX}}" ng-model="hPages.gifInterval" id="interval-slider" aria-label="Interval" class>
+			<md-slider class="slider-common" flex min="{{::constants.GIFINTERVAL_MIN}}" step="{{::constants.GIFINTERVAL_STEP}}" max="{{::constants.GIFINTERVAL_MAX}}" ng-model="hPages.gifInterval" id="interval-slider" aria-label="Interval" class>
             </md-slider>
 		</div>
 	</div>

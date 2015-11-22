@@ -1,6 +1,6 @@
 'use strict';
 
-/* globals jQuery */
+/* globals $ */
 angular.module('htckApp').factory('hTools', function() {
   function getSizeOfImage(src) {
     var fimg = new Image(); 
@@ -20,8 +20,8 @@ angular.module('htckApp').factory('hTools', function() {
       return Math.random() * (ub - lb + 1) + lb;
   }
 
-  jQuery.fn.redraw = function(){
-    jQuery(this).each(function(){
+  $.fn.redraw = function(){
+    $(this).each(function(){
       this.style.display='none';
       this.offsetHeight;  /* jshint ignore:line */
       this.style.display='block';
@@ -52,10 +52,23 @@ angular.module('htckApp').factory('hTools', function() {
     return blob;
   }
 
+  // Function gotten from SVGFix
+  // source : https://code.google.com/p/svgfix/
+  function svgfix (text) {
+    var fixed = text ;
+    fixed = $.trim(fixed);
+    if (fixed.indexOf( 'xmlns:xlink' ) === -1 ) {
+      fixed = fixed.replace ('<svg ', '<svg xmlns:xlink="http://www.w3.org/1999/xlink" '); 
+    }
+    fixed = fixed.replace (' href', ' xlink:href');
+    return fixed; 
+  }
+
   return {
     getSizeOfImage: getSizeOfImage,
     randInt: randInt,
     rand: rand,
-    b64toBlob: b64toBlob
+    b64toBlob: b64toBlob,
+    svgfix: svgfix
   };
 });
