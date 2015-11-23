@@ -364,8 +364,10 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         var c = hElement.clone($scope.clipboard, $scope.provisionElement);
         // Put out of sight
         hElement.move(c, -constants.W * 2, 0);
-        hTextEdit.addCaret();
-      }
+        if(c.type === 'text'){
+            hTextEdit.addCaret();
+        }
+      };
 
       function testSame(first, copy){
         return first &&
@@ -395,7 +397,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
 
         $scope.clipboard = c;
         $scope.clipboard.tmpClone = true;
-        $timeout(function(){$scope.setCurrent(element)},5);
+        $timeout(function(){$scope.setCurrent(element);},5);
 
         $log.debug('Copied to clipboard');
       };

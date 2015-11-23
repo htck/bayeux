@@ -85,19 +85,19 @@ angular.module('htckApp').factory('hElement', function() {
       return;
     }
 
-    var clone = element.clone();
-    clone.origId = element.id;
-    provisionFn(clone);
-    clone.keepratio = element.keepratio;
-    clone.height = element.height;
-    clone.width = element.width;
-    clone.rotation = element.rotation;
-    setRotation(clone, clone.rotation);
-    clone.opacity = element.opacity;
-    clone.caret = element.caret;
-    clone.inited = element.inited;
+    var c = element.clone();
+    c.origId = element.id;
+    provisionFn(c);
+    c.keepratio = element.keepratio;
+    c.height = element.height;
+    c.width = element.width;
+    c.rotation = element.rotation;
+    setRotation(c, c.rotation);
+    c.opacity = element.opacity;
+    c.caret = element.caret;
+    c.inited = element.inited;
 
-    return clone;
+    return c;
   }
 
   return {
