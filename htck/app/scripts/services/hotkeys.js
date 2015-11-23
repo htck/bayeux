@@ -127,9 +127,6 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
       description: 'Saves draft file for further edit',
       callback: function(evt){
         evt.preventDefault();
-        if(scope.$parent.current && scope.$parent.current.type ==='text'){
-          hTextEdit.popChar(scope.$parent.current);
-        }
         scope.$parent.save();
       }
     });
@@ -151,9 +148,6 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
       description: 'Exports canvas to png',
       callback: function (event){
         event.preventDefault();
-        if(scope.$parent.current && scope.$parent.current.type ==='text'){
-          hTextEdit.popChar(scope.$parent.current);
-        }
         scope.$parent.export();
       }
     });
@@ -163,9 +157,9 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
       description: 'Exports pages to gif',
       callback: function (event){
         event.preventDefault();
-        if(scope.$parent.current && scope.$parent.current.type ==='text'){
-          hTextEdit.popChar(scope.$parent.current);
-        }
+        // if(scope.$parent.current && scope.$parent.current.type ==='text'){
+        //   hTextEdit.popChar(scope.$parent.current);
+        // }
         hPages.exportGIF(null);
       }
     });
@@ -175,9 +169,6 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
       description: 'Copies currently selected element to clipboard',
       callback: function (event){
         event.preventDefault();
-        if(scope.$parent.current && scope.$parent.current.type ==='text'){
-          hTextEdit.popChar(scope.$parent.current);
-        }
         scope.$parent.copy();
       }
     });
@@ -187,9 +178,6 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
       description: 'Pastes clipboard content',
       callback: function (event){
         event.preventDefault();
-        if(scope.$parent.current && scope.$parent.current.type ==='text'){
-          hTextEdit.popChar(scope.$parent.current);
-        }
         scope.$parent.paste();
       }
     });

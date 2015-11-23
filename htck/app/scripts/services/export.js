@@ -44,7 +44,7 @@ angular.module('htckApp').factory('hExport', function (hTools) {
     // Serialize as json
     var json = paper.toJSON(function(el, data){ // For each element
 
-      if(el.handle){
+      if(el.handle || el.tmpClone){
         return;
       }
 

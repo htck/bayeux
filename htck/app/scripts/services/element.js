@@ -80,6 +80,26 @@ angular.module('htckApp').factory('hElement', function() {
     element.ft.handles.y.line.attr({opacity: show ? 1 : 0});
   }
 
+  function clone(element, provisionFn){
+    if(!element){
+      return;
+    }
+
+    var clone = element.clone();
+    clone.origId = element.id;
+    provisionFn(clone);
+    clone.keepratio = element.keepratio;
+    clone.height = element.height;
+    clone.width = element.width;
+    clone.rotation = element.rotation;
+    setRotation(clone, clone.rotation);
+    clone.opacity = element.opacity;
+    clone.caret = element.caret;
+    clone.inited = element.inited;
+
+    return clone;
+  }
+
   return {
     move: move,
     remove: remove,
@@ -90,6 +110,7 @@ angular.module('htckApp').factory('hElement', function() {
     setMirror: setMirror,
     elementRatio: elementRatio,
     handles: handles,
-    rotate: rotate
+    rotate: rotate,
+    clone: clone
   };
 });
