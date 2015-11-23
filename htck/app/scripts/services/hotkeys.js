@@ -169,6 +169,30 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
         hPages.exportGIF(null);
       }
     });
+
+    hotkeys.add({
+      combo: 'ctrl+c',
+      description: 'Copies currently selected element to clipboard',
+      callback: function (event){
+        event.preventDefault();
+        if(scope.$parent.current && scope.$parent.current.type ==='text'){
+          hTextEdit.popChar(scope.$parent.current);
+        }
+        scope.$parent.copy();
+      }
+    });
+
+    hotkeys.add({
+      combo: 'ctrl+v',
+      description: 'Pastes clipboard content',
+      callback: function (event){
+        event.preventDefault();
+        if(scope.$parent.current && scope.$parent.current.type ==='text'){
+          hTextEdit.popChar(scope.$parent.current);
+        }
+        scope.$parent.paste();
+      }
+    });
   }
 
   return init;

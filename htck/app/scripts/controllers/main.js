@@ -393,5 +393,70 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         $timeout(function(){$('#itembank').redraw();},1000);  // Chrome redraw for itembank
       }
 
+      function clone(element){
+        if(!element){
+          return;
+        }
+
+        var clone = element.clone();
+        clone.origId = element.id;
+        $scope.provisionElement(clone);
+        clone.keepratio = element.keepratio;
+        clone.height = element.height;
+        clone.width = element.width;
+        clone.rotation = element.rotation;
+        hElement.setRotation(clone, clone.rotation);
+        clone.opacity = element.opacity;
+        clone.caret = element.caret;
+        clone.inited = element.inited;
+
+        return clone;
+      }
+
+      $scope.paste = function(){
+        if(!$scope.clipboard){
+          return;
+        }
+
+        var c = clone($scope.clipboard);
+        // Put out of sight
+        hElement.move(c, -constants.W * 2, 0);
+      }
+
+      function testSame(first, copy){
+        return first &&
+               copy &&
+               first.id === copy.origId &&
+               first.keepratio === copy.keepratio &&
+               first.height === copy.height &&
+               first.width === copy.width &&
+               first.rotation === copy.rotation &&
+               first.opacity === copy.opacity;
+      }
+
+      function copy(element){
+        if(!element || ($scope.clipboard && testSame(element, $scope.clipboard))){
+          return;
+        }
+        // Erase clipboard
+        if($scope.clipboard){
+          hElement.remove($scope.clipboard);
+          delete $scope.clipboard;
+        }
+
+        var c = clone(element);
+        // Put out of sight
+        hElement.move(c, constants.W * 2, 0);
+
+        $scope.clipboard = c;
+        $timeout(function(){$scope.setCurrent(element)},5);
+
+        $log.debug('Copied to clipboard');
+      }
+
+      $scope.copy = function(){
+        copy($scope.current);
+      };
+
       init();
   });
