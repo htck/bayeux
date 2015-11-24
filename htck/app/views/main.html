@@ -243,7 +243,7 @@
       <div class="author-wrapper" layout="columns">
         <a ng-repeat="a in ::constants.config.authors" href="{{::a.link}}" class="author" flex>
             <md-button class="md-icon-button" ng-click="hotkeys.toggleCheatSheet()" style="background-image: url({{::a.picture}});"></md-button>
-            <span>&nbsp;{{::a.name}}</span>
+            <span class="author-name">&nbsp;{{::a.name}}</span>
         </a>
       </div>
     </div>
