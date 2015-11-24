@@ -18,16 +18,20 @@ $switchColorOff: #aaa;
 $brushActiveColor: rgba(150,255,150,0.4);
 
 $faSize:25px;
+$faSizeSmall:22px;
 $faShift: 4px;
 $iconButtonMargin: 5px;
 
 $colorPickerSize:2 * 24px;
 $mdComponent:48px;
+$mdComponentSmall:35px;
 $toolbarHeight:60px;
 
 $defaultTransitionTime: 0.2s;
 
 $dialogW: 35vw;
+
+$aColor: #424242;
 
 @mixin transition($transition...) {
     -moz-transition:    $transition;

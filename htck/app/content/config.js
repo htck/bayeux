@@ -10,12 +10,12 @@ var constants = {
       },
       {
         "name": "Mathieu",
-        "picture": "",
+        "picture": "/images/btn-icon-bg.png",
         "link": ""
       },
       {
         "name": "Maria",
-        "picture": "",
+        "picture": "/images/btn-icon-bg.png",
         "link": ""
       }
     ]

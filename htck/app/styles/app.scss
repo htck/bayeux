@@ -120,7 +120,21 @@
   padding-bottom: 5px;
   padding-left: 15px;
   padding-right: 15px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.6);
+
+  text-align:justify;
+  a {
+    color:$aColor;
+  }
+
+  .author, .icon-item a {
+      text-decoration: none;
+  }
+
+  .author {
+    text-align:center;
+    line-height: $mdComponent;
+  }
 }
 
 .layer-management{
@@ -241,6 +255,17 @@
 
   .md-icon-warn{
       background: linear-gradient( rgba(255, 0, 0, 0.3), rgba(255, 0, 0, 0.3)), url('../images/btn-icon-bg.png') no-repeat center center !important;
+  }
+
+  .md-icon-small {
+    height:$mdComponentSmall;
+    width:$mdComponentSmall;
+    line-height:30px;
+    min-height:$mdComponentSmall;
+
+    .fa{
+      font-size:$faSizeSmall !important;
+    }
   }
 
   /* sliders */
