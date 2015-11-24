@@ -1,7 +1,24 @@
 var constants = {
   "config": {
     "appTitle": "Historic Tale Construction Kit",
-    "appSub": "Bayeux"
+    "appSub": "Bayeux",
+    "authors": [
+      {
+        "name": "LeonardA-L",
+        "picture": "https://leonarda-l.github.io/Photo_small.jpg",
+        "link": "https://LeonardA-L.github.io/"
+      },
+      {
+        "name": "Mathieu",
+        "picture": "",
+        "link": ""
+      },
+      {
+        "name": "Maria",
+        "picture": "",
+        "link": ""
+      }
+    ]
   },
   "colors":[
     "#303030",

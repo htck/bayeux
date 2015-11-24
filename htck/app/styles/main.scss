@@ -28,3 +28,12 @@ $fa-font-path: "../lib/font-awesome/fonts/";
 *:focus {
     outline: none;
 }
+
+.overflow-hidden {
+	overflow: hidden;
+}
+
+.component-sized{
+	height:$mdComponent;
+	width:$mdComponent;
+}
