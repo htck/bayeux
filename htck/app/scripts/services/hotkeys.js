@@ -5,6 +5,7 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
   function init(parent) {
     var scope = parent.$new();
     // Hotkeys
+    scope.$parent.hotkeys = hotkeys;
 
     hotkeys.add({
       combo: 'del',
