@@ -10,7 +10,7 @@ var constants = {
       },
       {
         "name": "Mathieu",
-        "picture": "/images/btn-icon-bg.png",
+        "picture": "images/btn-icon-bg.png",
         "link": ""
       },
       {
