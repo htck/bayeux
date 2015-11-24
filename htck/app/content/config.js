@@ -1,6 +1,7 @@
 var constants = {
   "config": {
-    "appTitle": "Historic Tale Construction Kit"
+    "appTitle": "Historic Tale Construction Kit",
+    "appSub": "Bayeux"
   },
   "colors":[
     "#303030",
