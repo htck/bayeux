@@ -86,7 +86,7 @@ angular.module('htckApp').factory('hExport', function (hTools) {
         'images': base64ImageArray,
         'gifWidth': gifWidth,
         'gifHeight': gifHeight,
-        'sampleInterval': 20,
+        'sampleInterval': 10,
         'interval': gifInterval,
         'numFrames': base64ImageArray.length,
         'crossOrigin': '' // Firefox

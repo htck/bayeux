@@ -2,6 +2,7 @@ var constants = {
   "config": {
     "appTitle": "Historic Tale Construction Kit",
     "appSub": "Bayeux",
+    "repository":"https://github.com/htck/bayeux",
     "authors": [
       {
         "name": "LeonardA-L",
