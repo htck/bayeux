@@ -19,7 +19,8 @@ var params = {
     DEBOUNCE: 12,
     GIFINTERVAL_MIN: 0.1,
     GIFINTERVAL_MAX: 5,
-    GIFINTERVAL_STEP: 0.1
+    GIFINTERVAL_STEP: 0.1,
+    TOOLTIP_DELAY: 600
 };
 
 $.extend(constants, params);

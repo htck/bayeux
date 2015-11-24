@@ -65,14 +65,17 @@
                       <section layout="row" layout-align="end" layout-align-gt-md="center" layout-wrap>
                         <md-button class="md-icon-button" aria-label="Top layer" ng-click="bringToFront()">
                           <md-icon class="fa fa-chevron-up sh-fa-t"></md-icon>
+                          <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Bring to front</md-tooltip>
                         </md-button>
 
                         <md-button class="md-icon-button" aria-label="Bottom layer" ng-click="bringToBack()">
                           <md-icon class="fa fa-chevron-down sh-fa-t"></md-icon>
+                          <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Bring to back</md-tooltip>
                         </md-button>
 
                         <md-button class="md-icon-button md-icon-warn" aria-label="Remove" ng-click="remove()">
                           <md-icon class="fa fa-times"></md-icon>
+                          <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Remove element</md-tooltip>
                         </md-button>
                       </section>
                     </md-content>
@@ -154,34 +157,41 @@
     <span class="fleft">
       <md-button class="md-icon-button" aria-label="Brushes" ng-click="brushes = !brushes;">
         <md-icon class="fa fa-paint-brush"></md-icon>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Show brushes</md-tooltip>
       </md-button>
 
       <div class="brushes-wrapper {{brushes ? 'brushes-on' : ''}}">
         <md-button aria-label="{{::b.name}}" ng-class="b.classe" ng-repeat="b in ::constants.brushes track by $index" ng-click="setBrush(b)" class="png-icon" style="background-image:url({{::(b.icon)}})">
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">{{::b.name}} brush</md-tooltip>
         </md-button>
       </div>
 
       <md-button class="md-icon-button" aria-label="Clear">
         <md-icon class="fa fa-trash"></md-icon>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Clear current page</md-tooltip>
       </md-button>
 
       <md-button class="md-icon-button" aria-label="Pages" ng-click="pages = !pages;">
         <md-icon class="fa fa-clone"></md-icon>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Show pages</md-tooltip>
       </md-button>
 
     </span>
     <span class="fright">
       <md-button class="md-icon-button" aria-label="save" ng-click="save()">
         <md-icon class="fa fa-download"></md-icon>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Save for further edit</md-tooltip>
       </md-button>
 
       <md-button class="md-icon-button" aria-label="Open" ng-click="startImport()">
         <md-icon class="fa fa-folder-open"></md-icon>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Open HTCK file</md-tooltip>
       </md-button>
 
       <md-button class="md-icon-button" aria-label="Export" ng-click="export()">
         <md-icon class="fa fa-file-image-o" ng-if="!exportPNGRunning"></md-icon>
         <span ng-if="exportPNGRunning"><md-icon class="fa-spin fa fa-spinner"></md-icon></span>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Export page as PNG</md-tooltip>
       </md-button>
 
       <input type="file" id="import-file-chooser" ng-show="false" accept=".htck"> 
@@ -193,10 +203,12 @@
   <div id="toolbar-pages" class="container {{pages ? 'toolbar-pages-active' : ''}}" container md-whiteframe-z5>
     <md-button class="md-icon-button" aria-label="New" ng-click="hPages.createNew()">
       <md-icon class="fa fa-file-o"></md-icon>
+      <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Create new page</md-tooltip>
     </md-button>
 
     <md-button class="md-icon-button" aria-label="Duplicate" ng-click="hPages.createByCopy()">
       <md-icon class="fa fa-files-o"></md-icon>
+      <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Duplicate current page</md-tooltip>
     </md-button>
 
     <md-button ng-disabled="hPages.currentPageIndex === 0" class="md-icon-button" aria-label="Previous" ng-click="hPages.prev()">
@@ -211,11 +223,13 @@
 
     <md-button class="md-icon-button md-icon-warn" ng-disabled="hPages.pages.length <= 1" aria-label="Delete" ng-click="hPages.delete()">
       <md-icon class="fa fa-times"></md-icon>
+      <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Delete current page</md-tooltip>
     </md-button>
 
     <md-button class="md-icon-button" ng-disabled="hPages.pages.length <= 1" aria-label="Delete" ng-click="hPages.exportGIF($event)">
       <md-icon class="fa fa-film sh-fa-t sh-fa-l" ng-if="!exportGIFRunning"></md-icon>
       <span ng-if="exportGIFRunning"><md-icon class="fa-spin fa fa-spinner"></md-icon></span>
+      <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Export all pages as GIF</md-tooltip>
     </md-button>
   </div>
   <!-- /pages toolbar -->
@@ -227,14 +241,14 @@
       <p>This project is available for you to use and we hope you will enjoy playing with it as much as we enjoyed building it. We put the opensource code on <a href="https://github.com/htck/Bayeux">GitHub <i class="fa fa-github"></i></a>, so you can grab it, tinker with it, even help us by contributing.</p>
       <div class="icon-item">
          <a href="htck-Bayeux.zip">
-          <md-button class="md-icon-button md-icon-small">
+          <md-button class="md-icon-button md-icon-small" aria-label="Download application">
             <md-icon class="fa fa-download"></md-icon>
           </md-button>
         </a>
         Download a standalone version to run it offline :)
       </div>
       <div class="icon-item">
-        <md-button class="md-icon-button md-icon-small" ng-click="hotkeys.toggleCheatSheet()">
+        <md-button class="md-icon-button md-icon-small" ng-click="hotkeys.toggleCheatSheet()" aria-label="Keyboard shortcuts">
           <md-icon class="fa fa-question"></md-icon>
         </md-button>
         Press the <i class="fa fa-question"></i> key to get the list of keyboard shortcuts
@@ -242,7 +256,7 @@
       <p>Cheers,</p>
       <div class="author-wrapper" layout="columns">
         <a ng-repeat="a in ::constants.config.authors" href="{{::a.link}}" class="author" flex>
-            <md-button class="md-icon-button" style="background-image: url({{::a.picture}});"></md-button>
+            <md-button class="md-icon-button" style="background-image: url({{::a.picture}});" aria-label="{{::a.name}}"></md-button>
             <span class="author-name">&nbsp;{{::a.name}}</span>
         </a>
       </div>
