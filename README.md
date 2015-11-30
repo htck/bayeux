@@ -6,13 +6,13 @@
 > Slay mischievous beasts  
 > Rule the kingdom
 
-Two German students originally wrote the Historic Tale Construction Kit, with Flash. Sadly, their work isn't available anymore, only [remembered](http://netzspannung.org/cat/servlet/CatServlet?cmd=document&subCommand=show&forward=%2Fnetzkollektor%2Foutput%2Fproject.xml&entryId=84868). This new application is a tribute, but also an attempt to revive the old [medieval meme](http://knowyourmeme.com/memes/medieval-macros-bayeux-tapestry-parodies), with code and availability that won't get lost.
+Two German students originally wrote the _Historic Tale Construction Kit_, with Flash. Sadly, their work isn't available anymore, only [remembered](http://netzspannung.org/cat/servlet/CatServlet?cmd=document&subCommand=show&forward=%2Fnetzkollektor%2Foutput%2Fproject.xml&entryId=84868). This new application is a tribute, but also an attempt to revive the old [medieval meme](http://knowyourmeme.com/memes/medieval-macros-bayeux-tapestry-parodies), with code and availability that won't get lost.
 
 ## Features
 This brand new Historic Tale Construction Kit allows you to
 * Drag, drop, scale, rotate any item from the Bayeux image bank
 * Do the same with text with different fonts and colors
-* Bring elements to the front/back of the scene (this **is** life hanging)
+* Bring elements to the front/back of the scene (this **is** life changing)
 * Work on several images (pages) at once
 * Export those pages as PNG or as GIF
 * Save a working copy of your tapestry to your disk, to finish it later
@@ -30,7 +30,7 @@ To do so, put your content to the ``content`` folder and index it in the [config
 This kit is written mostly using RaphaelJS and AngularJS, but it also uses a bunch of really cool libraries, such as [angular-hotkeys](https://github.com/chieffancypants/angular-hotkeys), [canvg](https://github.com/gabelerner/canvg), [FileSaver.js](https://github.com/eligrey/FileSaver.js), [Raphael.FreeTransform](https://github.com/AliasIO/Raphael.FreeTransform), [Raphael.json](https://github.com/AliasIO/Raphael.JSON), [gifshot](https://github.com/yahoo/gifshot), [Canvas-to-Blob](https://github.com/blueimp/JavaScript-Canvas-to-Blob). They helped us build an app that works everywhere, client-side without the need for any back-end. Huge thanks to them.
 
 ### Vagrant
-If you want to work on the Historic Tale Construction Kit by yourself, you can use the vagrant box by launching ``vagrant up``. **Attention**, you will need to have admin rights if you want to run it on windows.
+If you want to work on the _Historic Tale Construction Kit_ by yourself, you can use the vagrant box by launching ``vagrant up``. **Attention**, you will need to have admin rights if you want to run it on windows.
 
 ### Setting up a development environnement
 If you do not want to use vagrand, you will need to install the following globally
@@ -51,6 +51,6 @@ bower install
 You can then run a development server using the command ``grunt``
 
 ## Contribute
-If you experienced a bug, we're sorry! If you can fix it, we gladly accept pull request. If you can't, you can still open an issue here on GitHub and we will try to address it shortly.
+If you experienced a bug, we're sorry! If you can fix it, we gladly accept pull requests. If you can't, you can still open an issue here on GitHub and we will try to address it shortly.
 
 This project is [MIT-licensed](https://github.com/htck/bayeux/blob/master/LICENSE) and any open source contribution is welcome!
