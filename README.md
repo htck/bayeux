@@ -1,5 +1,7 @@
 # Historic Tale Construction Kit - Bayeux
 
+[Check out the online demo!](http://htck.github.io/bayeux)
+
 > Craft thy own Bayeux Tapestry  
 > Slay mischievous beasts  
 > Rule the kingdom
@@ -10,7 +12,7 @@ Two German students originally wrote the Historic Tale Construction Kit, with Fl
 This brand new Historic Tale Construction Kit allows you to
 * Drag, drop, scale, rotate any item from the Bayeux image bank
 * Do the same with text with different fonts and colors
-* Bring elements to the front/back of the scene (this ***is*** life hanging)
+* Bring elements to the front/back of the scene (this **is** life hanging)
 * Work on several images (pages) at once
 * Export those pages as PNG or as GIF
 * Save a working copy of your tapestry to your disk, to finish it later
@@ -25,10 +27,10 @@ Feel free to fork this project and create your own Historic Tale Construction Ki
 To do so, put your content to the ``content`` folder and index it in the [config.js](https://github.com/htck/bayeux/blob/master/htck/app/content/config.js) file.
 
 ## Technical Stuff
-This kit is written mostly using RaphaelJS and AngularJS, but it also uses a bunch of really cool libraries, such as angular-hotkeys, canvg, FileSaver.js, Raphael.FreeTransform, Raphael.json, gifshot, Canvas-to-Blob. They helped us build an app that works everywhere, client-side without the need for any back-end. Huge thanks to them
+This kit is written mostly using RaphaelJS and AngularJS, but it also uses a bunch of really cool libraries, such as [angular-hotkeys](https://github.com/chieffancypants/angular-hotkeys), [canvg](https://github.com/gabelerner/canvg), [FileSaver.js](https://github.com/eligrey/FileSaver.js), [Raphael.FreeTransform](https://github.com/AliasIO/Raphael.FreeTransform), [Raphael.json](https://github.com/AliasIO/Raphael.JSON), [gifshot](https://github.com/yahoo/gifshot), [Canvas-to-Blob](https://github.com/blueimp/JavaScript-Canvas-to-Blob). They helped us build an app that works everywhere, client-side without the need for any back-end. Huge thanks to them.
 
 ### Vagrant
-If you want to work on the Historic Tale Construction Kit by yourself, you can use the vagrant box by launching ``vagrant up``. Attention, you will need to have admin rights if you want to run it on windows.
+If you want to work on the Historic Tale Construction Kit by yourself, you can use the vagrant box by launching ``vagrant up``. **Attention**, you will need to have admin rights if you want to run it on windows.
 
 ### Setting up a development environnement
 If you do not want to use vagrand, you will need to install the following globally
