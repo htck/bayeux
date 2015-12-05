@@ -3,7 +3,7 @@
 # Vagrantfile for role tests
 #
 Vagrant.configure(2) do |config|
-  config.vm.box = "debian/jessie64"
+  config.vm.box = "ubuntu/trusty64"
   config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "/home/vagrant/.ssh/id_rsa"
