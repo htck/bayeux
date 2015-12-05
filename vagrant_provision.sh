@@ -6,7 +6,7 @@ PROJECT_NAME=htck
 sudo apt-get update -y
 sudo apt-get upgrade -y
 # Install required packages
-sudo apt-get install git build-essential ruby-compass -y
+sudo apt-get install git build-essential ruby-compass zip -y
 curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
 sudo apt-get install --yes nodejs
 sudo npm install npm -g

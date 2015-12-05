@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
   config.ssh.forward_agent = true
 
   config.vm.provider "virtualbox" do |v|
-    v.name   = "htck"
+    v.name   = "htck-bayeux"
     v.memory = 2048
     v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
   end

@@ -11,12 +11,12 @@ var constants = {
       },
       {
         "name": "Mathieu",
-        "picture": "images/btn-icon-bg.png",
-        "link": ""
+        "picture": "https://secure.gravatar.com/avatar/e6cfb8715cecf121b64c938268519c50?s=64",
+        "link": "https://thoretton.com"
       },
       {
         "name": "Maria",
-        "picture": "/images/btn-icon-bg.png",
+        "picture": "https://avatars3.githubusercontent.com/u/6231239?v=3&s=460",
         "link": ""
       }
     ]
