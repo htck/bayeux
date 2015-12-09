@@ -17,7 +17,7 @@ var constants = {
       {
         "name": "Maria",
         "picture": "https://avatars3.githubusercontent.com/u/6231239?v=3&s=460",
-        "link": ""
+        "link": "https://github.com/metegan"
       }
     ]
   },
