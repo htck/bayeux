@@ -99,7 +99,7 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $inter
       return;
     }
     // Check if letter key
-    if((!evt.key.match('^[a-zA-Z]$')) && (evt.key !== ' ') || evt.key.length > 1){ // TODO better regex
+    if((!evt.key.match('^[a-zA-Z\'",:_]$')) && (evt.key !== ' ') || evt.key.length > 1){ // TODO better regex
       return;
     }
     var k = (evt.key === ' ') ? ' ' : (scope.$parent.font.uppercase ? evt.key.toUpperCase() : evt.key);
