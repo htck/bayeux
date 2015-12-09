@@ -9,10 +9,8 @@ npm install
 bower install
 # Build app
 grunt build
-rm -f dist/content/dist_README.md
-ls
+xargs rm -rf < build_tools/rm_on_deploy
 cd ..
-ls htck
 
 # Create dist zip file
 cd htck
@@ -25,16 +23,15 @@ cd ..
 git branch -D gh-pages 
 # Save built app to tmp folder
 cp -R htck/dist/ /tmp/
-ls /tmp
+cp htck/build_tools/git_add_on_deploy /tmp
 git checkout --orphan gh-pages
 # Remove all git tracked files (keeps libs and node_modules)
 git ls-files -z | xargs -0 rm -f
 rm .gitignore
 # Move back built app
 mv /tmp/dist/* .
-ls
 # Deploy
-git add content/ images/ index.html  scripts/ styles/ views/ lib/ *.zip
+xargs git add < /tmp/git_add_on_deploy
 git commit -am "Deploying $branch to gh-pages"
 git push --delete origin gh-pages
 git push --set-upstream origin gh-pages
