@@ -9,6 +9,7 @@ npm install
 bower install
 # Build app
 grunt build
+rm -f dist/content/dist_README.md
 ls
 cd ..
 ls htck

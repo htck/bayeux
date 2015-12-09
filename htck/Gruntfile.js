@@ -336,6 +336,14 @@ module.exports = function (grunt) {
           cwd: 'lib/font-awesome',
           src: ['fonts/*'],
           dest: '<%= appConfig.dist %>/lib/font-awesome/'
+        },{ // Dist Readme
+          expand: true,
+          cwd: '<%= appConfig.app %>/content/',
+          src: ['dist_README.md'],
+          dest: '<%= appConfig.dist %>',
+          rename: function(dest, src){
+            return dest+'/README.md';
+          }
         },{
           expand: true,
           dot: true,
