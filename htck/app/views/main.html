@@ -237,8 +237,8 @@
   <div id="readme-wrapper" class="container">
     <div id="readme">
       <h2>{{::constants.config.appTitle}} - {{::constants.config.appSub}}</h2>
-      <p>Two German students originally wrote the Historic Tale Construction Kit, with Flash. Sadly, their work isn't available anymore, only <a href="http://netzspannung.org/cat/servlet/CatServlet?cmd=document&subCommand=show&forward=%2Fnetzkollektor%2Foutput%2Fproject.xml&entryId=84868">remembered</a>. This new application is a tribute, but also an attempt to revive the old <a href="http://knowyourmeme.com/memes/medieval-macros-bayeux-tapestry-parodies">medieval meme</a>, with code and availability that won't get lost.</p>
-      <p>This project is available for you to use and we hope you will enjoy playing with it as much as we enjoyed building it. We put the opensource code on <a ng-href="{{::constants.config.repository}}">GitHub <i class="fa fa-github"></i></a>, so you can grab it, tinker with it, even help us by contributing.</p>
+      <p>Two German students originally wrote the Historic Tale Construction Kit, with Flash. Sadly, their work isn't available anymore, only <a href="http://netzspannung.org/cat/servlet/CatServlet?cmd=document&subCommand=show&forward=%2Fnetzkollektor%2Foutput%2Fproject.xml&entryId=84868" target="_blank">remembered</a>. This new application is a tribute, but also an attempt to revive the old <a href="http://knowyourmeme.com/memes/medieval-macros-bayeux-tapestry-parodies" target="_blank">medieval meme</a>, with code and availability that won't get lost.</p>
+      <p>This project is available for you to use and we hope you will enjoy playing with it as much as we enjoyed building it. We put the opensource code on <a ng-href="{{::constants.config.repository}}" target="_blank">GitHub <i class="fa fa-github"></i></a>, so you can grab it, tinker with it, even help us by contributing.</p>
       <div class="icon-item">
          <a href="htck-Bayeux.zip">
           <md-button class="md-icon-button md-icon-small" aria-label="Download application">
@@ -255,7 +255,7 @@
       </div>
       <p>Cheers,</p>
       <div class="author-wrapper" layout="columns">
-        <a ng-repeat="a in ::constants.config.authors" href="{{::a.link}}" class="author" flex>
+        <a ng-repeat="a in ::constants.config.authors" href="{{::a.link}}" class="author" flex  target="_blank">
             <md-button class="md-icon-button contributor-avatar" style="background-image: url({{::a.picture}});" aria-label="{{::a.name}}"></md-button>
             <span class="author-name">&nbsp;{{::a.name}}</span>
         </a>
