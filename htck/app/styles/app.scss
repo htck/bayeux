@@ -82,6 +82,12 @@
   @include transition(max-width $defaultTransitionTime);
 }
 
+.brush{
+  margin-top:13px;
+  background: no-repeat center top;
+  background-size:75%;
+}
+
 .brushes-on {
   max-width: 100%;
 }

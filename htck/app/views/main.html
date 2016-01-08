@@ -161,7 +161,7 @@
       </md-button>
 
       <div class="brushes-wrapper {{brushes ? 'brushes-on' : ''}}">
-        <md-button aria-label="{{::b.name}}" ng-class="b.classe" ng-repeat="b in ::constants.brushes track by $index" ng-click="setBrush(b)" class="png-icon" style="background-image:url({{::(b.icon)}})">
+        <md-button aria-label="{{::b.name}}" ng-class="b.classe" ng-repeat="b in ::constants.brushes track by $index" ng-click="setBrush(b)" class="png-icon brush" style="background-image:url({{::(b.icon)}})">
         <md-tooltip md-delay="::constants.TOOLTIP_DELAY">{{::b.name}} brush</md-tooltip>
         </md-button>
       </div>
