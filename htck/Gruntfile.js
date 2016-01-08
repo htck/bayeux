@@ -341,7 +341,7 @@ module.exports = function (grunt) {
           cwd: '<%= appConfig.app %>/content/',
           src: ['dist_README.md'],
           dest: '<%= appConfig.dist %>',
-          rename: function(dest, src){
+          rename: function(dest/*, src*/){
             return dest+'/README.md';
           }
         },{

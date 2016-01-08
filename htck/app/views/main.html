@@ -13,7 +13,7 @@
       <div flex="20" layout-padding>
         <md-content class="itembank-wrapper" layout="column" layout-fill>
           <md-tabs id="itembank" class="itembank" md-border-bottom layout-fill>
-            <md-tab ng-repeat="t in constants.tabs track by $index" label="{{::t.title}}">
+            <md-tab ng-repeat="t in ::(constants.tabs) track by $index" label="{{::t.title}}">
               <md-content flex class="md-padding">
                 <div>
                   <md-grid-list

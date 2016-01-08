@@ -37,7 +37,6 @@ module.exports = function(config) {
       'lib/canvg/dist/canvg.bundle.min.js',
       'lib/FileSaver/FileSaver.js',
       'lib/raphael/raphael.js',
-      'lib/blueimp-canvas-to-blob/js/canvas-to-blob.js',
       'lib/gifshot/build/gifshot.js',
       'lib/angular-mocks/angular-mocks.js',
       // endbower
