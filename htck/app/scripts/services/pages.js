@@ -61,9 +61,11 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, hElement, 
   };
 
   this.clearPage = function() {
+    scope.$parent.unfocus();
+
     var elemList = [];
     scope.$parent.paper.forEach(function (elem) {
-      if (elem.ft&&!elem.background) {
+      if (elem.ft && !elem.background && !elem.tmpClone) {
         elemList.push(elem);
       }
     });
