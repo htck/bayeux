@@ -6,9 +6,10 @@ PROJECT_NAME=htck
 sudo apt-get update -y
 sudo apt-get upgrade -y
 # Install required packages
-sudo apt-get install git build-essential ruby-compass zip -y
+sudo apt-get install git build-essential rubygems1.9 ruby-compass zip -y
 curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
 sudo apt-get install --yes nodejs
+sudo gem install compass
 sudo npm install npm -g
 sudo npm install -g bower
 sudo npm install -g grunt-cli

@@ -1,7 +1,7 @@
 'use strict';
 
 /* globals constants */
-angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, $mdDialog, $log) {
+angular.module('htckApp').factory('hPages', function (hExport, hSave, hElement, $timeout, $mdDialog, $log) {
   var scope = {};
   this.pages = [];
   this.pngPages = [];
@@ -58,6 +58,18 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, 
   this.createNew = function() {
     this.saveCurrent();
     this.create(hExport.exportOneJSON(scope.$parent.paper, true));
+  };
+
+  this.clearPage = function() {
+    var elemList = [];
+    scope.$parent.paper.forEach(function (elem) {
+      if (elem.ft&&!elem.background) {
+        elemList.push(elem);
+      }
+    });
+    for (var i = 0; i < elemList.length ; ++i) {
+      hElement.remove(elemList[i]);
+    }
   };
 
   this.deletePage = function() {
@@ -124,6 +136,7 @@ angular.module('htckApp').factory('hPages', function (hExport, hSave, $timeout, 
     prev: this.prev,
     createByCopy: this.createByCopy,
     createNew: this.createNew,
-    exportGIF: this.exportGIF
+    exportGIF: this.exportGIF,
+    clearPage: this.clearPage
   };
 });
