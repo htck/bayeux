@@ -13,7 +13,7 @@
       <div flex="20" layout-padding>
         <md-content class="itembank-wrapper" layout="column" layout-fill>
           <md-tabs id="itembank" class="itembank" md-border-bottom layout-fill>
-            <md-tab ng-repeat="t in constants.tabs track by $index" label="{{::t.title}}">
+            <md-tab ng-repeat="t in ::(constants.tabs) track by $index" label="{{::t.title}}">
               <md-content flex class="md-padding">
                 <div>
                   <md-grid-list
@@ -161,7 +161,7 @@
       </md-button>
 
       <div class="brushes-wrapper {{brushes ? 'brushes-on' : ''}}">
-        <md-button aria-label="{{::b.name}}" ng-class="b.classe" ng-repeat="b in ::constants.brushes track by $index" ng-click="setBrush(b)" class="png-icon" style="background-image:url({{::(b.icon)}})">
+        <md-button aria-label="{{::b.name}}" ng-class="b.classe" ng-repeat="b in ::constants.brushes track by $index" ng-click="setBrush(b)" class="png-icon brush" style="background-image:url({{::(b.icon)}})">
         <md-tooltip md-delay="::constants.TOOLTIP_DELAY">{{::b.name}} brush</md-tooltip>
         </md-button>
       </div>

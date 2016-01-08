@@ -1,7 +1,7 @@
 @import "common.scss";
 
 #ng_view {
-  background: url(../images/background_1.jpg);
+  background: url(../content/images/backgrounds/background_1.jpg);
   min-height: 100%;
 }
 
@@ -80,6 +80,12 @@
 
   vertical-align:top;
   @include transition(max-width $defaultTransitionTime);
+}
+
+.brush{
+  margin-top:13px;
+  background: no-repeat center top;
+  background-size:75%;
 }
 
 .brushes-on {
