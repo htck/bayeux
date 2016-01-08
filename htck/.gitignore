@@ -6,6 +6,3 @@
 /lib
 /npm-debug.log.*
 *.log
-
-#To be added later
-README.md
