@@ -216,6 +216,9 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           return;
         }
         $scope.current.attr({'text-anchor': 'start', 'font-family': $scope.font.font, 'font-size': $scope.font.size+'px' || constants.TEXT_DEFAULT_SIZE, 'fill': $scope.fontColor});
+        if($scope.font.uppercase){
+          hTextEdit.toUpperCase($scope.current);
+        }
         $timeout(hTextEdit.updateCaretPosition,10);
       };
 

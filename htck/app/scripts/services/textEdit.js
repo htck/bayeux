@@ -141,6 +141,13 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $inter
     updateCaretPosition();
   }
 
+  function toUpperCase(textElement) {
+    if(!textElement || textElement.type !== 'text'){
+      return;
+    }
+    textElement.attr({text: textElement[0].textContent.toUpperCase()});
+  }
+
   function removeCaret() {
     if(!scope.$parent.caretPointer){
       return;
@@ -155,6 +162,7 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $inter
     updateCaretPosition: updateCaretPosition,
     addCaret: addCaret,
     removeCaret: removeCaret,
-    popChar: popChar
+    popChar: popChar,
+    toUpperCase: toUpperCase
   };
 });
