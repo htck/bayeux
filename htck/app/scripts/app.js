@@ -22,8 +22,10 @@ angular
     'ngDragDrop',
     'cfp.hotkeys'
   ])
-  .config(function ($routeProvider, $logProvider) {
+  .config(function ($routeProvider, $logProvider, hotkeysProvider) {
     $.extend(constants, params);
+
+    hotkeysProvider.cheatSheetHotkey = 'ctrl+h';
 
     $logProvider.debugEnabled(false);
     $routeProvider

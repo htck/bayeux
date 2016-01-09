@@ -1,7 +1,7 @@
 'use strict';
 
 /* globals constants */
-angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextEdit, hPages) {
+angular.module('htckApp').factory('hHotkeys', function (hotkeys, hElement, hTextEdit, hPages) {
   function init(parent) {
     var scope = parent.$new();
     // Hotkeys
@@ -180,6 +180,15 @@ angular.module('htckApp').factory('hHotkeys', function(hotkeys, hElement, hTextE
       callback: function (event){
         event.preventDefault();
         scope.$parent.paste();
+      }
+    });
+
+    hotkeys.add({
+      combo: 'ctrl+h',
+      description: 'Show / hide this help menu',
+      callback: function (event){
+        event.preventDefault();
+        hotkeys.toggleCheatSheet();
       }
     });
   }
