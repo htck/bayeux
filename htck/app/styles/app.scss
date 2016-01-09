@@ -39,12 +39,21 @@
   background-size: cover !important;
 }
 
-.itembank-wrapper {
-  overflow: hidden;
-  min-height:$contentMinHeightGTLD;
-
+// Hack for google chrome
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+  .itembank-wrapper {
+    min-height:$contentMinHeightGTLD;
+  }
   .itembank {
     min-height: $contentMinHeightGTLD !important;
+    height: 100%;
+  }
+}
+
+.itembank-wrapper {
+  overflow: hidden;
+
+  .itembank {
     height: 100%;
   }
   .item{
