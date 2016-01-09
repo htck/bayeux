@@ -20,7 +20,8 @@ var params = {
     GIFINTERVAL_MIN: 0.1,
     GIFINTERVAL_MAX: 5,
     GIFINTERVAL_STEP: 0.1,
-    TOOLTIP_DELAY: 600
+    TOOLTIP_DELAY: 600,
+    ENABLED_CHARACTERS: '^[a-zA-Z0-9\'",:_\!\?\-]$'
 };
 
 $.extend(constants, params);

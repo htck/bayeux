@@ -1,5 +1,6 @@
 'use strict';
 
+/* globals constants */
 angular.module('htckApp').factory('hTextEdit', function ($document, $log, $interval) {
   var scope = {};
 
@@ -98,8 +99,8 @@ angular.module('htckApp').factory('hTextEdit', function ($document, $log, $inter
       evt.preventDefault();
       return;
     }
-    // Check if letter key
-    if((!evt.key.match('^[a-zA-Z\'",:_]$')) && (evt.key !== ' ') || evt.key.length > 1){ // TODO better regex
+    // Check if allowed character
+    if((!evt.key.match(constants.ENABLED_CHARACTERS)) && (evt.key !== ' ') || evt.key.length > 1){
       return;
     }
     var k = (evt.key === ' ') ? ' ' : (scope.$parent.font.uppercase ? evt.key.toUpperCase() : evt.key);
