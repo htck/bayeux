@@ -415,6 +415,14 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       function init(){
         $scope.font = (constants.fonts && constants.fonts.length) ? constants.fonts[0] : undefined;
         $scope.fontColor = (constants.colors && constants.colors.length) ? constants.colors[0] : constants.TEXT_DEFAULT_FONT_COLOR;
+        
+        $scope.headerStyle = {};
+        if($scope.font){
+          $scope.headerStyle = {
+            'font-family': $scope.font.font,
+            'text-transform': $scope.font.uppercase ? 'uppercase' : 'none'
+          }
+        }
 
         var paper = new Raphael(constants.RAPHAEL_PAPER, constants.W, constants.H);
         $scope.paper = paper;
