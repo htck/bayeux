@@ -23,13 +23,35 @@ var constants = {
   },
   "colors":[
     "#303030",
-    "#BA3030",
-    "#0F0FA6",
-    "#B89735",
-    "#438005",
-    "#A61BA3"
+    "#871b1b",
+    "#141464",
+    "#b98c1a",
+    "#336600",
+    "#7b2b7a"
   ],
   "tabs": [
+   {
+      "title": "Braves",
+      "images": [
+        "content//images/brave/01_archer1.png",
+        "content//images/brave/02_archer2.png",
+        "content//images/brave/03_archer3.png",
+        "content//images/brave/04_archer4.png",
+        "content//images/brave/05_falling_hero.png",
+        "content//images/brave/06_beheaded_warrior1.png",
+        "content//images/brave/07_dead_warrior2.png",
+        "content//images/brave/08_dead_warrior2.png",
+        "content//images/brave/09_dead_warrior3.png",
+        "content//images/brave/10_dead_warrior4.png",
+        "content//images/brave/11_horseman_with_shield_and_lance.png",
+        "content//images/brave/12_horsemen.png",
+        "content//images/brave/13_saluting_warrior.png",
+        "content//images/brave/14_two_warriors.png",
+        "content//images/brave/15_flag_carrying_warrior.png",
+        "content//images/brave/16_guy_in_shrubs.png",
+        "content//images/brave/17_driver_on_horse.png",
+      ]
+    },
    {
       "title": "Beasts",
       "images": [
@@ -57,28 +79,6 @@ var constants = {
         "content//images/beasts/22_lion3.png",
         "content//images/beasts/23_lamb.png",
         "content//images/beasts/24_donkey.png"
-      ]
-    },
-   {
-      "title": "Braves",
-      "images": [
-        "content//images/brave/01_archer1.png",
-        "content//images/brave/02_archer2.png",
-        "content//images/brave/03_archer3.png",
-        "content//images/brave/04_archer4.png",
-        "content//images/brave/05_falling_hero.png",
-        "content//images/brave/06_beheaded_warrior1.png",
-        "content//images/brave/07_dead_warrior2.png",
-        "content//images/brave/08_dead_warrior2.png",
-        "content//images/brave/09_dead_warrior3.png",
-        "content//images/brave/10_dead_warrior4.png",
-        "content//images/brave/11_horseman_with_shield_and_lance.png",
-        "content//images/brave/12_horsemen.png",
-        "content//images/brave/13_saluting_warrior.png",
-        "content//images/brave/14_two_warriors.png",
-        "content//images/brave/15_flag_carrying_warrior.png",
-        "content//images/brave/16_guy_in_shrubs.png",
-        "content//images/brave/17_driver_on_horse.png",
       ]
     },
    {

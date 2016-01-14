@@ -157,7 +157,7 @@
     <span class="fleft">
       <md-button class="md-icon-button" aria-label="Brushes" ng-click="brushes = !brushes;">
         <md-icon class="fa fa-paint-brush"></md-icon>
-        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Show brushes</md-tooltip>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY"><span ng-if="!brushes">Show</span><span ng-if="brushes">Hide</span> brushes</md-tooltip>
       </md-button>
 
       <div class="brushes-wrapper {{brushes ? 'brushes-on' : ''}}">
@@ -236,9 +236,9 @@
 
   <div id="readme-wrapper" class="container">
     <div id="readme">
-      <h2>{{::constants.config.appTitle}} - {{::constants.config.appSub}}</h2>
+      <h2>{{::constants.config.appTitle}} - <span ng-style="{{headerStyle}}">{{::constants.config.appSub}}</span></h2>
       <p>Two German students originally wrote the Historic Tale Construction Kit, with Flash. Sadly, their work isn't available anymore, only <a href="http://netzspannung.org/cat/servlet/CatServlet?cmd=document&subCommand=show&forward=%2Fnetzkollektor%2Foutput%2Fproject.xml&entryId=84868" target="_blank">remembered</a>. This new application is a tribute, but also an attempt to revive the old <a href="http://knowyourmeme.com/memes/medieval-macros-bayeux-tapestry-parodies" target="_blank">medieval meme</a>, with code and availability that won't get lost.</p>
-      <p>This project is available for you to use and we hope you will enjoy playing with it as much as we enjoyed building it. We put the opensource code on <a ng-href="{{::constants.config.repository}}" target="_blank">GitHub <i class="fa fa-github"></i></a>, so you can grab it, tinker with it, even help us by contributing.</p>
+      <p>This project is available for you to use and we hope you will enjoy playing with it as much as we enjoyed building it. We put the open source code on <a ng-href="{{::constants.config.repository}}" target="_blank">GitHub <i class="fa fa-github"></i></a>, so you can grab it, tinker with it or even help us by contributing.</p>
       <div class="icon-item">
          <a href="htck-Bayeux.zip">
           <md-button class="md-icon-button md-icon-small" aria-label="Download application">
