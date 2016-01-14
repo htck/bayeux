@@ -30,10 +30,10 @@ To do so, put your content to the ``content`` folder and index it in the [config
 This kit is written mostly using RaphaelJS and AngularJS, but it also uses a bunch of really cool libraries, such as [angular-hotkeys](https://github.com/chieffancypants/angular-hotkeys), [canvg](https://github.com/gabelerner/canvg), [FileSaver.js](https://github.com/eligrey/FileSaver.js), [Raphael.FreeTransform](https://github.com/AliasIO/Raphael.FreeTransform), [Raphael.json](https://github.com/AliasIO/Raphael.JSON), [gifshot](https://github.com/yahoo/gifshot), [Canvas-to-Blob](https://github.com/blueimp/JavaScript-Canvas-to-Blob). They helped us build an app that works everywhere, client-side without the need for any back-end. Huge thanks to them.
 
 ### Vagrant
-If you want to work on the _Historic Tale Construction Kit_ by yourself, you can use the vagrant box by launching ``vagrant up``. **Attention**, you will need to have admin rights if you want to run it on windows.
+If you want to work on the _Historic Tale Construction Kit_ by yourself, you can use the vagrant box by launching ``vagrant up``. **Attention**, you will need to have admin rights if you want to run it on windows. Or set up a development environnement.
 
 ### Setting up a development environnement
-If you do not want to use vagrand, you will need to install the following globally
+If you do not want to use vagrant, you will need to install the following globally
 ```
 sudo apt-get install nodejs
 sudo npm install npm -g
@@ -43,12 +43,12 @@ sudo npm install -g grunt-cli
 
 ------
 
-Then either way go to the ``htck`` and install dependencies using
+Then either way go to the ``htck`` folder and install dependencies using
 ```
 npm install
 bower install
 ```
-You can then run a development server using the command ``grunt``
+You can then run a development server using the command ``grunt serve``
 
 ## Contribute
 If you experienced a bug, we're sorry! If you can fix it, we gladly accept pull requests. If you can't, you can still open an issue here on GitHub and we will try to address it shortly.
