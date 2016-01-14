@@ -1,8 +1,8 @@
 <div>
   <!-- title -->
   <div id="title" class="text-center">
-    <h1 class="margin-v-0">{{::constants.config.appTitle}}</h1>
-    <h2 class="margin-v-0">{{::constants.config.appSub}}</h2>
+    <h1 class="margin-v-0 htck-title">{{::constants.config.appTitle}}</h1>
+    <h2 class="margin-v-0 htck-subtitle" style="font-family:{{::((constants.fonts && constants.fonts.length) ? constants.fonts[0].font :'')}}; text-transform: {{::((constants.fonts && constants.fonts.length && constants.fonts[0].uppercase) ? 'uppercase' : '')}};">{{::constants.config.appSub}}</h2>
   </div>
   <!-- /title -->
 
