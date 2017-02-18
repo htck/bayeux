@@ -261,7 +261,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       // Drag & drop
 
       $scope.dragDropItemBank = function(event, ui) {
-        var src=ui.draggable.context.currentSrc;
+        var src = ui.draggable[0].src;
         var x = ui.offset.left - $('#paper').offset().left;
         var y = ui.offset.top - $('#paper').offset().top;
         var sf = scaleFactors(x, y);
