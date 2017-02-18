@@ -31,10 +31,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
       };
 
       $scope.provisionElement = function(ie) {
-        var ft = $scope.paper.freeTransform(ie, {}, function(ft, events) {
-          $scope.setCurrent(ft.subject);
-          $scope.handleFtChanged(ft, events);
-        });
+        var ft = $scope.paper.freeTransform(ie, {}, hTools.debounce(freeTransformCallback), $scope.constants.DEBOUNCE);
         
         // to make this work free_transform plugin must implement range.scale for x AND y 
         //ft.setOpts({range: {scale: [$scope.constants.ELEMENT_SCALE_MIN*ft.attrs.size.x, $scope.constants.ELEMENT_SCALE_MAX*ft.attrs.size.y] } });
@@ -69,6 +66,12 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         ie.ft.handles.y.disc.handle=true;
 
       };
+
+      // Callback for freeTransform
+      function freeTransformCallback(ft, events) {
+        $scope.setCurrent(ft.subject);
+        $scope.handleFtChanged(ft, events);
+      }
 
       // Should be called when creating a raphael element
       function addElement(ie){
@@ -421,7 +424,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
           $scope.headerStyle = {
             'font-family': $scope.font.font,
             'text-transform': $scope.font.uppercase ? 'uppercase' : 'none'
-          }
+          };
         }
 
         var paper = new Raphael(constants.RAPHAEL_PAPER, constants.W, constants.H);
