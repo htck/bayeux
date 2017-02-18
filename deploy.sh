@@ -8,7 +8,7 @@ npm cache clean
 npm install
 bower install
 # Build app
-grunt build
+grunt build --force
 xargs rm -rf < build_tools/rm_on_deploy
 cd ..
 
