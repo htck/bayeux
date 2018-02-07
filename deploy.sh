@@ -1,6 +1,7 @@
 #!/bin/bash
 branch=${1:-"master"}
-echo "Deploying $branch to gh-pages"
+remote=${2:-"https://github.com/htck/bayeux.git"}
+echo "Deploying $branch to gh-pages $remote"
 git checkout $branch
 cd htck
 # Update all dependencies
@@ -9,7 +10,6 @@ npm install
 bower install
 # Build app
 grunt build --force
-xargs rm -rf < build_tools/rm_on_deploy
 cd ..
 
 # Create dist zip file
@@ -20,19 +20,22 @@ mv htck-Bayeux.zip dist/
 rm -rf htck-Bayeux
 cd ..
 
-git branch -D gh-pages 
-# Save built app to tmp folder
-cp -R htck/dist/ /tmp/
-cp htck/build_tools/git_add_on_deploy /tmp
-git checkout --orphan gh-pages
-# Remove all git tracked files (keeps libs and node_modules)
-git ls-files -z | xargs -0 rm -f
+######
+
+echo "Creating temporary deployment folder"
+rm -rf /tmp/bayeux-ghost
+mkdir /tmp/bayeux-ghost
+cp -R htck/dist/* /tmp/bayeux-ghost/
+cp -R htck/app/images /tmp/bayeux-ghost/
+cd /tmp/bayeux-ghost
+echo "Initing ghost git"
+git init
+echo "Add remote $remote"
+git remote add origin $remote
+git checkout -b gh-pages
 rm .gitignore
-# Move back built app
-mv /tmp/dist/* .
-# Deploy
-xargs git add < /tmp/git_add_on_deploy
+git add .
 git commit -am "Deploying $branch to gh-pages"
-git push --delete origin gh-pages
-git push --set-upstream origin gh-pages
-git checkout master
+git push --force origin gh-pages
+
+######
