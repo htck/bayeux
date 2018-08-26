@@ -35,7 +35,6 @@ module.exports = function(config) {
       'lib/angular-hotkeys/build/hotkeys.js',
       'lib/canvg/dist/canvg.bundle.js',
       'lib/canvg/dist/canvg.bundle.min.js',
-      'lib/FileSaver/FileSaver.js',
       'lib/raphael/raphael.js',
       'lib/gifshot/build/gifshot.js',
       'lib/angular-mocks/angular-mocks.js',

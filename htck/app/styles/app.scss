@@ -25,9 +25,26 @@
     md-tabs {
       background: #f6f6f6;
       border: 1px solid #e1e1e1;
-      md-tabs-canvas {
-        background: white;
-      }
+    }
+  }
+}
+
+md-tabs {
+  background: url("../content/images/backgrounds/background_1.jpg") repeat scroll 0% 0% transparent !important;
+}
+
+md-tab-item {
+  font-family: "Bayeux";
+  font-size: 14px !important;
+  padding: 8px 6px !important;
+  color: $brownColor !important;
+  font-weight: 600 !important;
+}
+
+md-tabs-wrapper {
+  md-next-button, md-prev-button {
+    md-icon {
+      color: $brownColor !important;
     }
   }
 }
@@ -62,6 +79,10 @@
   }
   md-tab-content {
     overflow-x: hidden;
+  }
+
+  .background-bank-item {
+    border: solid 1px #9F836E;
   }
 }
 
@@ -347,6 +368,18 @@
     .md-thumb-text {
       color: $sliderColor;
     }
+  }
+
+  .slider-input {
+    display: block;
+    width: 35px;
+    margin-left: 15px;
+
+    background: transparent;
+    color: #FFC600;
+    border: solid 1px;
+    border-radius: 3px;
+    text-align: center;
   }
 
   /* switchs */
