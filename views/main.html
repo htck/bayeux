@@ -1,0 +1,271 @@
+<div>
+  <!-- title -->
+  <div id="title" class="text-center">
+    <h1 class="margin-v-0 htck-title">{{::constants.config.appTitle}}</h1>
+    <h2 class="margin-v-0 htck-subtitle" ng-style="::headerStyle">{{::constants.config.appSub}}</h2>
+  </div>
+  <!-- /title -->
+
+  <!-- content -->
+  <div id="content" class="app_wrapper container md-whiteframe-z5">
+    <div id="app-wrapper" layout="column" layout-gt-lg="row" layout-padding>
+      <!-- images -->
+      <div flex="20" layout-padding>
+        <md-content class="itembank-wrapper" layout="column" layout-fill>
+          <md-tabs id="itembank" class="itembank" md-border-bottom layout-fill>
+            <md-tab ng-repeat="t in ::(constants.tabs) track by $index" label="{{::t.title}}">
+              <md-content flex class="md-padding">
+                <div>
+                  <md-grid-list
+                    md-cols-sm="2" md-cols-md="6" md-cols-gt-md="3" md-cols-lg="9"
+                    md-row-height-gt-md="2:2" md-row-height="2:2"
+                    md-gutter="12px" md-gutter-gt-sm="8px" >
+                    <md-grid-tile ng-repeat="i in ::(t.images) track by $index" class="gray" md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                      <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{::i}}" ng-click="addImage(i)"></img>
+                    </md-grid-tile>
+                  </md-grid-list>
+                </div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Backgrounds" ng-if="::constants.backgrounds.length > 1">
+              <md-content class="md-padding">
+                <div>
+                  <md-grid-list
+                    md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
+                    md-row-height-gt-md="2:2" md-row-height="2:2"
+                    md-gutter="12px" md-gutter-gt-sm="8px" >
+                    <md-grid-tile ng-repeat="i in ::(constants.backgrounds) track by $index" class="gray background-bank-item"
+                      md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                      <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{::i}}" ng-click="setBackground(i)"></img>
+                    </md-grid-tile>
+                  </md-grid-list>
+                </div>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-content>
+      </div>
+      <!-- /images -->
+      <div flex="80">
+        <div layout="column" layout-gt-md="row">
+          <!-- paper -->
+          <div id="paper-wrapper" flex="75" layout-padding>
+            <div layout="row" layout-align="center center" layout-fill>
+              <div id="paper" class="md-whiteframe-z5 no-select" data-drop="true" jqyoui-droppable="{onDrop: 'dragDropItemBank'}">
+              </div>
+            </div>
+          </div>
+          <!-- /paper -->
+          <!-- toolbar -->
+          <div id="toolbar-element" class="text-center" flex="25" layout-padding layout-fill>
+              <div>
+                <div ng-show="current">
+                  <div flex="40" flex-gt-md="100" class="layer-management">
+                    <md-content>
+                      <section layout="row" layout-align="end" layout-align-gt-md="center" layout-wrap>
+                        <md-button class="md-icon-button" aria-label="Top layer" ng-click="bringToFront()">
+                          <md-icon class="fa fa-chevron-up sh-fa-t"></md-icon>
+                          <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Bring to front</md-tooltip>
+                        </md-button>
+
+                        <md-button class="md-icon-button" aria-label="Bottom layer" ng-click="bringToBack()">
+                          <md-icon class="fa fa-chevron-down sh-fa-t"></md-icon>
+                          <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Bring to back</md-tooltip>
+                        </md-button>
+
+                        <md-button class="md-icon-button md-icon-warn" aria-label="Remove" ng-click="remove()">
+                          <md-icon class="fa fa-times"></md-icon>
+                          <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Remove element</md-tooltip>
+                        </md-button>
+                      </section>
+                    </md-content>
+                  </div>
+                  <div layout="row" layout-gt-md="column">
+                    <div flex="flex">
+                      <p class="margin-v-0">Opacity</p>
+                      <div layout>
+                        <md-slider class="slider-common" flex min="0" step="0.02" max="1" ng-model="current.opacity" ng-change="elementSetOpacity()" ng-model-options="{debounce: constants.DEBOUNCE}" id="opacity-slider" aria-label="Opacity" class>
+                        </md-slider>
+                        <input class="slider-input" ng-model="current.opacity" ng-change="elementSetOpacity()" ng-model-options="{debounce: constants.DEBOUNCE}">
+                      </div>
+                      <p class="margin-v-0">Rotation</p>
+                      <div layout>
+                        <md-slider class="slider-common" flex min="-180" step="1" max="180" ng-model="current.rotation" ng-change="elementSetRotation()" ng-model-options="{debounce: constants.DEBOUNCE}" id="rotation-slider" aria-label="Rotation" class>
+                        </md-slider>
+                        <input class="slider-input" ng-model="current.rotation" ng-change="elementSetRotation()" ng-model-options="{debounce: constants.DEBOUNCE}">
+                      </div>
+                    </div>
+                    <div flex="flex">
+                      <p class="margin-v-0">Height</p>
+                      <div layout>
+                        <md-slider class="slider-common" flex min="{{::constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{::constants.ELEMENT_SCALE_MAX}}" ng-model="current.height" ng-change="elementSetHeight()" ng-model-options="{debounce: constants.DEBOUNCE}" id="height-slider" aria-label="Height" class>
+                        </md-slider>
+                        <input class="slider-input" ng-model="current.height" ng-change="elementSetHeight()" ng-model-options="{debounce: constants.DEBOUNCE}">
+                      </div>
+                      <p class="margin-v-0">Width</p>
+                      <div layout>
+                        <md-slider class="slider-common" flex min="{{::constants.ELEMENT_SCALE_MIN}}" step="0.1" max="{{::constants.ELEMENT_SCALE_MAX}}" ng-model="current.width" ng-change="elementSetWidth()" ng-model-options="{debounce: constants.DEBOUNCE}" id="width-slider" aria-label="Width" class>
+                        </md-slider>
+                        <input class="slider-input" ng-model="current.width" ng-change="elementSetWidth()" ng-model-options="{debounce: constants.DEBOUNCE}">
+                      </div>
+                    </div>
+                    <div flex="20" flex-gt-md="100" layout="column" layout-gt-md="row">
+                      <div flex="flex">
+                        <p class="margin-v-0">Mirror</p>
+                        <div layout-align="center" layout>
+                          <md-switch class="switch-common" ng-model="current.mirror" ng-change="elementSetMirror()" id="mirror-switch" aria-label="Mirror">
+                          </md-switch>
+                        </div>
+                      </div>
+                      <div flex="flex">
+                        <p class="margin-v-0">Keep ratio</p>
+                        <div layout-align="center" layout>
+                          <md-switch class="switch-common" ng-model="current.keepratio" ng-change="elementSetKeepRatio()" id="keepratio-switch" aria-label="Keep Ratio">
+                          </md-switch>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div layout="row" layout-gt-md="column" layout-padding>
+                    <div flex="60" flex-gt-md="100">
+                      <div ng-if="current && current.type==='text'">
+                        <div layout="row" layout-gt-md="column">
+                          <div flex="35" flex-gt-md="100" id="wrapper-font-selector" layout-padding>
+                            <label>Font</label>
+                            <md-select aria-label="Font" style="margin: 0px;" ng-model="$parent.font" ng-change="elementChangeFont()">
+                              <md-option ng-repeat="f in ::(constants.fonts) track by $index" ng-value="f">
+                                {{::f.font}}
+                              </md-option>
+                            </md-select>
+                          </div>
+                          <div flex="65" flex-gt-md="100" layout-padding>
+                            <div class="circle" ng-repeat="c in ::(constants.colors) track by $index" style="background:{{::c}};" ng-click="setFontColor(c)"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <!-- /toolbar -->
+        </div>
+      </div>
+    </div>
+    <!-- /toolbar -->
+  </div>
+  <!-- /content -->
+
+  <!-- /toolbar-general -->
+  <div id="toolbar-general" class="container" container md-whiteframe-z5>
+    <span class="fleft">
+      <md-button class="md-icon-button" aria-label="Brushes" ng-click="brushes = !brushes;">
+        <md-icon class="fa fa-paint-brush"></md-icon>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY"><span ng-if="!brushes">Show</span><span ng-if="brushes">Hide</span> brushes</md-tooltip>
+      </md-button>
+
+      <div class="brushes-wrapper {{brushes ? 'brushes-on' : ''}}">
+        <md-button aria-label="{{::b.name}}" ng-class="b.classe" ng-repeat="b in ::constants.brushes track by $index" ng-click="setBrush(b)" class="png-icon brush" style="background-image:url({{::(b.icon)}})">
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">{{::b.name}} brush</md-tooltip>
+        </md-button>
+      </div>
+
+      <md-button class="md-icon-button" aria-label="Clear" ng-click="hPages.clearPage()">
+        <md-icon class="fa fa-trash"></md-icon>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Clear current page</md-tooltip>
+      </md-button>
+
+      <md-button class="md-icon-button" aria-label="Pages" ng-click="pages = !pages;">
+        <md-icon class="fa fa-clone"></md-icon>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Show pages</md-tooltip>
+      </md-button>
+
+    </span>
+    <span class="fright">
+      <md-button class="md-icon-button" aria-label="save" ng-click="save()">
+        <md-icon class="fa fa-download"></md-icon>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Save for further edit</md-tooltip>
+      </md-button>
+
+      <md-button class="md-icon-button" aria-label="Open" ng-click="startImport()">
+        <md-icon class="fa fa-folder-open"></md-icon>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Open HTCK file</md-tooltip>
+      </md-button>
+
+      <md-button class="md-icon-button" aria-label="Export" ng-click="export()">
+        <md-icon class="fa fa-file-image-o" ng-if="!exportPNGRunning"></md-icon>
+        <span ng-if="exportPNGRunning"><md-icon class="fa-spin fa fa-spinner"></md-icon></span>
+        <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Export page as PNG</md-tooltip>
+      </md-button>
+
+      <input type="file" id="import-file-chooser" ng-show="false" accept=".htck"> 
+    </span>
+  </div>
+  <!-- /toolbar-general -->
+
+  <!-- pages toolbar -->
+  <div id="toolbar-pages" class="container {{pages ? 'toolbar-pages-active' : ''}}" container md-whiteframe-z5>
+    <md-button class="md-icon-button" aria-label="New" ng-click="hPages.createNew()">
+      <md-icon class="fa fa-file-o"></md-icon>
+      <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Create new page</md-tooltip>
+    </md-button>
+
+    <md-button class="md-icon-button" aria-label="Duplicate" ng-click="hPages.createByCopy()">
+      <md-icon class="fa fa-files-o"></md-icon>
+      <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Duplicate current page</md-tooltip>
+    </md-button>
+
+    <md-button ng-disabled="hPages.currentPageIndex === 0" class="md-icon-button" aria-label="Previous" ng-click="hPages.prev()">
+      <md-icon class="fa fa-chevron-left sh-fa-l sh-fa-b"></md-icon>
+    </md-button>
+
+    <span class="toolbar-text">Page : {{hPages.currentPageIndex +1 }} / {{hPages.pages.length || 1}}</span>
+
+    <md-button ng-disabled="hPages.currentPageIndex >= hPages.pages.length -1" class="md-icon-button" aria-label="Next" ng-click="hPages.next()">
+      <md-icon class="fa fa-chevron-right sh-fa-r sh-fa-b"></md-icon>
+    </md-button>
+
+    <md-button class="md-icon-button md-icon-warn" ng-disabled="hPages.pages.length <= 1" aria-label="Delete" ng-click="hPages.delete()">
+      <md-icon class="fa fa-times"></md-icon>
+      <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Delete current page</md-tooltip>
+    </md-button>
+
+    <md-button class="md-icon-button" ng-disabled="hPages.pages.length <= 1" aria-label="Delete" ng-click="hPages.exportGIF($event)">
+      <md-icon class="fa fa-film sh-fa-t sh-fa-l" ng-if="!exportGIFRunning"></md-icon>
+      <span ng-if="exportGIFRunning"><md-icon class="fa-spin fa fa-spinner"></md-icon></span>
+      <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Export all pages as GIF</md-tooltip>
+    </md-button>
+  </div>
+  <!-- /pages toolbar -->
+
+  <div id="readme-wrapper" class="container">
+    <div id="readme">
+      <h2>{{::constants.config.appTitle}} - <span ng-style="{{headerStyle}}">{{::constants.config.appSub}}</span></h2>
+      <p>Two German students originally wrote the Historic Tale Construction Kit, with Flash. Sadly, their work isn't available anymore, only <a href="http://netzspannung.org/cat/servlet/CatServlet?cmd=document&subCommand=show&forward=%2Fnetzkollektor%2Foutput%2Fproject.xml&entryId=84868" target="_blank">remembered</a>. This new application is a tribute, but also an attempt to revive the old <a href="http://knowyourmeme.com/memes/medieval-macros-bayeux-tapestry-parodies" target="_blank">medieval meme</a>, with code and availability that won't get lost.</p>
+      <p>This project is available for you to use and we hope you will enjoy playing with it as much as we enjoyed building it. We put the open source code on <a ng-href="{{::constants.config.repository}}" target="_blank">GitHub <i class="fa fa-github"></i></a>, so you can grab it, tinker with it or even help us by contributing.</p>
+      <div class="icon-item">
+         <a href="htck-Bayeux.zip">
+          <md-button class="md-icon-button md-icon-small" aria-label="Download application">
+            <md-icon class="fa fa-download"></md-icon>
+          </md-button>
+        </a>
+        Download a standalone version to run it offline :)
+      </div>
+      <div class="icon-item">
+        <md-button class="md-icon-button md-icon-small" ng-click="hotkeys.toggleCheatSheet()" aria-label="Keyboard shortcuts">
+          <md-icon class="fa fa-question"></md-icon>
+        </md-button>
+        Press <key class="cfp-hotkeys-key">CTRL + h</key> keys to get the list of keyboard shortcuts
+      </div>
+      <p>Cheers,</p>
+      <div class="author-wrapper" layout="columns">
+        <a ng-repeat="a in ::constants.config.authors" href="{{::a.link}}" class="author" flex  target="_blank">
+            <md-button class="md-icon-button contributor-avatar" style="background-image: url({{::(a.picture)}});" aria-label="{{::a.name}}"></md-button>
+            <span class="author-name">&nbsp;{{::a.name}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="canvas" ng-show="false"></canvas>
+</div>

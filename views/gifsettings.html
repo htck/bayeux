@@ -1,0 +1,39 @@
+<div layout="column" class="dialog" layout-padding>
+	<h2>GIF Export settings</h2>
+	<div layout="row">
+		<div flex="40" class="label">
+			<strong>Interval</strong> {{hPages.gifInterval}}s
+		</div>
+		<div flex="55">
+			<md-slider class="slider-common" flex min="{{::constants.GIFINTERVAL_MIN}}" step="{{::constants.GIFINTERVAL_STEP}}" max="{{::constants.GIFINTERVAL_MAX}}" ng-model="hPages.gifInterval" id="interval-slider" aria-label="Interval" class>
+            </md-slider>
+		</div>
+	</div>
+	<div layout="row">
+		<div flex="40" class="label">
+			<strong>Width</strong>
+		</div>
+		<div flex="55">
+			<md-input-container>
+		      <label>Width</label>
+		      <input ng-model="hPages.gifWidth">
+		    </md-input-container>
+		</div>
+	</div>
+	<div layout="row">
+		<div flex="40">
+			<strong>Height</strong>
+		</div>
+		<div flex="55">
+			{{hPages.gifWidth * constants.H / constants.W}}
+		</div>
+	</div>
+	<div class="margin-v-30"></div>
+	<div>
+		<strong>Warning:</strong> Increased GIF size can take a long time to render
+	</div>
+	<div class="text-right">
+		<md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
+		<md-button class="md-primary md-raised" ng-click="answer()">Export to GIF</md-button>
+	</div>
+</div>
