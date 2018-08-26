@@ -96,6 +96,7 @@ var constants = {
         "content//images/buildings/10_pillar.png",
         "content//images/buildings/11_tower6.png",
         "content//images/buildings/12_tower5.png",
+        "content//images/buildings/13_Arch.png",
       ]
     },
    {
@@ -125,6 +126,11 @@ var constants = {
         "content//images/folc/22_woman_with_child.png",
         "content//images/folc/23_guy_with_chickens.png",
         "content//images/folc/24_shouting_guy.png",
+        "content//images/folc/25_Man_pointing.png",
+        "content//images/folc/26_Serf.png",
+        "content//images/folc/27_SittingNoble01.png",
+        "content//images/folc/28_SittingNoble02.png",
+        "content//images/folc/29_SittingNoble03.png",
       ]
     },
    {
@@ -137,6 +143,7 @@ var constants = {
         "content//images/misc/05_tree.png",
         "content//images/misc/06_boat.png",
         "content//images/misc/07_boat.png",
+        "content//images/misc/07_boat_with_horses.png",
         "content//images/misc/08_boat.png",
         "content//images/misc/09_shield.png",
         "content//images/misc/10_shield.png",
@@ -147,12 +154,16 @@ var constants = {
         "content//images/misc/15_halleys_comet.png",
         "content//images/misc/16_sword.png",
         "content//images/misc/17_sword_helmet.png",
+        "content//images/misc/18_Barbecue.png",
       ]
     },
   ],
   "backgrounds":[
     "content//images/backgrounds/background_1.jpg",
-    "content//images/backgrounds/background_2.jpg"
+    "content//images/backgrounds/background_2.jpg",
+    "content//images/backgrounds/background_3.jpg",
+    "content//images/backgrounds/background_4.jpg",
+    "content//images/backgrounds/background_5.jpg"
   ],
   "fonts":[
     {
