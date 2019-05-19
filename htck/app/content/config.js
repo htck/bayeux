@@ -51,6 +51,7 @@ var constants = {
         "content//images/brave/15_flag_carrying_warrior.png",
         "content//images/brave/16_guy_in_shrubs.png",
         "content//images/brave/17_driver_on_horse.png",
+        "content//images/brave/18_brave_with_axe.png",
       ]
     },
    {
@@ -132,6 +133,9 @@ var constants = {
         "content//images/folc/27_SittingNoble01.png",
         "content//images/folc/28_SittingNoble02.png",
         "content//images/folc/29_SittingNoble03.png",
+        "content//images/folc/30_quasimodo.png",
+        "content//images/folc/31_people_fighting.png",
+        "content//images/folc/32_man_with_dog.png",
       ]
     },
    {
