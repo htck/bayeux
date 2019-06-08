@@ -37,8 +37,8 @@ If you do not want to use vagrant, you will need to install the following global
 ```
 sudo apt-get install nodejs
 sudo npm install npm -g
-sudo npm install -g bower
-sudo npm install -g grunt-cli
+sudo npm install -g bower grunt-cli grunt-contrib-compass
+sudo gem install compass
 ```
 
 ------
