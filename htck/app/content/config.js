@@ -162,6 +162,14 @@ var constants = {
         "content/images/misc/18_Barbecue.png",
       ]
     },
+    {
+      "title": "Flames",
+      "images": [
+        "content/images/fire/flames_1.png",
+        "content/images/fire/flames_2.png",
+        "content/images/fire/flames_3.png",
+      ]
+    }
   ],
   "backgrounds":[
     "content/images/backgrounds/background_1.jpg",
@@ -298,6 +306,29 @@ var constants = {
         {
           img:"content/images/brave/10_dead_warrior4.png"
         }
+      ]
+    },
+    {
+      name:"Fire",
+      icon:"content/images/fire/flames_1.png",
+      speed:100,
+      randScaleRange: 0.2,
+      randRotationRange: 5,
+      scale: 0.6,
+      randMirror: true,
+      images:[
+        {
+          img:"content/images/fire/flames_1.png",
+          scale:1
+        },
+        {
+          img:"content/images/fire/flames_2.png",
+          scale:0.7
+        },
+        {
+          img:"content/images/fire/flames_3.png",
+          scale:1
+        },
       ]
     }
   ]
