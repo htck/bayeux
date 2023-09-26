@@ -6,7 +6,7 @@
 > Slay mischievous beasts  
 > Rule the kingdom
 
-Two German students originally wrote the _Historic Tale Construction Kit_, with Flash. Sadly, their work isn't available anymore, only [remembered](http://netzspannung.org/cat/servlet/CatServlet?cmd=document&subCommand=show&forward=%2Fnetzkollektor%2Foutput%2Fproject.xml&entryId=84868). This new application is a tribute, but also an attempt to revive the old [medieval meme](http://knowyourmeme.com/memes/medieval-macros-bayeux-tapestry-parodies), with code and availability that won't get lost.
+Two German students originally wrote the _Historic Tale Construction Kit_, with Flash. Sadly, their work isn't available anymore, only [remembered](http://web.archive.org/web/20220123020746/http://netzspannung.org/cat/servlet/CatServlet?cmd=document&subCommand=show&forward=%2Fnetzkollektor%2Foutput%2Fproject.xml&entryId=84868). This new application is a tribute, but also an attempt to revive the old [medieval meme](http://knowyourmeme.com/memes/medieval-macros-bayeux-tapestry-parodies), with code and availability that won't get lost.
 
 ## Features
 This brand new Historic Tale Construction Kit allows you to
