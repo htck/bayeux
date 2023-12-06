@@ -3,7 +3,7 @@
 /* globals constants */
 /* globals Raphael */
 /* globals $ */
-angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, $mdSidenav, hExport, hTextEdit, hHotkeys, hElement, hTools, hSave, hPages) {
+angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $log, $document, $mdSidenav, hExport, hTextEdit, hHotkeys, hElement, hTools, hSave, hPages, hCustom) {
   		$scope.constants = constants;
 
       $scope.setCurrent = function(newCurrent) {
@@ -327,6 +327,16 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         }
       };
 
+      $scope.addCustomImage = function(){
+        $log.debug('Add custom image');
+        hCustom.addCustomImage().then($scope.$applyAsync());
+      };
+
+      $scope.clearCustomImages = function(){
+        $log.debug('Clear custom images');
+        hCustom.clearCustomImages();
+      };
+
       $scope.export = function(){
         $log.debug('Exporting');
         // Unfocus to remove handles from elements
@@ -445,6 +455,7 @@ angular.module('htckApp').controller('MainCtrl', function ($scope, $timeout, $lo
         hSave.init($scope);
         hHotkeys($scope);
         hPages.init($scope);
+        hCustom.init($scope);
 
         $scope.hPages = hPages;
 

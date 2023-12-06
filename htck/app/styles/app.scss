@@ -126,11 +126,15 @@ md-tabs-wrapper {
   color: white;
 }
 
-#toolbar-general, #toolbar-pages {
+#toolbar-general, #toolbar-pages, #toolbar-custom {
   background-image: url(../images/background_3.jpg);
   margin-top: 15px;
   height:$toolbarHeight;
   vertical-align:top;
+}
+
+#toolbar-custom {
+  margin-bottom: 15px;
 }
 
 .toolbar-text {

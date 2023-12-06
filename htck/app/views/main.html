@@ -27,6 +27,32 @@
                 </div>
               </md-content>
             </md-tab>
+            <md-tab label="Custom">
+              <md-content class="md-padding">
+                <div id="toolbar-custom">
+                  <md-button class="md-icon-button" aria-label="Add custom image" ng-click="addCustomImage()">
+                    <md-icon class="fa fa-upload"></md-icon>
+                    <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Add custom image</md-tooltip>
+                  </md-button>
+            
+                  <md-button class="md-icon-button" aria-label="Clear custom images" ng-click="clearCustomImages()">
+                    <md-icon class="fa fa-trash"></md-icon>
+                    <md-tooltip md-delay="::constants.TOOLTIP_DELAY">Clear custom images</md-tooltip>
+                  </md-button>
+                </div>
+                <div>
+                  <md-grid-list
+                    md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
+                    md-row-height-gt-md="2:2" md-row-height="2:2"
+                    md-gutter="12px" md-gutter-gt-sm="8px" >
+                    <md-grid-tile ng-repeat="i in customImages track by $index" class="gray background-bank-item"
+                      md-rowspan="1" md-colspan="1" md-colspan-sm="1">
+                      <img class="item" data-drag="true" jqyoui-draggable="{animate: true}" data-jqyoui-options="{revert: 'invalid', appendTo: 'body', containment: 'window', scroll: false, helper: 'clone'}" ng-src="{{::i}}" ng-click="addImage(i)"></img>
+                    </md-grid-tile>
+                  </md-grid-list>
+                </div>
+              </md-content>
+            </md-tab>
             <md-tab label="Backgrounds" ng-if="::constants.backgrounds.length > 1">
               <md-content class="md-padding">
                 <div>
